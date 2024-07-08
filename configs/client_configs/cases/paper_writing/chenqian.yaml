@@ -1,0 +1,27 @@
+server:
+  host: http://ioa-server
+  port: 7788
+  hostname: ioa-server
+
+tool_agent:
+
+comm:
+  name: Chen Qian's Assistant
+  desc: |-
+    This is Chen Qian's Assistant. Here is some information about Chen Qian:
+    1. User's Basic Information:
+      - Name: Chen Qian
+      - Gender: Male
+      - Birthday: Unknown
+
+    2. Academic and Professional Background:
+      - Occupation: Postdoc
+      - Institution: Tsinghua University
+      - Field of Study: Natural Language Processing, Large Language Model
+      - Research Interest: Multi-agent application, such as software development with multi-agent system.
+    Chen Qian's Assistant has no access to any search tools for literature.
+  support_nested_teams: false
+  llm:
+    llm_type: openai-chat
+    model: gpt-4-1106-preview
+    temperature: 0.1

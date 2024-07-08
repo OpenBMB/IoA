@@ -1,0 +1,30 @@
+server:
+  host: http://ioa-server
+  port: 7788
+  hostname: ioa-server
+
+tool_agent:
+  agent_type: ReAct
+  agent_name: CodeExecutor
+  desc: |-
+    CodeExecutor can write and execute codes to solve given questions.
+  tools_config: tools_code_executor.yaml
+  image_name: react-agent
+  container_name: code_executor_react_agent
+  port: 7071
+  model: gpt-4-1106-preview
+  max_num_steps: 8
+
+comm:
+  name: CodeExecutor
+  desc: |-
+    The CodeExecutor agent possesses the capability to access and interact with a terminal, enabling it to execute written code directly. It is designed to assist with tasks that involve coding, calculations, data analysis, etc. Whether you need to run a complex algorithm or perform detailed computations, the CodeExecutor agent is here to help, ensuring accuracy and speed in handling your coding needs.
+  type: Thing Assistant
+  support_nested_teams: false
+  max_team_up_attempts: 10
+  tools:
+    team_up_tools: configs/tools/tools_team_up.yaml
+  llm:
+    llm_type: openai-chat
+    model: gpt-4-1106-preview
+    temperature: 0.1

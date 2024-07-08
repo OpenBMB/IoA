@@ -1,0 +1,5 @@
+.app-container {
+  display: flex; /* Arrange the chat list and chat window side-by-side */
+  height: 100vh; /* Make the chat app take up the full viewport height */
+  flex-direction: row; /* Specify that we want a horizontal layout */
+}

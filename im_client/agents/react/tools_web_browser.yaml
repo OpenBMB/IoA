@@ -1,0 +1,114 @@
+- function:
+    description: Perform an INFORMATIONAL web search query then return the search results.
+    name: informational_web_search
+    parameters:
+      properties:
+        query:
+          description: The informational web search query to perform.
+          type: string
+      required:
+        - query
+      type: object
+  type: function
+- function:
+    description: |-
+      Perform a NAVIGATIONAL web search query then immediately navigate to the top result. Useful, for example, to navigate to a particular Wikipedia article or other known destination. Equivalent to Google's \"I'm Feeling Lucky\" button.
+    name: navigational_web_search
+    parameters:
+      properties:
+        query:
+          description: The navigational web search query to perform.
+          type: string
+      required:
+        - query
+      type: object
+  type: function
+- function:
+    description: |-
+      Visit a webpage at a given URL and return its text.
+    name: visit_page
+    parameters:
+      properties:
+        url:
+          description: The relative or absolute url of the webapge to visit.
+          type: string
+      required:
+        - url
+      type: object
+  type: function
+- function:
+    description: |-
+      Download a file at a given URL and, if possible, return its text.
+    name: download_file
+    parameters:
+      properties:
+        url:
+          description: The relative or absolute url of the file to be downloaded.
+          type: string
+      required:
+        - url
+      type: object
+  type: function
+- function:
+    description: |-
+      Scroll the viewport UP one page-length in the current webpage and return the new viewport content.
+    name: page_up
+    parameters:
+      properties: {}
+      required: []
+      type: object
+  type: function
+- function:
+    description: |-
+      Scroll the viewport DOWN one page-length in the current webpage and return the new viewport content.
+    name: page_down
+    parameters:
+      properties: {}
+      required: []
+      type: object
+  type: function
+- function:
+    description: |-
+      Uses AI to read the page and directly answer a given question based on the content.
+    name: read_page_and_answer
+    parameters:
+      properties:
+        question:
+          description: The question to directly answer.
+          type: string
+        url:
+          description: The url of the page. (Defaults to the current page)
+          type: string
+      required:
+        - question
+      type: object
+  type: function
+- function:
+    description: |-
+      Uses AI to summarize the content found at a given url. If the url is not provided, the current page is summarized.
+    name: summarize_page
+    parameters:
+      properties:
+        url:
+          description: The url of the page. (Defaults to the current page)
+          type: string
+      required: []
+      type: object
+  type: function
+# - function:
+#     description: Get the text of a PDF file.
+#     name: pdf_to_text
+#     parameters:
+#       properties:
+#         path:
+#           description: The path to the pdf file.
+#           type: string
+#         pages:
+#           description: A list of page indices that will be converted to text. Default is None, which means all pages will be converted.
+#           type: array
+#           items:
+#             type: integer
+#       required:
+#         - path
+#       type: object
+#   type: function

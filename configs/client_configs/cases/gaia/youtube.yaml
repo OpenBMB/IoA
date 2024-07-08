@@ -1,0 +1,30 @@
+server:
+  host: http://ioa-server
+  port: 7788
+  hostname: ioa-server
+
+tool_agent:
+  agent_type: ReAct
+  agent_name: YoutubeAgent
+  desc: |-
+    The YouTubeAgent can be tasked with searching for videos on YouTube and can analyze these videos by obtaining their transcripts.
+  tools_config: tools_youtube.yaml
+  image_name: react-agent
+  container_name: youtube_react_agent
+  port: 7072
+  model: gpt-4-1106-preview
+  max_num_steps: 5
+
+comm:
+  name: YoutubeAgent
+  desc: |-
+    The YouTubeAgent is equipped with the ability to search for content on YouTube and retrieve transcripts from various videos. This makes it particularly valuable for tasks that require gathering information from YouTube, such as extracting educational content, analyzing video dialogues, or summarizing key points from video presentations. The YouTubeAgent efficiently navigates YouTube to provide accurate and relevant information, enhancing your research and information-gathering processes.
+  type: Thing Assistant
+  support_nested_teams: false
+  max_team_up_attempts: 10
+  tools:
+    team_up_tools: configs/tools/tools_team_up.yaml
+  llm:
+    llm_type: openai-chat
+    model: gpt-4-1106-preview
+    temperature: 0.1

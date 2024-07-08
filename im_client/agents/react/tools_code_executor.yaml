@@ -1,0 +1,20 @@
+- function:
+    description: Execute your provided code and return the terminal output. To get the result, you must explicitly print the important information (intermediate results, final results, etc.) in your code using `print` function.
+    name: execute_code
+    parameters:
+      properties:
+        code:
+          description: The code to execute. If None, the code from the file specified by filename will be executed. Either code or filename must be provided.
+          type: string
+        filename:
+          description: The file name to save the code or where the code is stored when `code` is None. If None, a file with a randomly generated name will be created. The randomly generated file will be deleted after execution. The file name must be a relative path. Relative paths are relative to the working directory.
+          type: string
+        work_dir:
+          description: The working directory for the code execution. If None, a default working directory will be used.
+          type: string
+        lang:
+          description: The language of the code. Default is "python".
+          type: string
+      required: []
+      type: object
+  type: function

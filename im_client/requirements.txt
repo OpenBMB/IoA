@@ -1,0 +1,17 @@
+pyyaml
+fastapi
+uvicorn
+numpy
+openai==1.3.0
+httpx[socks]==0.25.0
+pydantic
+pymilvus==2.3.0
+colorama==0.4.6
+tiktoken==0.5.1
+tenacity
+websockets
+docker
+sqlitedict==2.1.0
+aiofiles
+requests==2.31.0
+aiohttp

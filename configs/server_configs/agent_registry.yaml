@@ -1,0 +1,50 @@
+name: AgentRegistry # name of the collection
+
+collectionSchema:
+  name: agents
+  description: Server collection of registered agents.
+  fields:
+    - name: key
+      is_primary: True # only one primary field for each schema
+      dtype: VARCHAR
+      max_length: 256
+    - name: name
+      dtype: VARCHAR
+      max_length: 256
+    - name: type
+      dtype: VARCHAR
+      max_length: 256
+    - name: desc
+      auto_vectorize: True # auto-create corresponding vector field(named <name>_vec),
+      dtype: VARCHAR # only one vector field for each schema
+      max_length: 2048
+    - name: created_at
+      dtype: VARCHAR
+      max_length: 256
+  enable_dynamic_fields: True
+
+using: default
+consistence_level: Strong
+shards_num: 2
+auto_create_index: True # auto-create index
+
+index: # set index_config
+  - name: desc
+    field_name: desc_vec
+    index_params:
+      metric_type: IP # [L2, IP, COSINE]
+      index_type: FLAT
+      params:
+        nlist: 1
+
+search: # set search_config
+  - name: desc
+    auto_vectorize: True # auto-vectorize text input
+    search_params:
+      anns_field: desc_vec
+      output_fields: ["name", "type", "desc"]
+      limit: 3 # limit number of results
+      param:
+        metric_type: IP # should be same with the metirc_type of index
+        offset: 0
+      consistency_level: Strong

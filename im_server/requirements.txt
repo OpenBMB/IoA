@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pymilvus
+colorama
+openai==1.3.0
+pyyaml
+sqlitedict
+websockets
+gunicorn
+tenacity

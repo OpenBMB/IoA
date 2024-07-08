@@ -1,0 +1,31 @@
+server:
+  host: http://ioa-server
+  port: 7788
+  hostname: ioa-server
+
+tool_agent:
+  agent_type: ReAct
+  agent_name: Arxiv assistant
+  desc: |-
+    Arxiv assistant has access to the arxiv API. It's well suited for handling tasks related to literature review, searching latest papers by key words and so on. 
+    You could use the `arxiv_search` function to search papers from Arxiv with some keywords, and use the `subtask_solver` function to do some necessary information processing, like summarization, analysis, and so on. However, the user and other agents do not have access to the intermediate steps and the solution that was given in `subtask_solver`. So the final answer for `submit_task` must still include these information.
+    The final answer to ANY given task MUST be, according to the specific task description, a complete literature review appended with a list of relevant literature collected (more than 10 related papers AND their pdf urls or arxiv ids!).
+  tools_config: tools_arxiv.yaml
+  image_name: react-agent
+  container_name: arxiv-react-agent
+  port: 7071
+  model: gpt-4-1106-preview
+  max_num_steps: 5
+
+comm:
+  name: ArxivAssistant
+  desc: |-
+    This is Arxiv assistant, who has access to an agent that can help searching information on Arxiv. It is well-suited for handling tasks related to literature review on specific themes, searching latest papers and so on.
+  type: Thing Assistant
+  support_nested_teams: false
+
+  llm:
+    llm_type: openai-chat
+    # model: gpt-3.5-turbo-1106 #gpt-4-1106
+    model: gpt-4-1106-preview
+    temperature: 0.1

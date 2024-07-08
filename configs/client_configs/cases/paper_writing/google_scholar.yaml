@@ -1,0 +1,22 @@
+server:
+  host: http://ioa-server
+  port: 7788
+  hostname: ioa-server
+
+tool_agent:
+  agent_type: ReAct
+  desc: The ReAct agent has access to the google scholar. Designed as an affordable and straightforward agent, It is well-suited for handling routine tasks. However, it is important to note that it may not be able to tackle highly complex problems.
+  tools_config: tools_scholarly.yaml
+  container_name: scholarly_react_agent
+  port: 7072
+
+comm:
+  name: GoogleScholarAssistant
+  desc: |-
+    This is GoogleScholar assistant, who has access to an agent that can help searching information on GoogleScholar.
+  type: Thing Assistant
+  llm:
+    llm_type: openai-chat
+    #model: gpt-3.5-turbo-1106 #gpt-4-1106
+    model: gpt-4-1106-preview
+    temperature: 0.1

@@ -1,0 +1,35 @@
+server:
+  host: http://ioa-server
+  port: 7788
+  hostname: ioa-server
+
+tool_agent:
+  agent_type: ReAct
+  agent_name: WebBrowserAgent
+  desc: |-
+    WebBrowserAgent can access the interenet. Its key functionalities include:
+
+    - Web Searching: Conducts comprehensive searches using various search engines to find the most relevant and recent information.
+    - Page Navigation: Visits and navigates through multiple webpages, capable of scrolling up and down to access content located at different parts of a webpage.
+    - Data Extraction: Gathers data from different online sources, including articles, reports, and databases, providing well-rounded and accurate answers.
+    - Real-Time Information: Retrieves the latest news, current events, and updates, ensuring that the information provided is timely and pertinent.
+  tools_config: tools_web_browser.yaml
+  image_name: react-agent
+  container_name: web_browser_react_agent
+  port: 7070
+  model: gpt-4-1106-preview
+  max_num_steps: 6
+
+comm:
+  name: WebBrowserAgent
+  desc: |-
+    The Web Browser Agent is an agent equipped with the capability to access and navigate the web. It excels in performing online searches, visiting webpages, and scrolling through content to gather relevant information. This agent is particularly valuable when queries require up-to-date or extensive information available only on the internet. The Web Browser Agent is ideal for tasks requiring external validation, extensive research, or real-time updates.
+  type: Thing Assistant
+  support_nested_teams: false
+  max_team_up_attempts: 5
+  tools:
+    team_up_tools: configs/tools/tools_team_up.yaml
+  llm:
+    llm_type: openai-chat
+    model: gpt-4-1106-preview
+    temperature: 0.1

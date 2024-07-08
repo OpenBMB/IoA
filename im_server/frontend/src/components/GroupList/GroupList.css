@@ -1,0 +1,159 @@
+.chat-list {
+  width: 30%;
+  background-color: #f7f7f7;
+  border-right: 1px solid lightgray;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+.chat-list ul {
+  list-style-type: none; /* Removes bullet points */
+  padding: 0; /* No padding for the list */
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.chat-item {
+  /* Style individual chat items */
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  padding: 10px;
+  border-bottom: 1px solid lightgray; /* Divider between groups */
+  white-space: pre-wrap;
+  overflow-x: hidden;
+}
+
+.chat-item:hover {
+  background-color: lightgray;
+}
+
+.chat-item-selected {
+  display: flex;
+  flex-direction: row;
+  background-color: #d2d2d2;
+  white-space: pre-wrap;
+  padding: 10px;
+  border-bottom: 1px solid lightgray; /* Divider between groups */
+}
+
+.avatar-square {
+  width: 50px; /* Adjust this size as needed */
+  height: 50px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background-color: #dddee0;
+}
+
+.avatar-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-group-list {
+  width: 20px;
+  height: 20px;
+  /* border-radius: 3px; */
+}
+
+/* Layout for a single avatar */
+.avatar-grid-one {
+  width: 50px;
+  height: 50px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  justify-items: center;
+  flex-shrink: 0;
+  grid-template-areas: "avatar0";
+}
+
+/* Layout for two avatars, side by side */
+.avatar-grid-two {
+  width: 50px;
+  height: 50px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  justify-items: center;
+  flex-shrink: 0;
+  grid-template-areas: "avatar0 avatar1";
+}
+
+/* Layout for three avatars, two on top and one at the bottom */
+.avatar-grid-three {
+  width: 50px;
+  height: 50px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "avatar0 avatar1"
+    "avatar2 avatar2"; /* Single avatar centered at the bottom */
+  justify-items: center;
+  flex-shrink: 0;
+}
+
+/* Layout for four avatars in a 2x2 grid */
+.avatar-grid-four {
+  width: 50px;
+  height: 50px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas:
+    "avatar0 avatar1"
+    "avatar2 avatar3";
+  justify-items: center;
+  flex-shrink: 0;
+}
+
+.avatar-0 {
+  grid-area: avatar0;
+}
+
+.avatar-1 {
+  grid-area: avatar1;
+}
+
+.avatar-2 {
+  grid-area: avatar2;
+}
+
+.avatar-3 {
+  grid-area: avatar3;
+}
+
+.group-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 10px;
+  max-width: calc(80%);
+}
+
+.group-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.group-name {
+  font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.group-time {
+  font-size: 0.8em;
+  color: gray;
+}
+
+.group-description {
+  display: inline-block;
+  max-width: calc(100%);
+  color: #929292;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,229 @@
+- function:
+    description:
+      'Create or replace a notebook cell and execute it, return the output.
+
+      Use this tool to test your idea quickly.
+
+
+      Example:
+
+      ```
+
+      In[0]: code=''print("hello world")'' # This will create a new cell and execute
+      it.
+
+      Out[0]: [''cell_index: 0'', ''hello world'']
+
+      In[1]: code=''print("hello world")'',cell_index=0 # This will overwrite the
+      first cell and execute it.
+
+      In[2]: code=''print("hello world")'',cell_index=-1 # This will overwrite the
+      last cell and execute it.
+
+      ```'
+    name: PythonNotebook_execute_cell
+    parameters:
+      properties:
+        cell_index:
+          description:
+            the index of the cell to be insert and overwrite `code`, default
+            to `None`, which means append new cell.
+          type: integer
+        code:
+          description:
+            python code to be executed, make sure it is valid python code
+            with right format. don't provide shell command that started with '!' here.
+            don't make your code print too much output.
+          type: string
+        reset:
+          description:
+            whether to reset the kernel before executing the code. Default
+            to `False`.
+          type: boolean
+      required:
+        - code
+      type: object
+  type: function
+- function:
+    description: print all notebook cells' content and output.
+    name: PythonNotebook_print_cells_outputs
+    parameters:
+      properties: {}
+      required: []
+      type: object
+  type: function
+- function:
+    description:
+      Give a http or https url to browse a website and return the summarize
+      text. Note some websites may not be accessable due to network error. This tool
+      only return the content of give url and cannot provide any information need
+      interaction with the website.
+    name: WebEnv_browse_website
+    parameters:
+      properties:
+        goals_to_browse:
+          description:
+            The goals for browse the given `url` (e.g. what you want to
+            find on webpage.). If you need more details, request it in here.
+          type: string
+        url:
+          description:
+            'The realworld Uniform Resource Locator (web address) to scrape
+            text from. Never provide something like "<URL of the second news article>",
+            give real url!!! Example: ''https://www.deepmind.com/'''
+          type: string
+      required:
+        - url
+        - goals_to_browse
+      type: object
+  type: function
+- function:
+    description:
+      Search with search tools and browse the website returned by search.
+      Note some websites may not be accessable due to network error.
+    name: WebEnv_search_and_browse
+    parameters:
+      properties:
+        goals_to_browse:
+          description:
+            "What's you want to find on the website returned by search.
+            If you need more details, request it in here. Examples: 'What is latest
+            news about deepmind?', 'What is the main idea of this article?'"
+          type: string
+        region:
+          description:
+            "The region code of the search, default to `en-US`. Available
+            regions: `en-US`, `zh-CN`, `ja-JP`, `de-DE`, `fr-FR`, `en-GB`."
+          type: string
+        search_query:
+          description: The search query.
+          type: string
+      required:
+        - search_query
+        - goals_to_browse
+      type: object
+  type: function
+# - function:
+#     description: "Modify the textual file lines in slice [start_index:end_index] based\
+#       \ on `new_content` provided. Return content of the file after modification so\
+#       \ no further need to call `read_from_file`.\nfilepath_content_lines[start_index:end_index]\
+#       \ = new_content\n\nExample:\n```\nIn[0]: modify_file('test.txt', 'Hello World!')\
+#       \ # This will insert a new line `Hello World!` at the end of the file `test.txt`.\n\
+#       In[1]: modify_file('test.txt', 'Hello World!', 0) # This will insert a new line\
+#       \ `Hello World!` at the begin of the file `test.txt`.\nIn[2]: modify_file('test.txt',\
+#       \ 'Hello World!', 0, 1) # This will replace the first line of the file `test.txt`\
+#       \ with `Hello World!`. \n```"
+#     name: FileSystemEnv_modify_file
+#     parameters:
+#       properties:
+#         end_index:
+#           description: The end posistion in slice to modified file lines. Defaults
+#             to the value of `start_index`, which means if `start_index` provided,
+#             insert the new content at the `start_index` line.
+#           type: integer
+#         filepath:
+#           description: The path to the file to be modified, always use relative path
+#             to the workspace root.
+#           type: string
+#         new_content:
+#           description: The new content to be replaced with the old content.
+#           type: string
+#         start_index:
+#           description: The start position in slice to modified file lines. Defaults
+#             to `None`, which means insert the new content at the end of the file.
+#             So do not provide this if you want to append the new content to the file.
+#           type: integer
+#       required:
+#       - filepath
+#       - new_content
+#       type: object
+#   type: function
+# - function:
+#     description: "Return a tree-like structure for all files and folders in the workspace.\
+#       \ Use this tool if you are not sure what files are in the workspace.\nThis function\
+#       \ recursively walks through all the directories in the workspace\nand return\
+#       \ them in a tree-like structure, \ndisplaying all the files under each directory.\n\
+#       \nExample:\n```\n- root/\n    - sub_directory1/\n        - file1.txt\n     \
+#       \   - file2.txt\n    - sub_directory2/\n        - file3.txt\n```"
+#     name: FileSystemEnv_print_filesys_struture
+#     parameters:
+#       properties: {}
+#       required: []
+#       type: object
+#   type: function
+# - function:
+#     description: 'Open and read the textual file content in the workspace, you will
+#       see the content of the target file.
+
+#       Don''t use this if the give `filepath` is writen or modified before, the content
+#       in `filepath` should be already returned.'
+#     name: FileSystemEnv_read_from_file
+#     parameters:
+#       properties:
+#         filepath:
+#           description: The path to the file to be opened, always use relative path
+#             to the workspace root.
+#           type: string
+#         start_index:
+#           description: The starting line number of the content to be opened. Defaults
+#             to 0.
+#           type: integer
+#       required:
+#       - filepath
+#       type: object
+#   type: function
+# - function:
+#     description: "Write the textual file in the workspace with the content provided.\
+#       \ \nWill automatically create the file if it does not exist. Also overwrite\
+#       \ the file content if it already exists. If you want to append content to the\
+#       \ file, use `modify_file` instead.\nBetter check if the file exists before directly\
+#       \ writing to it. \nReturn content of the file after writing."
+#     name: FileSystemEnv_write_to_file
+#     parameters:
+#       properties:
+#         content:
+#           description: The content to be saved.
+#           type: string
+#         filepath:
+#           description: The path to the file to be saved, always use relative path
+#             to the workspace root.
+#           type: string
+#       required:
+#       - filepath
+#       - content
+#       type: object
+#   type: function
+# - function:
+#     description: "The shell tool that execute shell command in root privilege, return\
+#       \ the output and error. \nYou can use this tool to install packages, download\
+#       \ files, run programs, etc.\nSet run_async=True to run the command in a new\
+#       \ thread and return instantly if your command is time costly like install packages,\
+#       \ host services. \nExample:\n```\nIn: shell_command_executor(command='echo \"\
+#       hello world\"')\nOut: \"hello world\"\nIn: shell_command_executor(command='sleep\
+#       \ 10', run_async=True)\nOut: {'shell_id': 0} # You can use this id to read the\
+#       \ output and error later.\nIn: shell_command_executor(shell_id=0, kill=True)\n\
+#       Out: \"\" # The shell 0 will be killed.\n```"
+#     name: shell_command_executor
+#     parameters:
+#       properties:
+#         command:
+#           description: The shell command to be executed, must avoid command requiring
+#             additional user input. Default is empty string.
+#           type: string
+#         kill:
+#           description: If True, kill the shell which runs the command after execution.
+#             Default is False. Don't use any other kill command!
+#           type: boolean
+#         run_async:
+#           description: Whether to run the command asynchronously, default is False.
+#             If True, call this tool again with shell_id to get the final output and
+#             error.
+#           type: boolean
+#         shell_id:
+#           description: The id of shell to execute command, default is None, which
+#             means running in a new shell. Change this to execute command in the same
+#             shell.
+#           type: integer
+#       required: []
+#       type: object
+#   type: function

@@ -1,0 +1,26 @@
+- function:
+    description: Perform a search on YouTube. Will return a list of urls of the relevant videos
+    name: search_youtube
+    parameters:
+      properties:
+        query:
+          description: The keyword that you want to search
+          type: string
+      required:
+        - query
+      type: object
+  type: function
+- function:
+    description: Obtain the transcript (caption) of the given YouTube video. The `youtube_id` and `url` are optional, but you must provide one of them. Providing `youtube_id` is encouraged as it is simpler and less prone to errors.
+    name: get_youtube_transcript
+    parameters:
+      properties:
+        youtube_id:
+          description: Optional. The ID of the YouTube video. (The ID can be obtained from YouTube url, the url is often formatted as "https://www.youtube.com/watch?v={ID}")
+          type: string
+        url:
+          description: Optional. The complete URL of the YouTube video. For example, "https://www.youtube.com/watch?v=...".
+          type: string
+      required: []
+      type: object
+  type: function

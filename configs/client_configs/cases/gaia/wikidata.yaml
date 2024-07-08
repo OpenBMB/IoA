@@ -1,0 +1,30 @@
+server:
+  host: http://ioa-server
+  port: 7788
+  hostname: ioa-server
+
+tool_agent:
+  agent_type: ReAct
+  agent_name: WikidataAgent
+  desc: |-
+    WikidataAgent can search the information of entities on Wikidata.
+  tools_config: tools_wikidata.yaml
+  image_name: react-agent
+  container_name: wikidata_react_agent
+  port: 7073
+  model: gpt-4-1106-preview
+  max_num_steps: 5
+
+comm:
+  name: WikidataAgent
+  desc: |-
+    The WikidataAgent is capable of searching for entities on Wikidata and retrieving structured information about them. This agent is particularly useful for tasks that require detailed and organized data, such as gathering factual information, verifying data, or conducting research on various topics. The WikidataAgent efficiently navigates Wikidata to provide comprehensive and accurate information, streamlining your data retrieval and research processes.
+  type: Thing Assistant
+  support_nested_teams: false
+  max_team_up_attempts: 10
+  tools:
+    team_up_tools: configs/tools/tools_team_up.yaml
+  llm:
+    llm_type: openai-chat
+    model: gpt-4-1106-preview
+    temperature: 0.1

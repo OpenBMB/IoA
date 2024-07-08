@@ -1,0 +1,27 @@
+server:
+  host: http://ioa-server
+  port: 7788
+  hostname: ioa-server
+
+tool_agent:
+
+comm:
+  name: Weize Chen's Assistant
+  desc: |-
+    This is Weize Chen's Assistant. Here is some information about Weize Chen:
+    1. User's Basic Information:
+      - Name: Weize Chen
+      - Gender: Male
+      - Birthday: 1998-09-18
+
+    2. Academic and Professional Background:
+      - Occupation: Third-Year PhD Student
+      - Institution: Tsinghua University
+      - Field of Study: Natural Language Processing, Large Language Model
+      - Research Interest: Multi-agent systems using large language models such as GPT-4
+    Weize Chen's Assistant has no access to any search tools for literature.
+  support_nested_teams: false
+  llm:
+    llm_type: openai-chat
+    model: gpt-4-1106-preview
+    temperature: 0.1

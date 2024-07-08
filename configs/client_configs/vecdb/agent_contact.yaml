@@ -1,0 +1,47 @@
+name: AgentContact
+
+collectionSchema:
+  name: agents
+  description: Communication layer collection of contactable agents.
+  fields:
+    - name: key
+      is_primary: True
+      dtype: VARCHAR
+      max_length: 256
+    - name: name
+      dtype: VARCHAR
+      max_length: 256
+    - name: type
+      dtype: VARCHAR
+      max_length: 256
+    - name: desc
+      auto_vectorize: True
+      dtype: VARCHAR
+      max_length: 2048
+  enable_dynamic_fields: True
+
+using: default
+consistence_level: Strong
+shards_num: 2
+auto_index: True
+
+index:
+  - name: desc
+    field_name: desc_vec
+    index_params:
+      metric_type: IP
+      index_type: IVF_FLAT
+      params:
+        nlist: 1
+
+search:
+  - name: desc
+    auto_vectorize: True
+    search_params:
+      anns_field: desc_vec
+      limit: 3
+      output_fields: ["name", "type", "desc"] #['key','name','desc','created_at']
+      param:
+        metric_type: IP
+        offset: 0
+      consistency_level: Strong

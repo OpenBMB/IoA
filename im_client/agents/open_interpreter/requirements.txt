@@ -1,0 +1,5 @@
+open-interpreter==0.2.2
+fastapi
+uvicorn
+docker
+aiohttp

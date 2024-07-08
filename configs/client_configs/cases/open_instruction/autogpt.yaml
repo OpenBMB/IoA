@@ -1,0 +1,24 @@
+server:
+  host: http://ioa-server
+  port: 7788
+  hostname: ioa-server
+
+tool_agent:
+  image_name: autogpt:latest
+  container_name: autogpt-agent
+  agent_type: AutoGPT
+  agent_name: AutoGPT
+  desc: This is AutoGPT. AutoGPT is a cutting-edge AI. Unlike traditional chatbots, AutoGPT understands the goals, breaks them into smaller tasks, and leverages the internet and other tools to achieve them.
+  port: 8080
+comm:
+  name: AutoGPT
+  desc: |-
+    This is AutoGPT, which is a cutting-edge AI that can leverage web browser and file system to perform some challenging tasks. However, it might be costly to execute tasks. So be budget sensitive, and only assign challenging tasks to this assistant.
+  type: Thing Assistant
+  support_nested_teams: false
+
+  llm:
+    llm_type: openai-chat
+    model: gpt-4-1106-preview
+    # model: gpt-4-1106
+    temperature: 0.1

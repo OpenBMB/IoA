@@ -1,0 +1,35 @@
+server:
+  host: http://ioa-server
+  port: 7788
+  hostname: ioa-server
+
+tool_agent:
+  agent_type: ReAct
+  agent_name: ReAct Agent
+  desc: The ReAct agent is designed as an affordable and straightforward agent, It is well-suited for handling routine tasks. However, it is important to note that it may not be able to tackle highly complex problems. It has an access to a story about Paul Graham.
+  tools_config: tools_rag.yaml
+  model: gpt-3.5-turbo-1106 #gpt-4-1106-preview
+  image_name: react-agent
+  container_name: react_rag
+  port: 7070
+  rag:
+    persist_dir: ""
+    chunk_size: 512
+    llm_model: gpt-4-1106-preview
+    llm_temperature: 0.1
+    similarity_top_k: 2
+    data: ""
+comm:
+  name: Alice
+  desc: Alice is a simple assistant equipped with a ReAct agent as the tool agent. This agent provides basic functionalities including a web browser, a code interpreter, and Bing search capabilities. Designed as an affordable and straightforward option, Alice is well-suited for handling routine tasks. However, it is important to note that she may not be able to tackle highly complex problems.
+  type: Human Assistant
+  support_nested_teams: false
+  max_team_up_attempts: 10
+  tools:
+    team_up_tools: configs/tools/tools_team_up.yaml
+  llm:
+    llm_type: openai-chat
+    model: gpt-4-1106-preview
+    temperature: 0.1
+  observation_func: dummy
+  discussion_only: false

@@ -1,0 +1,33 @@
+- function:
+    description: This function interfaces with the arXiv's database API to retrieve a list of academic papers. It filters search results based on user-specified search terms and limits the number of results returned according to the provided parameters.
+    name: arxiv_search
+    parameters:
+      properties:
+        query:
+          description: A concise natural language sentence describing what you want to search for.
+          type: string
+        max_results:
+          description: the maximum number of papers returned (no more than 10).
+          type: number
+      required:
+        - query
+        - max_results
+      type: object
+  type: function
+- function:
+    description: |-
+      This function should be invoked for submission. As the user and other agents do not have access to your intermediate steps, you should write the complete final answer in the `conclusion` parameter. Include as many information from your exploration as possible.
+    name: submit_task
+    parameters:
+      properties:
+        conclusion:
+          description: The complete final answer to the given task. The answer MUST be a complete literature review appended with a list of relevant literature collected (more than 10 related papers AND their pdf urls or arxiv ids!).
+          type: string
+        success:
+          description: Do you think the given task has been solved?
+          type: boolean
+      required:
+        - conclusion
+        - success
+      type: object
+  type: function

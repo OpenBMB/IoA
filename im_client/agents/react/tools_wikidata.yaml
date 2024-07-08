@@ -1,0 +1,12 @@
+- function:
+    description: Perform a search on Wikidata.
+    name: search_wikidata
+    parameters:
+      properties:
+        query:
+          description: The item to search. It should not be a sentence, but should be an entity's name.
+          type: string
+      required:
+        - query
+      type: object
+  type: function

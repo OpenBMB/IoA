@@ -1,0 +1,38 @@
+- function:
+    description: Search for informations about the specific author from the database of google scholar.
+    name: scholarly_search_author
+    parameters:
+      properties:
+        query:
+          description: The name of author you want to search.
+          type: string
+      required:
+        - query
+      type: object
+  type: function
+- function:
+    description:
+      Search for informations about the specific keyword from the database of google scholar
+      return relevant authors.
+    name: scholarly_search_keyword
+    parameters:
+      properties:
+        query:
+          description: The keyword of author you want to search.
+          type: string
+      required:
+        - query
+      type: object
+  type: function
+- function:
+    description: Search for informations about the specific article or publication from the database of google scholar.
+    name: scholarly_search_pubs
+    parameters:
+      properties:
+        query:
+          description: The name of article or publication you want to search.
+          type: string
+      required:
+        - query
+      type: object
+  type: function
