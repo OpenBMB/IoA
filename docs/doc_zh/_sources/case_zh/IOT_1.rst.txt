@@ -1,0 +1,31 @@
+#######################
+IOT Party Simulation
+#######################
+
+|
+
+IOT Party: 在IOT场景中，有5个agent组队进行沟通协作完成根据宾客信息名单来完成Party准备，这五个agent分别是HostAssistant, CatererAssistant, EntertainmentAssistant, EnvironmentAssistant, DrinkerAssistant, 其中CatererAssistant, EntertainmentAssistant, EnvironmentAssistant, DrinkerAssistant 是四个基于ReAct agent的communication layer去使用不同的智能家居工具以完成Party准备。以下是如何启动并使用。
+
+Docker 运行
+===========================
+* 首先创建ReAct Agent镜像，其中http_proxy是可选择的，是为了在构建docker容器时使用你的本机代理，因为有一些需要翻墙下载的包。如果你的电脑上用的不是clash，需要把7890端口换成你代理软件的端口。如果你已经在外网，把这个参数删掉。
+
+  .. code-block:: bash
+
+    docker build -f dockerfiles/tool_agents/react.Dockerfile --build-arg http_proxy=http://host.docker.internal:7890 --build-arg https_proxy=http://host.docker.internal:7890 -t react:latest .  
+
+|
+
+* 通过docker-compose启动配置文件中的容器
+
+  .. code-block:: bash
+
+    docker-compose -f dockerfiles/compose/IOT_Party.yml up --build
+
+|
+
+* 启动后，在另一个窗口命令行中执行，该文件会发起一个goal
+
+  .. code-block:: bash
+
+    python tests/test_IOT_party.py 

@@ -1,0 +1,64 @@
+#######################
+Agent
+#######################
+
+|
+
+Create a folder named your_case_name under the :code:`im_client/config/cases` directory for your cases. For example: :code:`im_client/config/cases/IOT`
+
+创建 :code:`your_agent_name.yaml` 作为agent的配置文件，依据你所需要的agent数量，创建相应数量的yaml文件数量。比如: :code:`im_client/config/cases/IOT/Caterer.yaml`
+
+:code:`your_agent_name.yaml` is divided into four sections: **server** , **tool_agent**, **comm**, **llm**。
+
+Server
+===========================
+server: All configuration consists of the following IP Address and Port.
+
+.. code-block:: yaml
+
+   server:  
+      host: http://your_server_IP_address (ex. http://IoA-server)
+      port: 7788 (setting 7788 port in your server)
+      hostname: your_server_IP_address (ex. IoA-server)
+
+|
+
+Tool Agent
+===========================
+tool agent: Represents different agents integrated into AgentVerse, such as ReAct, OpenInterpreter, etc. The tool_agent is optional and determined by the actual agents required for the case.
+
+.. code-block:: yaml
+
+   tool_agent:  
+      agent_type: ReAct / OpenInterpreter
+      desc: your tool agent description
+      tool_config: your tools file path
+      container_name: docker container name
+      model: GPT version (ex. gpt-4-1106)
+
+
+|
+
+Comm
+==========================
+comm: The communication agent used for communicating with other agents and also for assigning tasks to the tool_agent.
+
+.. code-block:: yaml
+
+   comm:  
+      name: your communication agent name
+      desc: your communication agent description
+      type: Thing Assistant / Human Assistant
+
+|
+
+LLM
+==========================
+llm: Configuration properties for the LLM.。
+
+.. code-block:: yaml
+
+   llm:  
+      llm_type: openai-chat
+      model: GPT version (ex. gpt-4-1106)
+      temperature: our default value is 0.1, it is optional

@@ -1,0 +1,50 @@
+#######################
+创建docker-compose
+#######################
+
+|
+
+在 :code:`dockerfiles/compose` 目录下的 :code:`.env` 引入你的OpenAI API Key:
+
+.. code-block:: bash
+
+  OPENAI_API_KEY="your_openai_api_key"
+
+.. note::
+
+      :code:`.env` 中指定的环境变量会被系统环境变量覆盖，请确认系统环境变量
+
+Docker Compose
+=====================================
+在 :code:`dockerfiles/compose` 目录下的 :code:`your_case.yml` 。比如: :code:`dockerfiles/compose/IOT_Party.yml` 
+
+.. code-block:: yaml
+
+      version: "3"
+
+      service:
+      Name: (ex. Cater)
+         image: your_needed_image(ex. IoA-agent:latest)
+         build: 
+            context: ../../
+            dockerfile: your_docker_file(ex. dockerfiles/agent.Dockerfile)
+            args: (如果已连接外网，则不需要此参数)
+               http_proxy: http://172.27.16.1:7890 
+               https_proxy: http://172.27.16.1:7890
+         container_name: your_container_name
+         env_file:
+            - .env
+         volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+         volumes:
+            - OPENAI_API_KEY
+            - OPENAI_BASE_URL(如果不需要此参数，请删除)
+            - CUSTOM_CONFIG=your_agent.yaml path(ex. agentverse/config/cases/IOT/Caterer.yaml)
+         ports:
+            - your_host_port:your_container_port(ex. 5051:5050)
+         depends_on:
+            - Server
+            - your_needed_server(ex. IOT-Server)
+         stdin_open: true
+         tty: true
+

@@ -1,0 +1,94 @@
+##########################
+Mechanism
+##########################
+
+|
+
+🤖 Mechanism Design
+=======================================
+To enable different agents to collaborate and complete tasks together, we have divided the task completion process into two phases: Team Up and Coordination.
+
+|
+
+Team Up
+---------------------------
+* **Team Up** : During this phase, the Communication Layer's LLM receives a goal (for instance, one passed in by an external user). Based on the information in the Agent Notebook, it determines:
+
+  * If there's a suitable agent from previous collaborations, a team-up request will be sent to the server, followed by waiting for the server to return a group chat ID.
+
+  |
+
+  * If no suitable agents are found, an agent search request is sent to the server, detailing the characteristics of agents that are deemed compatible for collaboration, then waiting for the server to return a list of related agents. Subsequently, a team-up request is sent.
+
+
+
+  |
+
+
+  .. note::
+
+      🌟 Nested Team up: During the task discussion phase, each agent can now choose to:
+
+      * Complete the task alone, meaning the Tool Agent directly carries out the assigned task.
+
+      * Team up to complete the task: If the evaluation indicates the need to collaborate with other agents, the agent will treat the task as a new goal and initiate a new Team Up process to form a sub-team. This process can be nested as needed until the set depth limit for nested teaming is reached. The system allows toggling the nested teaming feature for each agent and setting the depth of nesting, providing more flexible configurations.
+
+      |
+
+      We expect the Nested Team Up to bring unprecedented flexibility and scalability to our Multi-Agent System. This feature allows agents to decide whether to form new sub-teams based on necessity, addressing more specific sub-tasks. With this nested team-building mechanism, our system can easily scale up to handle more complex tasks while ensuring efficient and flexible resource allocation.
+
+      |
+
+      Why do we need this mechanism? In a Multi-Agent System, the number of agents and the complexity of interactions often grow exponentially with the scale of the tasks. Nested team-up creates clear hierarchies and division of roles, allowing each small team to focus on tasks within their expertise, minimizing unnecessary interactions, thus maintaining communication complexity within each small team manageable even as the team size grows.
+
+      |
+
+      How does this mechanism scale up? It offers a modular method of expansion. As the system needs to scale, new agent groups can be added simply or agents increased within existing groups, with each new agent only needing to communicate with its immediate group, significantly reducing the overall communication burden of the system. Through this multi-layered nesting, the LLM-based Multi-Agent System can efficiently expand to handle larger-scale tasks while still maintaining the efficiency of each small team.
+
+
+|
+
+
+* **Coordination**: During this phase, the Communication Layer can send messages to the newly created group chat. This group is then responsible for completing the goal.
+
+|
+
+Coordination
+---------------------------
+**Coordination** is the most complex phase. To facilitate efficient communication between agents, we have implemented some mechanisms:
+
+
+* **Communication Order** : For controllability, at any given moment, we only allow one agent to speak. After its turn, it decides which agent speaks next.
+
+|
+
+* **Message Types**: We defined different types of messages for agents to choose from, including:
+
+  -  **DISCUSSION** : Regular discussion information.
+
+  |
+
+  -  **SYNC_TASK_ASSIGNMENT** : Synchronizes task assignments. In this message, agents assign tasks to other agents. The discussion will wait until the task is completed and feedback is received before continuing.
+
+  |
+  
+  -  **ASYNC_TASK_ASSIGNMENT** : Asynchronous task assignment. In this message, agents assign tasks to other agents while the discussion continues uninterrupted. The assigned agents execute their tasks and immediately send the results back to the group upon completion.
+
+  |
+
+  -  **INFORM_TASK_RESULT** : Feedback on the outcome of a task execution.
+
+  |
+
+  -  **INFORM_TASK_PROGRESS** : After being assigned an asynchronous task, an agent sends a message to confirm receipt of the task.
+
+  |
+
+  -  **PAUSE** : An agent decides to pause the discussion until a previously assigned asynchronous task is completed before continuing.
+
+  |
+
+  -  **CONCLUDE_GROUP_DISCUSSION** : The discussion concludes when the task is completed.
+
+
+

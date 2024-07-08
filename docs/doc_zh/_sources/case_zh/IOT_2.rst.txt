@@ -1,0 +1,31 @@
+#######################
+IOT Real Device
+#######################
+
+|
+
+IOT Real Device: 在IOT real device场景中，通过miio协议接入小米智能家居真实设备，其中包括米家台灯1S增强版、Redmi投影仪 2、米家智能直流变频落地扇1X、米家空气净化器、米家智能冷热饮水机、小米AI音箱（第二代）、米家智能除菌加湿器2，通过Agents实现设备间的互联互通，Agent之间的沟通协同来调配不同的智能家居，以营造一个智能舒适的居住体验。
+
+Docker 运行
+===========================
+* 首先创建ReAct Agent镜像，其中http_proxy是可选择的，是为了在构建docker容器时使用你的本机代理，因为有一些需要翻墙下载的包。如果你的电脑上用的不是clash，需要把7890端口换成你代理软件的端口。如果你已经在外网，把这个参数删掉。
+
+  .. code-block:: bash
+
+    docker build -f dockerfiles/tool_agents/react.Dockerfile --build-arg http_proxy=http://host.docker.internal:7890 --build-arg https_proxy=http://host.docker.internal:7890 -t react:latest . 
+
+|
+
+* 通过docker-compose启动配置文件中的容器
+
+  .. code-block:: bash
+
+     docker-compose -f dockerfiles/compose/IOT_Party.yml up --build
+
+|
+
+* 启动后，在另一个窗口命令行中执行，该文件会发起一个goal
+
+  .. code-block:: bash
+
+    python tests/test_IOT_real.py

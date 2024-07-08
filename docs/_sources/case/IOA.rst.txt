@@ -1,0 +1,77 @@
+#######################
+IOA
+#######################
+Internet of Agents (IOA) is a concept focused on the interconnectivity of Agents, which are capable of autonomous action as well as communication and collaboration with each other to achieve complex objectives. These agents can be deployed on cloud platforms, allowing users to remotely access and manage them via the internet. Within the IOA ecosystem, an example such as IOA Paper Writing demonstrates a case where Agents specialize in the automation of paper writing, while IOA Paper Writing with Printer further extends this scenario to include the printing process, showcasing how Agents integrate additional services and functions to accomplish broader tasks.
+
+
+
+|
+
+Papaer Writing
+===========================
+IOA Paper Writing involves four agents teaming up to communicate and collaborate on writing the IOA Paper Introduction. These four agents are Weize Chen's Assistant, Chen Qian's Assistant, Cheng Yang's Assistant, and ArxivAssistant. ArxivAssistant, based on the ReAct agent's communication layer, is responsible for utilizing Arxiv-related tools to obtain relevant papers needed for IOA. Here’s how to start and use it:
+
+1. First, create the ReAct Agent image.
+
+   .. code-block:: bash
+
+     docker build -f dockerfiles/tool_agents/react.Dockerfile -t react:latest . 
+
+|
+
+2. In :code:`dockerfiles/compose/.env` enter your OpenAI API key and base_url (if needed). If you have already set the system environment variables, you do not need to fill them in.
+
+|
+
+3. Then, use docker-compose to automatically create and run 7 containers, including the server, weize_frontend, the four agents participating in the group chat, and the Arxiv ReAct agent.
+
+   .. code-block:: bash
+
+     docker-compose -f dockerfiles/compose/paper_writing.yml up --build
+
+|
+
+4. After starting, execute a command in another window command line, which will initiate a goal.
+
+   .. code-block:: bash
+
+     python tests/test_paper_writing.py
+
+|
+
+Paper Writing with Printer
+====================================
+IOA Paper Writing with Printer builds on the Paper Writing scenario, introducing the FormatCraft Printer which can print out the result of the IOA paper introduction completed in the Paper Writing scenario. Here’s how to start and use it:
+
+1. First, create the ReAct Agent image.
+
+   .. code-block:: bash
+
+     docker build -f dockerfiles/tool_agents/latex_printer_react.Dockerfile  -t latex_printer_react:latest .
+
+
+|
+
+2. Create a network that allows docker containers to communicate with each other.
+
+   .. code-block:: bash
+
+     docker network create agent_network
+
+
+|
+
+3. Start the containers specified in the docker-compose configuration file.
+
+   .. code-block:: bash
+
+     docker-compose -f dockerfiles/compose/paper_writing_with_printer.yml up --build
+
+
+|
+
+4. After starting, execute a command in another window command line, which will initiate a goal.
+
+   .. code-block:: bash
+
+     python tests/test_paper_writing_with_printer.py

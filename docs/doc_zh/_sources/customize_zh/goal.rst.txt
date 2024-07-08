@@ -1,0 +1,24 @@
+#######################
+创建Goal
+#######################
+
+|
+
+在 :code:`tests` 目录下创建 :code:`test_your_case.py` 。比如: :code:`tests/test_IOT_real.py` 
+
+Goal
+===========================
+将你的任务目标描述补全到goal变量中，发送POST请求到 :code:`url: "http://127.0.0.1:5050/launch_goal"` ，设置 :code:`team_member_names为None` ，:code:`team_up_depth` 为你想要嵌套组队的深度。
+
+.. code-block:: python
+
+   import requests 
+   goal = """ your task goal """ (ex. """ Complete preparations for  a Halloween themed party. The following is the list of guests, RanLi (vegetarian), WeiZe (fitness enthusiast), YiTong (gluten-free), QianChen (kosher), Chengyang (halal). """)
+   response = requests.post(
+      "http://127.0.0.1:5050/launch_goal",
+      json={
+         "goal": goal
+         "team_member_names": None
+         "team_up_depth": 1
+      },
+   )

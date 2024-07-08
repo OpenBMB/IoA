@@ -1,0 +1,51 @@
+#######################
+配置文件
+#######################
+
+|
+
+设置服务器的7788，54321的TCP&UDP端口为开启状态。
+
+为了确保分布式服务可执行，需要更改 :code:`im_client/config/cases` 和 :code:`dockerfiles/compose` 中配置文件中的部分参数。
+
+Agent Configuration
+=====================================
+为了正确访问服务器，需要将Agent中server部分中的 **host** 和 **hostname** 更改成服务器的IP地址，以及确保端口设置开启成功。
+
+.. code-block:: yaml
+
+      server:  
+         host: http://your_server_IP_address (ex. http://43.163.230.180)
+         port: 7788 (setting up 7788 port in your server)
+         hostname: your_server_IP_address (ex. 43.163.230.180)
+
+Docker Compose Configuration
+=====================================
+为了正确访问服务器，需要将docker-compose中 **depends_on** 字段中有关 **server** 的参数删除。在此部分选择将depand_on字段全部删除，如果有需要自行更改。
+
+.. code-block:: yaml
+
+      version: "3"
+            
+         service:
+            Name: (ex. Cater)
+               image:your_needed_image(ex. IoA-agent:latest)
+               build:
+                  context: ../../
+                  dockerfile: your_docker_file(ex. dockerfiles/agent.Dockerfile)
+               args: (如果已连接外网，则不需要此参数)
+                  http_proxy: http://172.27.16.1:7890 
+                  https_proxy: http://172.27.16.1:7890
+               container_name: your_container_name
+               env_file:
+                  - .env
+               volumes:
+                  - /var/run/docker.sock:/var/run/docker.sock
+               volumes:
+                  - OPENAI_API_KEY
+                  - OPENAI_BASE_URL(如果不需要此参数，请删除)
+                  - CUSTOM_CONFIG=your_agent.yaml path(ex. agentverse/config/cases/IOT/Caterer.yaml)
+               ports:
+                  - your_host_port:your_container_port(ex. 5051:5050)
+               stdin_open: true
+               tty: true

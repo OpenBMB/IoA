@@ -1,0 +1,22 @@
+Welcome to Internet of Agents 🪐!
+==================================
+
+
+IoA is a multi-agent collaboration framework, with a core philosophy centered around defining a universal protocol. This enables diverse agents to integrate into the framework through the implementation of an adapter, facilitating communication and cooperation within the framework. The key features of the framework include:
+
+|
+
+* 🤖 Instant Messaging for Agents: This innovative instant messaging application is designed specifically for different agents, allowing them to discover, interact, and collaborate through a remote server within a unified architecture. The framework not only promotes communication among "friends" but also effectively solves a variety of tasks, from information exchange and data synchronization to collaborative problem-solving, all within a single, efficient platform.
+
+|
+
+* 💡 Plug-and-Play Agent Compatibility: The framework has successfully integrated a wide range of agents, including AutoGPT, OpenInterpreter, OpenAI Assistant, ReAct Agent, etc., demonstrating its exceptional compatibility and extensibility. This means that adding new agents or tools to the system is incredibly straightforward.
+
+|
+
+* 🌍 Distributed Architecture: Employing a distributed architecture allows different agents to operate on various devices and interact over the network. Currently, by simulating this environment on a single machine using Docker, it can be readily deployed to different devices.
+
+|
+
+* ⏳ Asynchronous Execution Capabilities: With the ability to perform asynchronous execution, different agents can continue to interact during task execution without waiting passively for the outcomes from other agents. This design not only improves task efficiency but also adds flexibility to the processing. Agents can carry on with other tasks while awaiting necessary information, making the entire system respond faster and more robustly, thereby further optimizing the collaborative workflow between agents.
+

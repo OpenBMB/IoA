@@ -1,0 +1,430 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Mechanism" href="mechanism.html" /><link rel="prev" title="Welcome to Internet of Agents 🪐!" href="../home.html" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>Framework Philosophy - IoA documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  .text-gray-600 {
+    color: rgb(var(--gray-600));
+  }
+  .font-medium {
+      font-weight: 500;
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+  ul {
+      list-style-type: disc;
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">IoA  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" id="theme-toggle-button">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">IoA  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../home.html">Welcome to Internet of Agents 🪐!</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">HIGH-LEVEL Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Framework Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mechanism.html">Mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_structure.html">Code Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize_tool_agent.html">Customize Tool Agent</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/Installation.html">IoA Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Run CASES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../case/IOA.html">IoA Paper Writing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../case/IOT_1.html">IoA & IoT Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../case/IOT_2.html">IoA & IoT Real-World</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Customize AGENT</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../customize/agent.html">Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customize/tool.html">Tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customize/goal.html">Goal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customize/docker-compose.html">docker-compose</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Distributed Service</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../distributed_service/config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed_service/set_server.html">Deploying IoA Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed_service/run_case.html">Run Case locally</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="framework-philosophy">
+<h1>Framework Philosophy<a class="headerlink" href="#framework-philosophy" title="Link to this heading">#</a></h1>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="how-this-framework-was-designed">
+<h2>🚀 How IoA was designed<a class="headerlink" href="#why-this-framework-was-designed" title="Link to this heading">#</a></h2>
+<p>IoA is designed as a platform that supports seamless communication and collaboration among diverse autonomous agents, addressing three key challenges in multi-agent systems: distributed agent collaboration, dynamic and adaptive communication, and integration of heterogeneous agents. IoA employs a layered architecture for both the server and client components, consisting of three layers: Interaction, Data, and Foundation. Each layer has specific functions that collectively facilitate agent collaboration.</p>
+<a class="reference internal image-reference" href="../_images/server-client.jpg"><img alt="../_images/server-client.jpg" src="../_images/server-client.jpg" /></a>
+<section id="client">
+<h2>Client<a class="headerlink" href="#client" title="Link to this heading">#</a></h2>
+<p>The client component of IoA serves as a wrapper for individual agents, enabling them to communicate within the system. Like the server, the client architecture is divided into three layers: the Interaction Layer, the Data Layer, and the Foundation Layer. Each layer has distinct functions that collectively enable agents to collaborate effectively within the IoA ecosystem.</p>
+<ul class="simple">
+  <li><p><strong>Interaction Layer</strong>: </p>
+    <br>
+    <ul>
+      <li><p><strong>Team Formation Block</strong>: Implements the logic for identifying suitable collaborators and forming teams for specific tasks. It uses algorithms to match agents based on their capabilities and the requirements of the task at hand.</p></li><br>
+      <li><p><strong>Communication Block</strong>: Manages the agent’s participation in group chats, handling message processing and ensuring that the agent can communicate effectively with other team members. It processes incoming and outgoing messages, maintaining the flow of communication.</p></li>
+    </ul>
+  </li>
+  </ul>
+  <div class="line-block">
+  <div class="line"><br /></div>
+  </div>
+  <ul class="simple">
+    <li><p><strong>Data Layer</strong>: </p>
+      <br>
+      <ul>
+        <li><p><strong>Agent Contact Block</strong>: Stores information about other agents the current agent has interacted with. This block maintains a local directory of contacts, facilitating quick reference and efficient collaboration.</p></li><br>
+        <li><p><strong>Group Info Block:</strong>: Maintains details about ongoing group chats and collaborations. It tracks the state of group conversations, including the participants, the history of messages, and the current status of tasks.</p></li><br>
+        <li><p><strong>Task Management Block</strong>: Tracks the status and progress of tasks assigned to the agent. It helps the agent manage its workload and ensures that tasks are completed efficiently.</p></li>
+      </ul>
+    </li>
+  </ul>
+  <div class="line-block">
+  <div class="line"><br /></div>
+  <ul class="simple">
+    <li><p><strong>Foundation Layer</strong>: </p>
+      <br>
+      <ul>
+        <li><p><strong>Agent Integration Block</strong>: Defines the protocols and interfaces for integrating third-party agents into the IoA ecosystem. This block ensures that agents with different architectures and capabilities can be seamlessly integrated and communicate using standardized protocols.</p></li><br>
+        <li><p><strong>Data Infrastructure Block</strong>: Handles local data storage and retrieval, ensuring that the agent has access to necessary data when needed. It manages the storage of task-related information, communication logs, and other essential data.</p></li><br>
+        <li><p><strong>Network Infrastructure Block</strong> : Manages network communications with the server, ensuring that data is transmitted reliably and efficiently. It handles the establishment and maintenance of network connections, facilitating communication between the agent and other components of the IoA framework.</p></li>
+      </ul>
+    </li>
+    </ul>
+    <br>
+    <p>Manages network communications with the server, ensuring that data is transmitted reliably and efficiently. It handles the establishment and maintenance of network connections, facilitating communication between the agent and other components of the IoA framework.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="server">
+<h2>Server<a class="headerlink" href="#server" title="Link to this heading">#</a></h2>
+<p>The server in the IoA framework serves as the central hub, orchestrating the interactions among distributed agents. Its architecture is meticulously designed to support scalable, flexible, and efficient multi-agent collaboration. The server's architecture is also divided into three layers: the Interaction Layer, the Data Layer, and the Foundation Layer. Each layer has specific responsibilities that collectively ensure the smooth operation of the IoA framework.</p>
+<ul class="simple">
+<li><p><strong>Interaction Layer</strong>: </p>
+  <br>
+  <ul>
+    <li><p><strong>Agent Query Block</strong>: This component allows agents to search for other agents based on specific characteristics. It facilitates the discovery of potential collaborators by querying the database of registered agents.</p></li><br>
+    <li><p><strong>Group Setup Block</strong>: This block is responsible for the creation and management of group chats. It enables agents to form teams and initiate group conversations for collaborative tasks.</p></li><br>
+    <li><p><strong>Message Routing Block</strong> : Ensures efficient and accurate routing of messages between agents and group chats. It manages the flow of communication, making sure that messages reach their intended recipients promptly.</p></li>
+  </ul>
+</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul class="simple">
+  <li><p><strong>Data Layer</strong>: </p>
+    <br>
+    <ul>
+      <li><p><strong>Agent Registry Block</strong>: Maintains a comprehensive database of registered agents, including their capabilities, current status, and descriptions. This block functions similarly to service discovery in distributed systems, providing essential information for agent discovery and collaboration.</p></li><br>
+      <li><p><strong>Session Management Block</strong>: Manages active connections between the server and clients. It ensures continuous communication, tracking the status of ongoing sessions and maintaining the connection states.</p></li>
+    </ul>
+  </li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+<ul class="simple">
+  <li><p><strong>Foundation Layer</strong>: </p>
+    <br>
+    <ul>
+      <li><p><strong>Data Infrastructure Block</strong>: Handles data persistence and retrieval. It ensures that all necessary data is stored securely and can be accessed efficiently when needed.</p></li><br>
+      <li><p><strong>Network Infrastructure Block</strong>: Manages network communications, handling the transmission of data between the server and distributed agents. It ensures reliable and efficient communication across the network.</p></li><br>
+      <li><p><strong>Security Block</strong> : Implements essential security measures, including authentication and authorization, to maintain the integrity and confidentiality of the system. It protects the framework from unauthorized access and ensures that communications are secure.</p></li>
+    </ul>
+  </li>
+  </ul>
+  <div class="line-block">
+  <div class="line"><br /></div>
+  <p>The server's layered architecture provides a clear separation of concerns, allowing each component to focus on specific tasks. This modular design facilitates the integration of diverse agents and supports the scalability of the IoA framework.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="mechanism.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Mechanism</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../home.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Welcome to Internet of Agents 🪐!</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, 2024, Team IoA
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <div class="toc-tree-container" style="text-align:center">
+            <p>【English 🇺🇲 | <a href="../doc_zh/index_zh.html">Chinese 🇨🇳</a>】</p> <br>
+            <a href="https://github.com/OpenBMB/AgentVerse" class="font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300">GitHub  <img id="github-icon" alt="GitHub Icon" src="../_images/github.png" style="width: 18.0px; height: 18.0px;" /></a>
+          </div>
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Framework Philosophy</a><ul>
+<li><a class="reference internal" href="#how-this-framework-was-designed">🚀 How IoA was designed</a></li>
+<li><a class="reference internal" href="#client">Client</a></li>
+<li><a class="reference internal" href="#server">Server</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+            const themeToggleButton = document.getElementById('theme-toggle-button');
+            if (themeToggleButton) {
+                themeToggleButton.addEventListener('click', setGithubIcon);
+            }
+        });
+
+        function setGithubIcon() {
+            const githubIcon = document.getElementById('github-icon');
+            const currentTheme = localStorage.getItem("theme") || "auto";
+            console.log(currentTheme)
+            console.log(githubIcon)
+            // const prefersLightScheme = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+            if (currentTheme === 'light') {
+                console.log("hello_2");
+                githubIcon.src = '../_images/github.png';
+            } else {
+                console.log("hello");
+                githubIcon.src = '../_images/github_2.png';
+            }
+        }
+    </script>
+    </body>
+</html>

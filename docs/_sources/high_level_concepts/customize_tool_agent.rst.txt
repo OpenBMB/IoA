@@ -1,0 +1,80 @@
+#####################
+Customize Tool Agent
+#####################
+
+|
+
+Here is a brief guide for integrating third-party Agents. If you want to integrate an agent from a third-party repository, there are mainly two things to consider:
+
+
+* Build a Docker container for the third-party agent and expose a **run** interface externally through FastAPI or another web framework.
+
+  * **run(task_desc)**: Executes the task_desc task from scratch and returns the result as a string.
+
+  |
+
+* Write an adapter to connect the third-party agent with AgentVerse. Essentially, this involves converting data formats, such as converting memory information in AgentVerse, which uses LLMResult from common/types/llm.py, into a format accepted by the third-party agent and invoking the interface provided by the Docker container created in the first step. The adapter serves as an intermediary layer in AgentVerse for interacting with the third-party agent.
+
+|
+
+=============================
+Openinterpreter Example
+=============================
+* **Building an HTTP service for Open Interpreter**: First, :code:`im_client/agents/open_interpreter` created in the im_client/agents/open_interpreter directory will be dockerized. This file includes some FastAPI post endpoints, which will be exposed as an HTTP service when started with uvicorn. When started with Docker, these endpoints can be requested externally.
+
+|
+
+* **Creating Docker for Open Interpreter**: Next, we need to create a Dockerfile located in  :code:`dockerfiles/tool_agents` . This allows tool agents like Open Interpreter to be started with Docker, avoiding potential environment conflicts with AgentVerse.
+
+|
+
+* **Building Adapter for Open Interpreter**: :code:`im_client/agents/open_interpreter` created in im_client/agents/open_interpreter is an adapter for Open Interpreter. It builds the conversion between AgentVerse and Open Interpreter data formats and forwards the request to the Open Interpreter's Docker container. The adapter also provides a run method, which performs data format conversion and calls the corresponding endpoint of the Open Interpreter Docker container via a POST request.
+
+|
+
+Docker Startup
+==========================
+* In the :code:`docker-compose.yml` , set up the environment variable CUSTOM_CONFIG for a tool agent's configuration within an agent's configuration, and define tool agent-related parameters in the file specified by CUSTOM_CONFIG. :code:`CUSTOM_CONFIG`.
+
+|
+
+* Build the Dockerfile you wrote earlier in the terminal, for example, :code:`docker build -f dockerfiles/tool_agents/open_interpreter.Dockerfile -t open_interpreter:latest .`. Then run :code:`docker-compose up --build` to start the server and multiple communication agents.
+
+|
+
+Logic
+===============
+Currently, there are three phases:
+
+1. **Team Up** phase: In this phase, the LLM in the communication layer receives the user's goal and decides based on the agent_contact:
+
+   |
+
+   * If there's a suitable agent, it sends a team-up request to the server, then waits for the server to return a group chat ID.
+
+   |
+
+   * If no suitable agent is found, it sends an agent search request to the server, specifying characteristics of agents that could collaborate, then waits for the server to return a list of relevant agents and finally sends a team-up request.
+
+   |
+
+2. **Coordination** Phase: In this phase, the communication agent can send messages to the newly created group chat, specifying the next speaker. There are two protocols (TBD):
+
+   |
+
+   * **discussion protocol** : For discussing task details, including objectives, details, and division of labor.
+
+   |
+
+   * **vote protocol** : When an agent proposes a plan for what to do next, this protocol is invoked. If invoked, it enters a voting phase where other agents vote on the proposal. If all agree, the process moves to the next phase; otherwise, it returns to discussion.
+
+   |
+
+3. **Execution** Phase: In this phase, the communication agent assigns tasks to its tool agent according to the plan discussed. Meanwhile, it periodically checks the tool agent's memory to determine if there is sufficient information that needs to be synchronized with other agents and sends the message to the group chat.
+
+
+
+
+
+
+

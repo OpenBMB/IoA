@@ -1,0 +1,442 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Welcome to Internet of Agents 🪐!" href="home.html" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>IoA documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  .text-gray-600 {
+    color: rgb(var(--gray-600));
+  }
+  .font-medium {
+      font-weight: 500;
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+  .sidebar-drawer {
+      z-index: 30;
+  }
+  .theme-toggle-container {
+      z-index: 40;
+  }
+
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="#"><div class="brand">IoA  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" id="theme-toggle-button">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+  
+  
+  <span class="sidebar-brand-text">IoA  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Welcome to Internet of Agents 🪐!</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">HIGH-LEVEL Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="high_level_concepts/framework.html">Framework Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="high_level_concepts/mechanism.html">Mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="high_level_concepts/code_structure.html">Code Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="high_level_concepts/customize_tool_agent.html">Customize Tool Agent</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/Installation.html">IoA Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Run CASES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="case/IOA.html">IoA Paper Writing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case/IOT_1.html">IoA & IoT Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case/IOT_2.html">IoA & IoT Real-World</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Customize AGENT</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="customize/agent.html">Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize/tool.html">Tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize/goal.html">Goal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize/docker-compose.html">docker-compose</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Distributed Service</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="distributed_service/config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed_service/set_server.html">Deploying IoA Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed_service/run_case.html">Run Case locally</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="welcome-to-IoA-s-documentation">
+<h1>Welcome to IoA’s documentation 🪐!<a class="headerlink" href="#welcome-to-IoA-s-documentation" title="Link to this heading">#</a></h1>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="home.html">Welcome to Internet of Agents 🪐!</a></li>
+</ul>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">HIGH-LEVEL Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="high_level_concepts/framework.html">Framework Philosophy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="high_level_concepts/framework.html#how-this-framework-was-designed">🚀 How this framework was designed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="high_level_concepts/framework.html#client">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="high_level_concepts/framework.html#server">Server</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="high_level_concepts/mechanism.html">Mechanism</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="high_level_concepts/mechanism.html#communication-mechanism-design">🤖 Mechanism Design</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="high_level_concepts/code_structure.html">Code Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="high_level_concepts/customize_tool_agent.html">Customize Tool Agent</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="high_level_concepts/customize_tool_agent.html#openinterpreter-example">Openinterpreter Example</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started/Installation.html">IoA Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/Installation.html#manual-Installation-recommended">Manual Installation ( Recommended!! )</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/Installation.html#server">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/Installation.html#client">Client</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Run CASES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="case/IOA.html">IoA Paper Writing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="case/IOA.html#paper-writing">Paper Writing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="case/IOA.html#paper-writing-with-printer">Paper Writing with Printer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="case/IOT_1.html">IoA & IoT Simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="case/IOT_1.html#docker-execution">Docker Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="case/IOT_2.html">IoA & IoT Real-World</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="case/IOT_2.html#docker-execution">Docker Execution</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Customize AGENT</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="customize/agent.html">Agent</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="customize/agent.html#server">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize/agent.html#tool-agent">Tool Agent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize/agent.html#comm">Comm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize/agent.html#llm">LLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="customize/tool.html">Tool</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="customize/tool.html#tool-with-required-parameters">Tool with required parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize/tool.html#tool-without-required-parameters">Tool without required parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="customize/goal.html">Goal</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="customize/goal.html#id1">Goal</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="customize/docker-compose.html">docker-compose</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="customize/docker-compose.html#id1">Docker Compose</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Distributed Service</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="distributed_service/config.html">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="distributed_service/config.html#agent-configuration">Agent Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="distributed_service/config.html#docker-compose-configuration">Docker Compose Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="distributed_service/set_server.html">Deploying IoA Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed_service/run_case.html">Run Case locally</a></li>
+</ul>
+</div>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="home.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Welcome to Internet of Agents 🪐!</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, 2024, Team IoA
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <div class="toc-tree-container" style="text-align:center">
+            <p>【English 🇺🇲 | <a href="doc_zh/index_zh.html">Chinese 🇨🇳</a>】</p><br>
+            <a href="https://github.com/OpenBMB/AgentVerse" class="font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300">GitHub  <img id="github-icon" alt="GitHub Icon" src="_images/github.png" style="width: 18.0px; height: 18.0px;" /></a>
+          </div>
+
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Welcome to IoA’s documentation 🪐!</a><ul>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+            const themeToggleButton = document.getElementById('theme-toggle-button');
+            if (themeToggleButton) {
+                themeToggleButton.addEventListener('click', setGithubIcon);
+            }
+        });
+
+        function setGithubIcon() {
+            const githubIcon = document.getElementById('github-icon');
+            const currentTheme = localStorage.getItem("theme") || "auto";
+            console.log(currentTheme)
+            console.log(githubIcon)
+            // const prefersLightScheme = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+            if (currentTheme === 'light') {
+                console.log("hello_2");
+                githubIcon.src = '_images/github.png';
+            } else {
+                console.log("hello");
+                githubIcon.src = '_images/github_2.png';
+            }
+        }
+    </script>
+    </body>
+</html>

@@ -1,0 +1,76 @@
+#######################
+IOA
+#######################
+Internet of Agents (IOA): 是一个聚焦于Agents互联的概念，这些Agents不仅能够自主行动，还能彼此沟通和协作以实现复杂的目标。它们可以部署在云平台上，允许用户通过互联网进行远程访问和管理。在 IOA 生态系统中，例如 IOA Paper Writing 代表了一个案例，其中Agents专注于论文撰写的自动化，而 IOA Paper Writing with Printer 进一步扩展了这一场景，涉及到打印过程，展示了Agents如何整合额外的服务和功能以完成更广泛的任务。
+
+|
+
+Papaer Writing
+===========================
+IOA Paper Writing: 在Paper Writing场景中，有4个agent组队进行沟通协作完成IOA Paper Introduction的写作，这四个agent分别是Weize Chen's Assistant,Chen Qian's Assistant,Cheng Yang's Assistant,ArxivAssistant,其中ArxivAssistant是一个基于ReAct agent的communication layer负责去使用Arxiv相关工具以获得IOA所需相关论文。以下是如何启动并使用。
+
+1. 首先创建ReAct Agent镜像。
+
+   .. code-block:: bash
+
+     docker build -f dockerfiles/tool_agents/react.Dockerfile -t react:latest . 
+
+|
+
+2. 在 :code:`dockerfiles/compose/.env` 中，写上你的openai的api key，和base_url（如果需要填写）。如果已经设置了系统环境变量，就不需要填写。
+
+|
+
+3. 然后通过docker-compose自动创建并运行7个container，其中包含server，weize_frontend，四个参与群聊的agent，以及Arxiv ReAct agent。
+
+   .. code-block:: bash
+
+     docker-compose -f dockerfiles/compose/paper_writing.yml up --build
+
+|
+
+4. 启动后，在另一个窗口命令行中执行，该文件会发起一个goal
+
+   .. code-block:: bash
+
+     python tests/test_paper_writing.py
+
+|
+
+Paper Writing with Printer
+====================================
+IOA Paper Writing with Printer: 在Paper Writing场景中基础上，引入了FormatCraft Printer可以将Paper Writing场景中完成的IOA paper introduction的结果打印出来。以下是是如何启动并使用。
+
+1. 首先创建ReAct Agent镜像。
+
+   .. code-block:: bash
+
+     docker build -f dockerfiles/tool_agents/latex_printer_react.Dockerfile  -t latex_printer_react:latest .
+
+
+|
+
+2. 创建docker容器之间可通信的网络
+
+
+   .. code-block:: bash
+
+     docker network create agent_network
+
+
+|
+
+3. 通过docker-compose启动配置文件中的容器
+
+   .. code-block:: bash
+
+     docker-compose -f dockerfiles/compose/paper_writing_with_printer.yml up --build
+
+
+|
+
+4. 启动后，在另一个窗口命令行中执行，该文件会发起一个goal
+
+   .. code-block:: bash
+
+     python tests/test_paper_writing_with_printer.py

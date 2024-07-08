@@ -1,0 +1,44 @@
+########################
+本地运行Case
+########################
+
+|
+
+
+.. warning::
+
+   如果服务启动失败，尝试Ctrl+C杀掉，重新启动。
+
+
+
+确认MetaAgent Server和IOT Server在服务器已正常启动，如下图
+
+.. image:: ../server.png
+    :height: 800px
+    :width: 800px
+    :scale: 50%
+
+
+
+1. 接下来步骤和运行IOT Party步骤一样,首先创建ReAct镜像
+
+   .. code-block:: bash
+      
+     docker build -f dockerfiles/tool_agents/react.Dockerfile --build-arg http_proxy=http://host.docker.internal:7890 --build-arg https_proxy=http://host.docker.internal:7890 -t react:latest . 
+     
+|
+
+2. 其次，通过docker-compose启动 :code:`test_IOT.yml` 
+
+   .. code-block:: bash
+
+     docker-compose -f dockerfiles/compose/test_IOT.yml up --build
+
+|
+
+3. 启动后，在另一个窗口命令行中执行，该文件会发起一个goal
+
+   .. code-block:: bash
+
+     python tests/test_IOT_party.py 
+

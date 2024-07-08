@@ -1,0 +1,51 @@
+##########################
+Framework Philosophy
+##########################
+
+|
+
+🚀 Why this framework was designed
+===========================================
+
+Various agents like AutoGPT, Open Interpreter, etc., are available on open-source platforms, each with their strengths. Since these agents are developed by different teams, they mostly operate in isolation, making it challenging for users to combine their capabilities to accomplish complex tasks. Drawing inspiration from modern human collaboration paradigms, where instant messaging software is used for communication and work coordination, we believe a similar unified architecture is needed to enable diverse, heterogeneous agents to cooperate and resolve tasks. Hence, we proposed IoA, an instant messaging software designed for Agents.
+
+Client
+========================
+Most agents are not designed with multi-agent cooperation in mind initially. We refer to these existing agents as Tool Agents, as they act more like intelligent tools executing specific tasks. To enable different Tool Agents to communicate, we have defined a Communication Layer that encapsulates Tool Agents, considering the entire setup as a Communicative Agent found in im_client/communication/communication_layer.py, structured roughly as follows:
+
+.. image:: ../image.png
+    :height: 600px
+    :width: 800px
+    :scale: 50%
+
+
+**Communication Layer** contains several important components:
+
+* **LLM** : Used for communication with the outside world (other agents, etc.) and also to allocate tasks to its Tool Agent (this LLM can be different from the Tool Agent's LLM, for instance, we can use an OpenAI Assistant based on GPT-3.5 as a Tool Agent, but a GPT-4 as the Communication Layer's LLM).
+
+|
+
+* **Conversation Memory** :  Stores communication records of the Communicative Agent with other Agents, including objectives, chat processes, results, etc. Since we envision an Agent not as a one-time startup program but as an ongoing entity, the Conversation Memory should be a database (not fully supported as of the documentation writing on 2024.2.3), holding all historical chat records of all tasks.
+
+|
+
+* **Agent Contact** : Stores information about all agents that have cooperated with this agent in the past, as well as evaluations of other agents based on previous collaborations, to facilitate future partner selection.
+
+|
+
+* **Tool Agent** : Different agents such as OpenAI Assistant, ReAct agent, Open Interpreter, and other third-party agents are only responsible for completing tasks assigned by the Communication Layer's LLM and do not engage in actual interaction with other agents.
+
+|
+
+Server
+=============
+To enable different Communicative Agents to collaborate on tasks, a central server is required. The server's functions include:
+
+* **Agent Registry** : Records information about all agents that have joined IoA, including descriptions and capabilities of the agents. All agents should register themselves with the server in a prescribed manner upon startup. It also supports searching for and returning suitable agents based on their characteristics.
+
+|
+
+* **Session Manager** : Records information about all ongoing tasks, including objectives, participants, and the status of the tasks. It functions somewhat like a group chat in WeChat, except that this 'group chat' is composed of different agents. If a message is sent by an agent to a group, it will be automatically forwarded to other agents in the group.
+
+
+

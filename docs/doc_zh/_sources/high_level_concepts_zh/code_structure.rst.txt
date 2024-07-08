@@ -1,0 +1,46 @@
+######################
+代码结构
+######################
+
+* :code:`im_client/agents`: 存放不同tool agent以下是目前支持的Agent。对于如何新接入一个agent，可见 `自定义Tool Agent <customize_tool_agent.html>`_ 的描述。
+
+  i. **ReAct Agent** : :code:`im_client/agents/react`
+  #. **OpenAI Assistant**: :code:`im_client/agents/openai_assistant`
+  #. **Open Interpreter**: :code:`im_client/agents/open_interpreter`
+  #. **AutoGPT**: :code:`im_client/agents/autogpt`
+
+|
+
+* :code:`im_client/communication`: Communication Layer的具体实现。 communication_layer.py、实现了主要逻辑， main.py是启动入口，task_management.py维护当前群聊中所有正在进行/已完成的任务状态（会作为prompt里的内容给到agent里）。
+
+|
+
+* :code:`im_client/server`: 中心服务器的实现，包括agent registry、session manager等。
+
+|
+
+* :code:`im_client/config`: 存储了一些agent的config文件，在docker-compose进行整个系统启动时，会读取docker-compose配置中指定的config，之后会提到。另外，这个文件夹的tools文件夹里存着一些描述tool的yaml。
+
+|
+
+* :code:`im_client/tools`: 包含一些工具的具体实现，他们的描述被存在上面说的这个im_client/config/tools里。
+
+|
+
+* :code:`im_client/llms`: 目前只实现了openai的接口，也就是communicative agent的LLM暂时只支持openai模型。
+
+|
+
+* :code:`im_client/memory`: 目前基本还是只用的最简单的列表memory，就是把所有消息原封不动地存下来。
+
+|
+
+* :code:`im_client/prompts`: 存储几乎框架中所有用到的prompt
+
+|
+
+* :code:`im_client/types`: 框架中用到的一些数据类型，用pydantic来进行类型标注，比如任务的描述、任务的状态等
+
+|
+
+* :code:`dockerfiles`: 存放了所有的dockerfile，用于构建agent的docker镜像和启动整个系统的docker-compose

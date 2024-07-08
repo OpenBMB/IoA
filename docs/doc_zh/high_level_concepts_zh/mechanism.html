@@ -1,0 +1,449 @@
+<!doctype html>
+<html class="no-js" lang="zh" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="代码结构" href="code_structure.html" /><link rel="prev" title="框架理念" href="framework.html" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>沟通机制 - IoA 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  .text-gray-600 {
+    color: rgb(var(--gray-600));
+  }
+  .font-medium {
+      font-weight: 500;
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index_zh.html"><div class="brand">IoA  文档</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" id="theme-toggle-button">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index_zh.html">
+  
+  
+  <span class="sidebar-brand-text">IoA  文档</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../home_zh.html">欢迎来到 Internet of Agents 🪐!</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">HIGH-LEVEL 概念</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="framework.html">框架理念</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">沟通机制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_structure.html">代码结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize_tool_agent.html">自定义Tool Agent</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开始使用</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_zh/Installation.html">IoA 安装</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">运行 CASES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../case_zh/IOA.html">IoA Paper Writing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../case_zh/IOT_1.html">IoA & IoT Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../case_zh/IOT_2.html">IoA & IoT Real-World</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">自定义AGENT</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../customize_zh/agent.html">创建Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customize_zh/tool.html">创建Tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customize_zh/goal.html">创建Goal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customize_zh/docker-compose.html">创建docker-compose</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">分布式服务简单配置</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../distributed_service_zh/config.html">配置文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed_service_zh/set_server.html">部署IoA服务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed_service_zh/run_case.html">本地运行Case</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="id1">
+<h1>沟通机制<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="id2">
+<h2>🤖 沟通机制设计<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>为了使不同agent可以协同完成任务，我们将完成任务的过程分为两阶段: Team Up, Coordination。</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="team-up">
+<h3>Team Up<a class="headerlink" href="#team-up" title="Link to this heading">#</a></h3>
+<ul>
+<li><p><strong>Team Up</strong> : 在这一阶段，Communication Layer的LLM会接收到一个goal（例如是外界用户传入的goal），然后根据Agent Notebook中的信息，决定:</p>
+<ul class="simple">
+<li><p>如果之前合作过的agent中有合适的agent，就会向服务器发送组队请求，然后等待服务器返回的群聊id。</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul class="simple">
+<li><p>如果没有合适的agent，就会向服务器发送agent查找，给出自己认为可以合作的agent的特征，然后等待服务器返回查找到的相关agent列表。并最后发送组队请求。</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>🌟 Nested Team up：在任务讨论阶段，每个agent在接收并评估被分配的任务时，现在可以选择：</p>
+<ul class="simple">
+<li><p>独自完成任务，即被分配的任务直接由Tool Agent完成。</p></li>
+<li><p>组队完成任务：如果评估结果表明需要与其他agent组队来完成该任务，agent会将该任务作为一个新的goal，并启动新的Team Up过程以组成子团队。这一过程可以根据需要进行嵌套，直至达到设定的嵌套组队深度限制。 系统允许设置每个agent的嵌套组队功能的开关，以及嵌套组队的深度，以提供更灵活的配置。</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>我们期望Nested Team Up为我们的Multi-Agent System统带来了前所未有的灵活性与扩展能力。此功能允许Agent根据需要自行决定是否组建新的子团队，以解决更具体的子任务。通过这种嵌套式的团队组建机制，我们的系统能够轻松scale up，处理更为复杂的任务，同时确保高效和灵活的资源分配。</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>为什么要有这个机制？因为在Multi-Agent System中，Agent的数量和交互复杂度往往随着任务的规模成指数增长。Nested team up通过创建清晰的层级和角色分工，允许每个小团队集中处理其专长的任务，减少不必要的交互，这样即便团队规模增加，每个小团队内的沟通复杂度仍然保持在可控范围内。</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>这种机制为什么能够scale up？因为它提供了一种模块化的扩展方法。当系统需要扩展时，可以简单地增加新的代理小组或在现有小组内增加代理，每个新加入的代理只需与其直接关联的小组沟通，而不是整个系统，这极大降低了系统整体的沟通负担。通过这种多层嵌套，LLM-based Multi-Agent System能够高效地扩展以处理更大规模的任务，同时仍然保持每个小团队的高效性。</p>
+</div>
+</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul class="simple">
+<li><p><strong>Coordination</strong>: 在这一阶段，Communication Layer可以向刚刚创建的群聊中发送消息。接下来这个群就负责完成这个goal了。</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="coordination">
+<h3>Coordination<a class="headerlink" href="#coordination" title="Link to this heading">#</a></h3>
+<p><strong>Coordination</strong> 是最复杂的阶段。为了使得agent之间可以比较高效地进行沟通，我们实现了一些机制:</p>
+<ul class="simple">
+<li><p><strong>沟通顺序</strong> : 为了可控性，每个时刻我们只允许一个agent说话，在它说完之后，自己决定下一个说话的agent。</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul>
+<li><p><strong>消息类型</strong>: 我们定义了不同的消息类型供agent自行选择，包括:</p>
+<ul class="simple">
+<li><p><strong>DISCUSSION</strong> : 正常的讨论信息。</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul class="simple">
+<li><p><strong>SYNC_TASK_ASSIGNMENT</strong> : 同步任务分配，在这一消息中，agent会向其他agent分配任务，讨论将等到任务完成后，得到结果反馈才会继续。</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul class="simple">
+<li><p><strong>ASYNC_TASK_ASSIGNMENT</strong> : 异步任务分配，在这一消息中，agent会向其他agent分配任务，同时讨论继续，不会阻塞。被指派任务的agent会去执行，并在执行完成后立刻把结果发到群里。</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul class="simple">
+<li><p><strong>INFORM_TASK_RESULT</strong> : 任务执行结果的反馈。</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul class="simple">
+<li><p><strong>INFORM_TASK_PROGRESS</strong> : 被分配到异步任务后，发送一条消息确认收到任务。</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul class="simple">
+<li><p><strong>PAUSE</strong> : agent决定暂停讨论，直到某个之前异步分配出去的任务完成再继续。</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul class="simple">
+<li><p><strong>CONCLUDE_GROUP_DISCUSSION</strong> : 讨论结束，任务完成。</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="code_structure.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">代码结构</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="framework.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">框架理念</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Team IoA
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <div class="toc-tree-container" style="text-align:center">
+            <p>【<a href="../../index.html">English 🇺🇲</a> | Chinese 🇨🇳】</p> <br>
+            <a href="https://github.com/OpenBMB/AgentVerse" class="font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300">GitHub  <img id="github-icon" alt="GitHub Icon" src="../_images/github.png" style="width: 18.0px; height: 18.0px;" /></a>
+          </div>
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">沟通机制</a><ul>
+<li><a class="reference internal" href="#id2">🤖 沟通机制设计</a><ul>
+<li><a class="reference internal" href="#team-up">Team Up</a></li>
+<li><a class="reference internal" href="#coordination">Coordination</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=2ccfc426"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+            const themeToggleButton = document.getElementById('theme-toggle-button');
+            if (themeToggleButton) {
+                themeToggleButton.addEventListener('click', setGithubIcon);
+            }
+        });
+
+        function setGithubIcon() {
+            const githubIcon = document.getElementById('github-icon');
+            const currentTheme = localStorage.getItem("theme") || "auto";
+            console.log(currentTheme)
+            console.log(githubIcon)
+            // const prefersLightScheme = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+            if (currentTheme === 'light') {
+                console.log("hello_2");
+                githubIcon.src = '../_images/github.png';
+            } else {
+                console.log("hello");
+                githubIcon.src = '../_images/github_2.png';
+            }
+        }
+    </script>
+    </body>
+</html>

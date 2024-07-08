@@ -1,0 +1,51 @@
+#######################
+Configuration
+#######################
+
+|
+
+Open TCP & UDP ports 7788, 54321 on the server.
+
+To ensure distributed services can run properly, some parameters in the configuration files within :code:`im_client/config/cases` and :code:`dockerfiles/compose`  need to be modified.
+
+Agent Configuration
+=====================================
+To correctly access the server, the **host** 和 **hostname** within the server section of the Agent need to be changed to the server's IP address, and ensure the port settings are successfully opened.
+
+.. code-block:: yaml
+
+      server:  
+         host: http://your_server_IP_address (ex. http://43.163.230.180)
+         port: 7788 (setting up 7788 port in your server)
+         hostname: your_server_IP_address (ex. 43.163.230.180)
+
+Docker Compose Configuration
+=====================================
+To correctly access the server, remove the parameters related to the **server** in the **depends_on** field within docker-compose. In this section, choose to delete the depends_on field entirely, or modify it as needed if necessary.
+
+.. code-block:: yaml
+
+      version: "3"
+            
+         service:
+            Name: (ex. Cater)
+               image:your_needed_image(ex. IoA-agent:latest)
+               build:
+                  context: ../../
+                  dockerfile: your_docker_file(ex. dockerfiles/agent.Dockerfile)
+               args: (如果已连接外网，则不需要此参数)
+                  http_proxy: http://172.27.16.1:7890 
+                  https_proxy: http://172.27.16.1:7890
+               container_name: your_container_name
+               env_file:
+                  - .env
+               volumes:
+                  - /var/run/docker.sock:/var/run/docker.sock
+               volumes:
+                  - OPENAI_API_KEY
+                  - OPENAI_BASE_URL(如果不需要此参数，请删除)
+                  - CUSTOM_CONFIG=your_agent.yaml path(ex. agentverse/config/cases/IOT/Caterer.yaml)
+               ports:
+                  - your_host_port:your_container_port(ex. 5051:5050)
+               stdin_open: true
+               tty: true

@@ -1,0 +1,72 @@
+#####################
+自定义Tool Agent
+#####################
+
+|
+
+以下是接入第三方Agent的简要指南。如果想要接入一个第三方仓库中的agent，那么我们主要需要考虑两件事:
+
+* 为第三方agent构建一个docker，并通过FastAPI或其他网络框架向外暴露run接口。
+
+  * run(task_desc)：从头开始执行task_desc任务，并返回执行结果字符串。
+
+  |
+
+* 写一个adapter，将第三方agent和AgentVerse连接起来。其实主要就是进行一些数据格式的转换，比如AgentVerse中的memory信息都使用common/types/llm.pycommon/types/llm.py中的LLMResult来存储，那么adapter的作用就是把这个转换为第三方agent接受的格式，并调用第一步中得到的docker提供的接口。adapter将作为AgentVerse中与第三方agent交互的中间层。
+
+|
+
+=============================
+Openinterpreter Example
+=============================
+* **为Open Interpreter构建一个http服务**。首先，在 :code:`im_client/agents/open_interpreter` 目录中创建的open_interpreter_agent.py会被docker化，在这其中写好了一些FastAPI的post的endpoint，在使用uvicorn启动的时候会暴露作为http服务。之后使用docker启动的时候，这些endpoint可以被外界请求。
+
+|
+
+* **为Open Interpreter创建Docker**。之后，我们需要创建一个Dockerfile文件，位于 :code:`dockerfiles/tool_agents` 中。这样我们可以将Open Interpreter这样的tool agent使用docker进行启动，以避免与AgentVerse可能的环境冲突。
+
+|
+
+* **为Open Interpreter构建Adapter**。在 :code:`im_client/agents/open_interpreter` 中创建的open_interpreter_agent_adapter.py是一个Open Interpreter的adapter。他去构建AgentVerse和Open Interpreter数据格式上的转换，并且把要求转发到Open Interpreter的docker容器。Adapter中同样提供了run，里面进行数据格式的转换，并通过post请求去调用Open Interpreter docker的对应endpoint。
+
+|
+
+Docker 启动
+==========================
+* 在 :code:`docker-compose.yml` 中的一个agent配置中设置好其tool agent对应的配置文件环境变量CUSTOM_CONFIG，同时在 :code:`CUSTOM_CONFIG` 指定的文件中定义tool agent相关的参数。
+
+|
+
+* 在终端中build你之前写的Dockerfile，例如 :code:`docker build -f dockerfiles/tool_agents/open_interpreter.Dockerfile -t open_interpreter:latest .` 。然后运行 :code:`docker-compose up --build` 启动服务器以及多个communication agent。
+
+|
+
+逻辑
+===============
+目前分为三个阶段，分别是:
+
+1. **Team Up** 阶段。在这个阶段，communication layer中的llm会接收到用户的goal，并根据agent_contact决定：
+
+   |
+
+   * 如果有合适的agent，就会向服务器发送组队请求，然后等待服务器返回的群聊id。
+
+   |
+
+   * 如果没有合适的agent，就会向服务器发送agent查找，给出自己认为可以合作的agent的特征，然后等待服务器返回查找到的相关agent列表。并最后发送组队请求。
+
+   |
+
+2. **Coordination** 阶段。在这个阶段，communication agent可以向刚刚创建的群聊中发送消息，同时指定下一个说话的人。在这个阶段，有两个protocol（待定）：
+
+   |
+
+   * **discussion protocol** ：用于讨论任务的细节，包括任务的目标、任务的细节、任务的分工等。
+
+   |
+
+   * **vote protocol** ：当有一个agent提出自己关于接下来的计划，需要指明使用该protocol，一旦指明，则进入投票阶段，其他agent将对agent的提议进行投票，投票结果决定是否采纳该提议。所有人同意，则进入下一个阶段；否则，返回discussion。
+
+   |
+
+3. **Execution** 阶段。在这个阶段，communication agent按照刚刚讨论的方案，给自己的tool agent分配任务。同时，随机时间内查看tool agent的memory，判断是否有足够的信息需要与其他agent进行同步，并将消息发送至群聊中。

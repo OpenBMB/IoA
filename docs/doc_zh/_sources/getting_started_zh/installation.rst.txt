@@ -1,0 +1,76 @@
+########################
+IoA 安装
+########################
+
+|
+
+手动安装（推荐 ！）
+===========================
+.. tip::
+
+   确保你的Python >= 3.10(建议全部通用3.10)。
+
+
+
+1. 在命令行使用conda创建python环境
+
+   .. code-block:: bash
+      
+     conda create --name your_env_name python==3.10
+
+|
+
+2. 将IoA clone到本地
+
+   .. code-block:: bash
+
+     git clone https://github.com/AgentVerse/IoA.git
+     cd IoA
+
+|
+
+3. 确保你本地环境已安装docker，若未安装docker，下载详情可见 `docker官网 <https://docs.docker.com/desktop/>`_ 
+
+|
+
+Server
+================
+1. 构建启动server所需要的docker镜像
+
+   .. code-block:: bash
+
+     docker build -f dockerfiles/server.Dockerfile -t server:latest . 
+
+|
+
+2. 创建并完成docker-compose文件your_server.yml，通过docker-compose启动服务器
+
+   .. code-block:: bash
+
+     docker-compose -f dockerfiles/compose/your_server.yml up
+
+|
+
+Client
+==================
+1. 构建Agent所需的基础镜像
+
+   - Agent
+
+     .. code-block:: bash
+
+        docker build -f dockerfiles/agent.Dockerfile -t agent:latest .
+
+   - Tool Agent (e.g React Agent)
+
+     .. code-block:: bash
+
+        docker build -f dockerfiles/tool_agents/react.Dockerfile -t react:latest .
+
+|
+
+2. 利用指定配置文件 docker-compose.yml 启动 docker-compose 服务 Agents
+
+   .. code-block:: bash
+
+      docker-compose -f dockerfiles/compose/test_agent.yml up

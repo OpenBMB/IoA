@@ -1,0 +1,76 @@
+#############################
+IoA Installation
+#############################
+
+|
+
+Manual Installation ( Recommended!! )
+=============================================
+.. tip::
+
+   Ensure your Python version >= 3.10 (It is advisable to use version 3.10 universally).
+
+
+
+1. Use conda in the command line to create a python environment.
+
+   .. code-block:: bash
+      
+     conda create --name your_env_name python==3.10
+
+|
+
+2. Clone IoA to your local machine.
+
+   .. code-block:: bash
+
+     git clone https://github.com/AgentVerse/IoA.git
+     cd IoA
+
+|
+
+3. Make sure you have Docker installed on your local environment. If Docker is not installed, for download details, please visit the `Docker official website <https://docs.docker.com/desktop/>`_ .
+
+|
+
+Server
+================
+1. Build the Docker image required to start the server.
+
+   .. code-block:: bash
+
+     docker build -f dockerfiles/server.Dockerfile -t server:latest . 
+
+|
+
+2. Create and complete the docker-compose file your_server.yml, and start the server using docker-compose.
+
+   .. code-block:: bash
+
+     docker-compose -f dockerfiles/compose/your_server.yml up
+
+|
+
+Client
+==================
+1. Build the images required for the Agents.
+
+   - Agent
+
+     .. code-block:: bash
+
+        docker build -f dockerfiles/agent.Dockerfile -t agent:latest .
+
+   - Tool Agent (e.g React Agent)
+
+     .. code-block:: bash
+
+        docker build -f dockerfiles/tool_agents/react.Dockerfile -t react:latest .
+
+|
+
+2. Create and complete the docker-compose file test_agent.yml, and start the Agents using docker-compose.
+
+   .. code-block:: bash
+
+      docker-compose -f dockerfiles/compose/test_agent.yml up
