@@ -1,5 +1,4 @@
 server:
-  host: http://ioa-server
   port: 7788
   hostname: ioa-server
 
@@ -22,8 +21,6 @@ comm:
   type: Thing Assistant
   support_nested_teams: false
   max_team_up_attempts: 10
-  tools:
-    team_up_tools: configs/tools/tools_team_up.yaml
   llm:
     llm_type: openai-chat
     model: gpt-4-1106-preview

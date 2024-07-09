@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  Server:
+    image: ioa-server:latest
+    build:
+      context: ../../
+      dockerfile: dockerfiles/server.Dockerfile
+    container_name: ioa-server
+    volumes:
+      - ../../configs/server_configs:/app/configs
+    env_file:
+      - .env
+    environment:
+      - OPENAI_API_KEY
+    ports:
+      - 7788:7788
+    stdin_open: true
+    tty: true
+
+  ServerFrontend:
+    image: ioa-server-frontend:latest
+    build:
+      context: ../../
+      dockerfile: dockerfiles/server_frontend.Dockerfile
+    container_name: server_frontend
+    ports:
+      - 80:80
+    depends_on:
+      - Server
+    stdin_open: true
+    tty: true
+
+networks:
+  default:
+    name: agent_network
+    driver: bridge
+    external: true

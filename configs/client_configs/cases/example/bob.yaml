@@ -1,0 +1,26 @@
+server:
+  port: <SERVER_PORT>
+  hostname: <SERVER_IP>
+
+tool_agent:
+  agent_type: ReAct
+  agent_name: Bob
+  desc: |-
+    Bob can leverage third-party tools to help manage resources.
+  tools_config: tools_code_executor.yaml  # simply an example
+  image_name: react-agent
+  container_name: bob-agent
+  port: 7070
+  model: gpt-4-1106-preview
+  max_num_steps: 8
+
+comm:
+  name: Bob
+  desc: Bob is a strategic intelligent assistant specializing in logistics and resource management. He excels at analyzing complex supply chains, predicting potential disruptions, and optimizing the flow of goods. Bob can work with other assistants to dynamically reallocate resources, ensuring efficiency and minimizing delays. His strong problem-solving skills and collaborative nature make him an invaluable asset in any logistical operation.
+  type: Thing Assistant
+  support_nested_teams: true
+  max_team_up_attempts: 10
+  llm:
+    llm_type: openai-chat
+    model: gpt-4-1106-preview
+    temperature: 0.

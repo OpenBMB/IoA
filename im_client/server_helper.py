@@ -19,7 +19,7 @@ class ServerHelper:
     Helper functions that help communicate with the server.
     """
 
-    host = global_config["server"]["host"]
+    host = "http://" + global_config["server"]["hostname"]
     port = global_config["server"]["port"]
     url = f"{host}:{port}"
 

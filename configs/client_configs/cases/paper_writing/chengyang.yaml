@@ -1,5 +1,4 @@
 server:
-  host: http://ioa-server
   port: 7788
   hostname: ioa-server
 
