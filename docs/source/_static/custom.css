@@ -1,0 +1,16 @@
+.custom-img {
+    border: 2px solid #ccc; 
+    border-radius: 10px; 
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); 
+    width: 40%;
+    display: block;
+    margin: 0 auto; 
+    float: right;
+    margin-right: 20px;
+}
+
+.custom-img-full-w {
+    border: 2px solid #ccc; 
+    border-radius: 10px; 
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); 
+}
