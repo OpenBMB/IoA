@@ -26,8 +26,6 @@
 
    high_level_concepts/mechanism
 
-   high_level_concepts/customize_tool_agent
-
 |
 
 
@@ -53,15 +51,17 @@
 
 .. toctree::
    :maxdepth: 2
-   :caption: Customize AGENT
+   :caption: Customize Agent
 
-   customize/agent
+   customize/integrate_thirdparty_agent
 
-   customize/tool
+   customize/client_configuration
 
-   customize/goal
+   customize/tool_creation
 
-   customize/docker-compose
+   customize/docker-compose_setup
+
+   customize/goal_submission
 
 |
 
