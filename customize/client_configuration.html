@@ -261,12 +261,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/OpenBMB/IoA/blob/main/docs/customize/client_configuration.rst?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/OpenBMB/IoA/blob/main/docs/source/customize/client_configuration.rst?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/OpenBMB/IoA/edit/main/docs/customize/client_configuration.rst" title="Edit this page">
+  <a class="muted-link" href="https://github.com/OpenBMB/IoA/edit/main/docs/source/customize/client_configuration.rst" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -287,7 +287,7 @@
         <article role="main" id="furo-main-content">
           <section id="client-configuration">
 <h1>Client Configuration<a class="headerlink" href="#client-configuration" title="Link to this heading">¶</a></h1>
-<p>When integrating a new client into the IoA platform, it is essential to configure the client’s settings to ensure seamless communication and functionality within the existing system. This configuration process, known as client configuration, is necessary because each client may have unique requirements, data formats, and interaction protocols that must be aligned with the IoA platform’s standards. Proper client configuration allows for the customization of parameters such as server, tool agent, and comm, ensuring that the new client can effectively interact with other components of the platform. Before introduce the configuration of parameters,
+<p>When integrating a new client into the IoA platform, it is essential to configure the client’s settings to ensure seamless communication and functionality within the existing system. This configuration process, known as client configuration, is necessary because each client may have unique requirements, data formats, and interaction protocols that must be aligned with the IoA platform’s standards. Proper client configuration allows for the customization of parameters related to server, agent, and communication approach, ensuring that the new client can effectively interact with other components of the platform. Before introduce the configuration of parameters,
 it is necessary to create a folder and file for the client configuration.</p>
 <ul class="simple">
 <li><p>Create a folder named your_case_name under the <code class="code docutils literal notranslate"><span class="pre">configs/client_configs/cases</span></code> directory for your cases. For example: <code class="code docutils literal notranslate"><span class="pre">configs/client_configs/cases/example</span></code></p></li>
@@ -298,8 +298,8 @@ it is necessary to create a folder and file for the client configuration.</p>
 <h2>Server<a class="headerlink" href="#server" title="Link to this heading">¶</a></h2>
 <p>The server section is responsible for setting up the basic server configurations</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">server</span><span class="p">:</span>
-<span class="w">   </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SERVER_PORT (e.g. setting 7788 port in your server)</span>
-<span class="w">   </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SERVER_IP (e.g. ioa-server)</span>
+<span class="w">   </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SERVER_PORT (e.g. default 7788)</span>
+<span class="w">   </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SERVER_IP (e.g. default ioa-server)</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -309,10 +309,10 @@ it is necessary to create a folder and file for the client configuration.</p>
 <section id="tool-agent">
 <h2>Tool Agent<a class="headerlink" href="#tool-agent" title="Link to this heading">¶</a></h2>
 <p>The tool_agent section defines the configuration for the tool agent itself and represents various agents integrated into the IoA platform, such as ReAct, OpenInterpreter, and others. The inclusion of a tool_agent is optional and depends on the specific agents required for the given use case.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tool_agent</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">s</span>
-<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">agent_type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReAct</span>
-<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">agent_name</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tool agent name</span>
-<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">desc</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">|-</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tool_agent</span><span class="p">:</span>
+<span class="w">   </span><span class="nt">agent_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReAct</span>
+<span class="w">   </span><span class="nt">agent_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tool agent name</span>
+<span class="w">   </span><span class="nt">desc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|-</span>
 <span class="w">      </span><span class="no">A description of the tool agent&#39;s capabilities.</span>
 <span class="w">   </span><span class="nt">tool_config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configuration file of tools (e.g tools_code_executor.yaml)</span>
 <span class="w">   </span><span class="nt">image_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">react-agent</span>
@@ -328,9 +328,9 @@ it is necessary to create a folder and file for the client configuration.</p>
 </section>
 <section id="comm">
 <h2>Comm<a class="headerlink" href="#comm" title="Link to this heading">¶</a></h2>
-<p>The communication agent used for communicating and interacting with other agents and also for assigning tasks to the tool_agent.</p>
+<p>The communication service client used for communicating and interacting with other clients and also for assigning tasks to the tool_agent.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">comm</span><span class="p">:</span>
-<span class="w">   </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The name of the communication agent.</span>
+<span class="w">   </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The name of the client.</span>
 <span class="w">   </span><span class="nt">desc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A description of the communication agent&#39;s capabilities.</span>
 <span class="w">   </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The type of the communication agent. (Thing Assistant or Human Assistant)</span>
 <span class="w">   </span><span class="nt">support_nested teams</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Indicates whether the agent supports nested teams. (true or false)</span>

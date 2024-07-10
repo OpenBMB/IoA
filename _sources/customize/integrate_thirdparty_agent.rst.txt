@@ -9,15 +9,13 @@ Here is a brief guide for integrating third-party agents. If you want to integra
 * **Build and Expose a Docker Container**:
   
   * **Containerization**: Package the third-party agent within a Docker container. This ensures a consistent and isolated environment for the agent to run.
-  * **Expose an API Interface**: Utilize FastAPI or another suitable web framework to expose a run interface externally. The interface should have the following specification:
-  
-    * **run(task_desc)**: Executes the task_desc task from scratch and returns the result as a string.
 
 
 * **Develop an Adapter for Integration**:
   
-  * **Data Format Conversion**: Write an adapter to facilitate communication between the third-party agent and IoA. This involves converting data formats to ensure compatibility. For instance, convert memory information in IoA, which uses :code:`LLMResult` from :code:`/types/llm.py`, into a format that the third-party agent can process.
-  * **Interface Invocation**: The adapter acts as an intermediary, invoking the API provided by the Docker container created in the first step. This ensures seamless interaction between IoA and the third-party agent.
+  * **Expose an API Interface**: Utilize FastAPI or another suitable web framework to expose a run interface externally. The interface should have the following specification:
+  
+    * **run(task_desc)**: Executes the task_desc task from scratch and returns the result as a string.
 
 You can review the implemented logic for the specific example, Open Interpreter, located at :code:`im_client/agents/open_interpreter`. The detailed explanation of this example is given in the following section.
 
@@ -27,7 +25,7 @@ Open Interpreter Integration
 ===============================
 * **Building an HTTP service for Open Interpreter**: 
   
-  * The Open Interpreter, located in the :code:`im_client/agents/open_interpreter` directory, will be dockerized. This directory includes FastAPI POST endpoints, which will be exposed as an HTTP service when started with Uvicorn. When deployed with Docker, these endpoints can be accessed externally.
+  * The Open Interpreter, located in the :code:`im_client/agents/open_interpreter/open_interpreter_agent.py` script, will be dockerized. This script includes FastAPI POST endpoints, which will be exposed as an HTTP service when started with Uvicorn. When deployed with Docker, these endpoints can be accessed externally.
 
 * **Creating Docker for Open Interpreter**: 
   
@@ -35,7 +33,11 @@ Open Interpreter Integration
 
 * **Building Adapter for Open Interpreter**: 
   
-  * The adapter for Open Interpreter, also located in :code:`im_client/agents/open_interpreter` , facilitates data format conversion between IoA and Open Interpreter. It forwards requests to the Open Interpreter Docker container. The adapter provides a run method that converts data formats and sends a POST request to the corresponding endpoint of the Open Interpreter Docker container.
+  * The adapter for Open Interpreter, also located in :code:`im_client/agents/open_interpreter/open_interpreter_agent.py`, facilitates bridges the gap between the protocol of IoA and Open Interpreter. It converts and forwards requests to the Open Interpreter Docker container.
+  
+*  **Building configuration file for Open Interpreter**: 
+    
+   * An example configuration file for Open Interpreter is located in :code:`configs/client_configs/cases/example/open_interpreter.yaml`. For the explanation of configuration parameters refers to `Client Configuration Section <client_configuration.html>`_.
 
 |
 
@@ -43,13 +45,13 @@ Open Interpreter Docker Startup
 =======================================
 * Environment Variable Configuration:
   
-  * In the :code:`open_instruction.yml`, set up the environment variable :code:`CUSTOM_CONFIG` to specify the configuration file for the tool agent. Define the tool agent-related parameters in the file referenced by :code:`CUSTOM_CONFIG`. For example, the configuration file for Open Interpreter is:
+  * In the :code:`dockerfiles/compose/open_interpreter.yaml`, set up the environment variable :code:`CUSTOM_CONFIG` to specify the configuration file for the tool agent. Define the tool agent-related parameters in the file referenced by :code:`CUSTOM_CONFIG`. For example, the configuration file for Open Interpreter is:
   
     .. code-block:: yaml
 
-      CUSTOM_CONFIG=configs/cases/open_instruction/open_interpreter.yaml
+      CUSTOM_CONFIG=configs/cases/open_interpreter.yaml
   
-  * In the :code:`dockerfiles/compose/.env_template`, ensuer to set up the necessary environment variable such as :code:`OPENAI_API_KEY`, :code:`OPENAI_RESPONSE_LOG_PATH`.
+  * In the :code:`dockerfiles/compose/.env`, ensuer to set up the necessary environment variable such as :code:`OPENAI_API_KEY`, :code:`OPENAI_RESPONSE_LOG_PATH`.
 
 * Building and Running the Docker Container:
   
@@ -58,14 +60,12 @@ Open Interpreter Docker Startup
     .. code-block:: bash
 
       docker build -f dockerfiles/tool_agents/open_interpreter.Dockerfile -t open_interpreter:latest .
-
-  * Before starting the server, ensure to comment out the autogpt section in the open_instruction.yml file.
   
   * Then, start the server and multiple communication agents by running:
   
     .. code-block:: bash
 
-      docker-compose -f dockerfiles/open_instruction.yml up
+      docker-compose -f dockerfiles/open_interpreter.yml up
 
 
 

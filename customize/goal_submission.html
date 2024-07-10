@@ -261,12 +261,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/OpenBMB/IoA/blob/main/docs/customize/goal_submission.rst?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/OpenBMB/IoA/blob/main/docs/source/customize/goal_submission.rst?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/OpenBMB/IoA/edit/main/docs/customize/goal_submission.rst" title="Edit this page">
+  <a class="muted-link" href="https://github.com/OpenBMB/IoA/edit/main/docs/source/customize/goal_submission.rst" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -287,7 +287,7 @@
         <article role="main" id="furo-main-content">
           <section id="goal-submission">
 <h1>Goal Submission<a class="headerlink" href="#goal-submission" title="Link to this heading">¶</a></h1>
-<p>When all agents’ Docker containers are successfully configured, sending a POST request to the local server to initiate a goal is necessary process, enabling the IoA to accomplish specific goals. Goal submission serves as a critical startup mechanism to validate the IoA’s functionality by setting specific tasks or objectives. By defining these goals, you ensure that the IoA and its integrated agents are working correctly and can effectively perform their intended tasks. This process is essential for verifying the system’s capabilities and identifying any potential issues before deploying the IoA in a production environment. Before launching goal, you need to create a Python script.</p>
+<p>After you have set up the server and client, you can send your goal to IoA. Before launching goal, you need to create a Python script.</p>
 <ul class="simple">
 <li><p>Create <code class="code docutils literal notranslate"><span class="pre">test_your_case.py</span></code> in the <code class="code docutils literal notranslate"><span class="pre">scripts</span></code> directory. For example, <code class="code docutils literal notranslate"><span class="pre">scripts/test_paper_writing.py</span></code></p></li>
 </ul>
@@ -304,8 +304,6 @@ The full URL <code class="code docutils literal notranslate"><span class="pre">u
       <span class="s2">&quot;goal&quot;</span><span class="p">:</span> <span class="n">goal</span><span class="p">,</span>
       <span class="s2">&quot;max_turns&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
       <span class="s2">&quot;team_member_names&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">agent_1</span><span class="p">,</span> <span class="n">agent_2</span><span class="p">]</span> <span class="s2">&quot;(if you have no spcific team members, set it to None)&quot;&quot;</span>
-      <span class="s2">&quot;team_up_depth&quot;</span><span class="p">:</span> <span class="s2">&quot;The depth of the nested team-up. Defaults to None.</span>
-      <span class="s2">&quot;is_collaborative_planning_enabled (bool, optional)&quot;</span><span class="p">:</span> <span class="s2">&quot;Whether the collaborative planning is enabled. Defaults to False.&quot;</span>
    <span class="p">},</span>
 <span class="p">)</span>
 </pre></div>

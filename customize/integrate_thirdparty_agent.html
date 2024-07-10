@@ -261,12 +261,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/OpenBMB/IoA/blob/main/docs/customize/integrate_thirdparty_agent.rst?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/OpenBMB/IoA/blob/main/docs/source/customize/integrate_thirdparty_agent.rst?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/OpenBMB/IoA/edit/main/docs/customize/integrate_thirdparty_agent.rst" title="Edit this page">
+  <a class="muted-link" href="https://github.com/OpenBMB/IoA/edit/main/docs/source/customize/integrate_thirdparty_agent.rst" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -295,17 +295,15 @@
 <li><p><strong>Build and Expose a Docker Container</strong>:</p>
 <ul>
 <li><p><strong>Containerization</strong>: Package the third-party agent within a Docker container. This ensures a consistent and isolated environment for the agent to run.</p></li>
+</ul>
+</li>
+<li><p><strong>Develop an Adapter for Integration</strong>:</p>
+<ul>
 <li><p><strong>Expose an API Interface</strong>: Utilize FastAPI or another suitable web framework to expose a run interface externally. The interface should have the following specification:</p>
 <ul>
 <li><p><strong>run(task_desc)</strong>: Executes the task_desc task from scratch and returns the result as a string.</p></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><p><strong>Develop an Adapter for Integration</strong>:</p>
-<ul>
-<li><p><strong>Data Format Conversion</strong>: Write an adapter to facilitate communication between the third-party agent and IoA. This involves converting data formats to ensure compatibility. For instance, convert memory information in IoA, which uses <code class="code docutils literal notranslate"><span class="pre">LLMResult</span></code> from <code class="code docutils literal notranslate"><span class="pre">/types/llm.py</span></code>, into a format that the third-party agent can process.</p></li>
-<li><p><strong>Interface Invocation</strong>: The adapter acts as an intermediary, invoking the API provided by the Docker container created in the first step. This ensures seamless interaction between IoA and the third-party agent.</p></li>
 </ul>
 </li>
 </ul>
@@ -318,7 +316,7 @@
 <ul class="simple">
 <li><p><strong>Building an HTTP service for Open Interpreter</strong>:</p>
 <ul>
-<li><p>The Open Interpreter, located in the <code class="code docutils literal notranslate"><span class="pre">im_client/agents/open_interpreter</span></code> directory, will be dockerized. This directory includes FastAPI POST endpoints, which will be exposed as an HTTP service when started with Uvicorn. When deployed with Docker, these endpoints can be accessed externally.</p></li>
+<li><p>The Open Interpreter, located in the <code class="code docutils literal notranslate"><span class="pre">im_client/agents/open_interpreter/open_interpreter_agent.py</span></code> script, will be dockerized. This script includes FastAPI POST endpoints, which will be exposed as an HTTP service when started with Uvicorn. When deployed with Docker, these endpoints can be accessed externally.</p></li>
 </ul>
 </li>
 <li><p><strong>Creating Docker for Open Interpreter</strong>:</p>
@@ -328,7 +326,12 @@
 </li>
 <li><p><strong>Building Adapter for Open Interpreter</strong>:</p>
 <ul>
-<li><p>The adapter for Open Interpreter, also located in <code class="code docutils literal notranslate"><span class="pre">im_client/agents/open_interpreter</span></code> , facilitates data format conversion between IoA and Open Interpreter. It forwards requests to the Open Interpreter Docker container. The adapter provides a run method that converts data formats and sends a POST request to the corresponding endpoint of the Open Interpreter Docker container.</p></li>
+<li><p>The adapter for Open Interpreter, also located in <code class="code docutils literal notranslate"><span class="pre">im_client/agents/open_interpreter/open_interpreter_agent.py</span></code>, facilitates bridges the gap between the protocol of IoA and Open Interpreter. It converts and forwards requests to the Open Interpreter Docker container.</p></li>
+</ul>
+</li>
+<li><p><strong>Building configuration file for Open Interpreter</strong>:</p>
+<ul>
+<li><p>An example configuration file for Open Interpreter is located in <code class="code docutils literal notranslate"><span class="pre">configs/client_configs/cases/example/open_interpreter.yaml</span></code>. For the explanation of configuration parameters refers to <a class="reference external" href="client_configuration.html">Client Configuration Section</a>.</p></li>
 </ul>
 </li>
 </ul>
@@ -341,12 +344,12 @@
 <ul>
 <li><p>Environment Variable Configuration:</p>
 <ul>
-<li><p>In the <code class="code docutils literal notranslate"><span class="pre">open_instruction.yml</span></code>, set up the environment variable <code class="code docutils literal notranslate"><span class="pre">CUSTOM_CONFIG</span></code> to specify the configuration file for the tool agent. Define the tool agent-related parameters in the file referenced by <code class="code docutils literal notranslate"><span class="pre">CUSTOM_CONFIG</span></code>. For example, the configuration file for Open Interpreter is:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">CUSTOM_CONFIG=configs/cases/open_instruction/open_interpreter.yaml</span>
+<li><p>In the <code class="code docutils literal notranslate"><span class="pre">dockerfiles/compose/open_interpreter.yaml</span></code>, set up the environment variable <code class="code docutils literal notranslate"><span class="pre">CUSTOM_CONFIG</span></code> to specify the configuration file for the tool agent. Define the tool agent-related parameters in the file referenced by <code class="code docutils literal notranslate"><span class="pre">CUSTOM_CONFIG</span></code>. For example, the configuration file for Open Interpreter is:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">CUSTOM_CONFIG=configs/cases/open_interpreter.yaml</span>
 </pre></div>
 </div>
 </li>
-<li><p>In the <code class="code docutils literal notranslate"><span class="pre">dockerfiles/compose/.env_template</span></code>, ensuer to set up the necessary environment variable such as <code class="code docutils literal notranslate"><span class="pre">OPENAI_API_KEY</span></code>, <code class="code docutils literal notranslate"><span class="pre">OPENAI_RESPONSE_LOG_PATH</span></code>.</p></li>
+<li><p>In the <code class="code docutils literal notranslate"><span class="pre">dockerfiles/compose/.env</span></code>, ensuer to set up the necessary environment variable such as <code class="code docutils literal notranslate"><span class="pre">OPENAI_API_KEY</span></code>, <code class="code docutils literal notranslate"><span class="pre">OPENAI_RESPONSE_LOG_PATH</span></code>.</p></li>
 </ul>
 </li>
 <li><p>Building and Running the Docker Container:</p>
@@ -356,9 +359,8 @@
 </pre></div>
 </div>
 </li>
-<li><p>Before starting the server, ensure to comment out the autogpt section in the open_instruction.yml file.</p></li>
 <li><p>Then, start the server and multiple communication agents by running:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose<span class="w"> </span>-f<span class="w"> </span>dockerfiles/open_instruction.yml<span class="w"> </span>up
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose<span class="w"> </span>-f<span class="w"> </span>dockerfiles/open_interpreter.yml<span class="w"> </span>up
 </pre></div>
 </div>
 </li>

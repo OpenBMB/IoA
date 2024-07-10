@@ -16,7 +16,7 @@ Create your case-specific :code:`your_case.yml` file in the :code:`dockerfiles/c
          image: Specifies the Docker image to use for this service (e.g. ioa-client:latest)
          build: 
             context: ../../
-            dockerfile: Specifies the Dockerfile to use for building the image(e.g. dockerfiles/client.Dockerfile)
+            dockerfile: dockerfiles/client.Dockerfile
          container_name: the name of the Docker container 
          env_file:
             - .env

@@ -1,6 +1,6 @@
 Goal Submission
 #######################
-When all agents' Docker containers are successfully configured, sending a POST request to the local server to initiate a goal is necessary process, enabling the IoA to accomplish specific goals. Goal submission serves as a critical startup mechanism to validate the IoA's functionality by setting specific tasks or objectives. By defining these goals, you ensure that the IoA and its integrated agents are working correctly and can effectively perform their intended tasks. This process is essential for verifying the system's capabilities and identifying any potential issues before deploying the IoA in a production environment. Before launching goal, you need to create a Python script.
+After you have set up the server and client, you can send your goal to IoA. Before launching goal, you need to create a Python script.
 
 * Create :code:`test_your_case.py` in the :code:`scripts` directory. For example, :code:`scripts/test_paper_writing.py` 
 
@@ -20,7 +20,5 @@ The full URL :code:`url: "http://127.0.0.1:5050/launch_goal"` is used to send a 
          "goal": goal,
          "max_turns": 20,
          "team_member_names": [agent_1, agent_2] "(if you have no spcific team members, set it to None)""
-         "team_up_depth": "The depth of the nested team-up. Defaults to None.
-         "is_collaborative_planning_enabled (bool, optional)": "Whether the collaborative planning is enabled. Defaults to False."
       },
    )
