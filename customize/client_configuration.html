@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Goal" href="goal.html" /><link rel="prev" title="Agent" href="agent.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Tool Creation" href="tool_creation.html" /><link rel="prev" title="Integrate Third-party Agent" href="integrate_thirdparty_agent.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>Tool - IoA 0.0.1 documentation</title>
+        <title>Client Configuration - IoA 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -219,7 +219,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../high_level_concepts/framework.html">Framework Philosophy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../high_level_concepts/mechanism.html">Key Mechanisms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../high_level_concepts/customize_tool_agent.html">Integrate Third-party Agent</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
@@ -231,12 +230,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../case/gaia.html">GAIA Benchmark</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../case/open_instruction.html">Open Instruction Dataset</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Customize AGENT</span></p>
+<p class="caption" role="heading"><span class="caption-text">Customize Agent</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="agent.html">Agent</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="goal.html">Goal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docker-compose.html">docker-compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrate_thirdparty_agent.html">Integrate Third-party Agent</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Client Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tool_creation.html">Tool Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker-compose_setup.html">Docker Compose Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="goal_submission.html">Goal Submission</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Distributed Service</span></p>
 <ul>
@@ -261,12 +261,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/OpenBMB/IoA/blob/main/docs/source/customize/tool.rst?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/OpenBMB/IoA/blob/main/docs/customize/client_configuration.rst?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/OpenBMB/IoA/edit/main/docs/source/customize/tool.rst" title="Edit this page">
+  <a class="muted-link" href="https://github.com/OpenBMB/IoA/edit/main/docs/customize/client_configuration.rst" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -285,49 +285,60 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="tool">
-<h1>Tool<a class="headerlink" href="#tool" title="Link to this heading">¶</a></h1>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>Create and complete the corresponding tool’s Python implementation in  <code class="code docutils literal notranslate"><span class="pre">im_client/agents/tools</span></code> . For example, <code class="code docutils literal notranslate"><span class="pre">im_client/agents/tools/IOT_tools.py</span></code></p>
-<p>Create a folder named your_tools_name under the <code class="code docutils literal notranslate"><span class="pre">im_client/agents/react</span></code> directory. For example, <code class="code docutils literal notranslate"><span class="pre">im_client/agents/react/tools_IOT</span></code></p>
-<p>Within the <code class="code docutils literal notranslate"><span class="pre">your_tools_name</span></code> folder, create a file named <code class="code docutils literal notranslate"><span class="pre">your_tools_name.yaml</span></code> to serve as the configuration file for calling the tool by the tool agent. The format of all tools within the YAML file should adhere to the OpenAI function call format. For example, <code class="code docutils literal notranslate"><span class="pre">tools_IOT/Tools_Drinker.yaml</span></code>. Here is an example:</p>
-<section id="tool-with-required-parameters">
-<h2>Tool with required parameters<a class="headerlink" href="#tool-with-required-parameters" title="Link to this heading">¶</a></h2>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">function</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your function description</span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">name:function name</span>
-<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">properties</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">parameters_1</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">description</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">your parameters_1 description</span>
-<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string / number / boolean</span>
-<span class="w">          </span><span class="nt">enum</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;It&#39;s</span><span class="nv"> </span><span class="s">necessary</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">your</span><span class="nv"> </span><span class="s">parameter</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">set</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">Literal</span><span class="nv"> </span><span class="s">type</span><span class="nv"> </span><span class="s">OR</span><span class="nv"> </span><span class="s">specified</span><span class="nv"> </span><span class="s">parameter&quot;</span><span class="p p-Indicator">]</span>
-<span class="w">        </span><span class="nt">parameters_2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(It&#39;s necessary if there are more than 1 parameter in your function)</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">your parameters_1 description</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string / number / boolean</span>
-<span class="w">      </span><span class="nt">required</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">parameters_1</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">parameters_2</span>
-<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
-<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">function</span>
+          <section id="client-configuration">
+<h1>Client Configuration<a class="headerlink" href="#client-configuration" title="Link to this heading">¶</a></h1>
+<p>When integrating a new client into the IoA platform, it is essential to configure the client’s settings to ensure seamless communication and functionality within the existing system. This configuration process, known as client configuration, is necessary because each client may have unique requirements, data formats, and interaction protocols that must be aligned with the IoA platform’s standards. Proper client configuration allows for the customization of parameters such as server, tool agent, and comm, ensuring that the new client can effectively interact with other components of the platform. Before introduce the configuration of parameters,
+it is necessary to create a folder and file for the client configuration.</p>
+<ul class="simple">
+<li><p>Create a folder named your_case_name under the <code class="code docutils literal notranslate"><span class="pre">configs/client_configs/cases</span></code> directory for your cases. For example: <code class="code docutils literal notranslate"><span class="pre">configs/client_configs/cases/example</span></code></p></li>
+<li><p>Create a file named <code class="code docutils literal notranslate"><span class="pre">your_agent_name.yaml</span></code> to serve as the configuration file for the agent, depending on the number of agents required, create the corresponding number of YAML files. For example: <code class="code docutils literal notranslate"><span class="pre">configs/client_configs/cases/example/bob.yaml</span></code></p></li>
+</ul>
+<p>The following are configuration examples for parameters. The configuration file is divided into three sections: <strong>server</strong> , <strong>tool_agent</strong>, <strong>comm</strong>.</p>
+<section id="server">
+<h2>Server<a class="headerlink" href="#server" title="Link to this heading">¶</a></h2>
+<p>The server section is responsible for setting up the basic server configurations</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">server</span><span class="p">:</span>
+<span class="w">   </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SERVER_PORT (e.g. setting 7788 port in your server)</span>
+<span class="w">   </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SERVER_IP (e.g. ioa-server)</span>
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </section>
-<section id="tool-without-required-parameters">
-<h2>Tool without required parameters<a class="headerlink" href="#tool-without-required-parameters" title="Link to this heading">¶</a></h2>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">function</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your function description</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">function name</span>
-<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">properties</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
-<span class="w">      </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
-<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
-<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">function</span>
+<section id="tool-agent">
+<h2>Tool Agent<a class="headerlink" href="#tool-agent" title="Link to this heading">¶</a></h2>
+<p>The tool_agent section defines the configuration for the tool agent itself and represents various agents integrated into the IoA platform, such as ReAct, OpenInterpreter, and others. The inclusion of a tool_agent is optional and depends on the specific agents required for the given use case.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tool_agent</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">s</span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">agent_type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReAct</span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">agent_name</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tool agent name</span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">desc</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">|-</span>
+<span class="w">      </span><span class="no">A description of the tool agent&#39;s capabilities.</span>
+<span class="w">   </span><span class="nt">tool_config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configuration file of tools (e.g tools_code_executor.yaml)</span>
+<span class="w">   </span><span class="nt">image_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">react-agent</span>
+<span class="w">   </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker container name</span>
+<span class="w">   </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The port number on which the agent&#39;s Docker container will be exposed.</span>
+<span class="w">   </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The model used by the agent (e.g. gpt-4-1106-preview)</span>
+<span class="w">   </span><span class="nt">max_num_steps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The maximum number of steps the agent can take in its process.</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="comm">
+<h2>Comm<a class="headerlink" href="#comm" title="Link to this heading">¶</a></h2>
+<p>The communication agent used for communicating and interacting with other agents and also for assigning tasks to the tool_agent.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">comm</span><span class="p">:</span>
+<span class="w">   </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The name of the communication agent.</span>
+<span class="w">   </span><span class="nt">desc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A description of the communication agent&#39;s capabilities.</span>
+<span class="w">   </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The type of the communication agent. (Thing Assistant or Human Assistant)</span>
+<span class="w">   </span><span class="nt">support_nested teams</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Indicates whether the agent supports nested teams. (true or false)</span>
+<span class="w">   </span><span class="nt">max_team_up_attempts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The maximum number of attempts to team up with other agents.</span>
+<span class="w">   </span><span class="nt">llm</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">llm_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Defines the type of large language model (e.g. openai-chat)</span>
+<span class="w">      </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Specifies the model for the large language model, indicating the version and type of AI model used (e.g., gpt-4-1106-preview)</span>
+<span class="w">      </span><span class="nt">temperature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Controls the randomness of the language model&#39;s responses (default value is 0.1)</span>
 </pre></div>
 </div>
 </section>
@@ -338,23 +349,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="goal.html">
+          <a class="next-page" href="tool_creation.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Goal</div>
+                <div class="title">Tool Creation</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="agent.html">
+          <a class="prev-page" href="integrate_thirdparty_agent.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Agent</div>
+                <div class="title">Integrate Third-party Agent</div>
                 
               </div>
             </a>
@@ -388,9 +399,10 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Tool</a><ul>
-<li><a class="reference internal" href="#tool-with-required-parameters">Tool with required parameters</a></li>
-<li><a class="reference internal" href="#tool-without-required-parameters">Tool without required parameters</a></li>
+<li><a class="reference internal" href="#">Client Configuration</a><ul>
+<li><a class="reference internal" href="#server">Server</a></li>
+<li><a class="reference internal" href="#tool-agent">Tool Agent</a></li>
+<li><a class="reference internal" href="#comm">Comm</a></li>
 </ul>
 </li>
 </ul>

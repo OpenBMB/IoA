@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="IoA Installation" href="../getting_started/installation.html" /><link rel="prev" title="Key Mechanisms" href="mechanism.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Client Configuration" href="client_configuration.html" /><link rel="prev" title="Open Instruction Dataset" href="../case/open_instruction.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
         <title>Integrate Third-party Agent - IoA 0.0.1 documentation</title>
@@ -216,10 +216,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../home.html">Overview</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">HIGH-LEVEL Concepts</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="framework.html">Framework Philosophy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mechanism.html">Key Mechanisms</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Integrate Third-party Agent</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../high_level_concepts/framework.html">Framework Philosophy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../high_level_concepts/mechanism.html">Key Mechanisms</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
@@ -231,12 +230,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../case/gaia.html">GAIA Benchmark</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../case/open_instruction.html">Open Instruction Dataset</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Customize AGENT</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../customize/agent.html">Agent</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../customize/tool.html">Tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../customize/goal.html">Goal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../customize/docker-compose.html">docker-compose</a></li>
+<p class="caption" role="heading"><span class="caption-text">Customize Agent</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Integrate Third-party Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client_configuration.html">Client Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tool_creation.html">Tool Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker-compose_setup.html">Docker Compose Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="goal_submission.html">Goal Submission</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Distributed Service</span></p>
 <ul>
@@ -261,12 +261,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/OpenBMB/IoA/blob/main/docs/source/high_level_concepts/customize_tool_agent.rst?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/OpenBMB/IoA/blob/main/docs/customize/integrate_thirdparty_agent.rst?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/OpenBMB/IoA/edit/main/docs/source/high_level_concepts/customize_tool_agent.rst" title="Edit this page">
+  <a class="muted-link" href="https://github.com/OpenBMB/IoA/edit/main/docs/customize/integrate_thirdparty_agent.rst" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -290,53 +290,81 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>Here is a brief guide for integrating third-party Agents. If you want to integrate an agent from a third-party repository, there are mainly two things to consider:</p>
-<ul>
-<li><p>Build a Docker container for the third-party agent and expose a <strong>run</strong> interface externally through FastAPI or another web framework.</p>
+<p>Here is a brief guide for integrating third-party agents. If you want to integrate an agent from a third-party repository, there are mainly two things to consider:</p>
 <ul class="simple">
+<li><p><strong>Build and Expose a Docker Container</strong>:</p>
+<ul>
+<li><p><strong>Containerization</strong>: Package the third-party agent within a Docker container. This ensures a consistent and isolated environment for the agent to run.</p></li>
+<li><p><strong>Expose an API Interface</strong>: Utilize FastAPI or another suitable web framework to expose a run interface externally. The interface should have the following specification:</p>
+<ul>
 <li><p><strong>run(task_desc)</strong>: Executes the task_desc task from scratch and returns the result as a string.</p></li>
 </ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Develop an Adapter for Integration</strong>:</p>
+<ul>
+<li><p><strong>Data Format Conversion</strong>: Write an adapter to facilitate communication between the third-party agent and IoA. This involves converting data formats to ensure compatibility. For instance, convert memory information in IoA, which uses <code class="code docutils literal notranslate"><span class="pre">LLMResult</span></code> from <code class="code docutils literal notranslate"><span class="pre">/types/llm.py</span></code>, into a format that the third-party agent can process.</p></li>
+<li><p><strong>Interface Invocation</strong>: The adapter acts as an intermediary, invoking the API provided by the Docker container created in the first step. This ensures seamless interaction between IoA and the third-party agent.</p></li>
+</ul>
+</li>
+</ul>
+<p>You can review the implemented logic for the specific example, Open Interpreter, located at <code class="code docutils literal notranslate"><span class="pre">im_client/agents/open_interpreter</span></code>. The detailed explanation of this example is given in the following section.</p>
 <div class="line-block">
 <div class="line"><br /></div>
+</div>
+<section id="open-interpreter-integration">
+<h2>Open Interpreter Integration<a class="headerlink" href="#open-interpreter-integration" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Building an HTTP service for Open Interpreter</strong>:</p>
+<ul>
+<li><p>The Open Interpreter, located in the <code class="code docutils literal notranslate"><span class="pre">im_client/agents/open_interpreter</span></code> directory, will be dockerized. This directory includes FastAPI POST endpoints, which will be exposed as an HTTP service when started with Uvicorn. When deployed with Docker, these endpoints can be accessed externally.</p></li>
+</ul>
+</li>
+<li><p><strong>Creating Docker for Open Interpreter</strong>:</p>
+<ul>
+<li><p>Next, create a Dockerfile in the <code class="code docutils literal notranslate"><span class="pre">dockerfiles/tool_agents</span></code> directory. This Dockerfile ensures that tool agents like Open Interpreter can be started with Docker, preventing potential environment conflicts with IoA.</p></li>
+</ul>
+</li>
+<li><p><strong>Building Adapter for Open Interpreter</strong>:</p>
+<ul>
+<li><p>The adapter for Open Interpreter, also located in <code class="code docutils literal notranslate"><span class="pre">im_client/agents/open_interpreter</span></code> , facilitates data format conversion between IoA and Open Interpreter. It forwards requests to the Open Interpreter Docker container. The adapter provides a run method that converts data formats and sends a POST request to the corresponding endpoint of the Open Interpreter Docker container.</p></li>
+</ul>
+</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="open-interpreter-docker-startup">
+<h2>Open Interpreter Docker Startup<a class="headerlink" href="#open-interpreter-docker-startup" title="Link to this heading">¶</a></h2>
+<ul>
+<li><p>Environment Variable Configuration:</p>
+<ul>
+<li><p>In the <code class="code docutils literal notranslate"><span class="pre">open_instruction.yml</span></code>, set up the environment variable <code class="code docutils literal notranslate"><span class="pre">CUSTOM_CONFIG</span></code> to specify the configuration file for the tool agent. Define the tool agent-related parameters in the file referenced by <code class="code docutils literal notranslate"><span class="pre">CUSTOM_CONFIG</span></code>. For example, the configuration file for Open Interpreter is:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">CUSTOM_CONFIG=configs/cases/open_instruction/open_interpreter.yaml</span>
+</pre></div>
 </div>
 </li>
-<li><p>Write an adapter to connect the third-party agent with AgentVerse. Essentially, this involves converting data formats, such as converting memory information in AgentVerse, which uses LLMResult from common/types/llm.py, into a format accepted by the third-party agent and invoking the interface provided by the Docker container created in the first step. The adapter serves as an intermediary layer in AgentVerse for interacting with the third-party agent.</p></li>
+<li><p>In the <code class="code docutils literal notranslate"><span class="pre">dockerfiles/compose/.env_template</span></code>, ensuer to set up the necessary environment variable such as <code class="code docutils literal notranslate"><span class="pre">OPENAI_API_KEY</span></code>, <code class="code docutils literal notranslate"><span class="pre">OPENAI_RESPONSE_LOG_PATH</span></code>.</p></li>
 </ul>
-<div class="line-block">
-<div class="line"><br /></div>
+</li>
+<li><p>Building and Running the Docker Container:</p>
+<ul>
+<li><p>Build the Dockerfile previously created by running the following command in the terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-f<span class="w"> </span>dockerfiles/tool_agents/open_interpreter.Dockerfile<span class="w"> </span>-t<span class="w"> </span>open_interpreter:latest<span class="w"> </span>.
+</pre></div>
 </div>
-<section id="openinterpreter-example">
-<h2>Openinterpreter Example<a class="headerlink" href="#openinterpreter-example" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><strong>Building an HTTP service for Open Interpreter</strong>: First, <code class="code docutils literal notranslate"><span class="pre">im_client/agents/open_interpreter</span></code> created in the im_client/agents/open_interpreter directory will be dockerized. This file includes some FastAPI post endpoints, which will be exposed as an HTTP service when started with uvicorn. When started with Docker, these endpoints can be requested externally.</p></li>
-</ul>
-<div class="line-block">
-<div class="line"><br /></div>
+</li>
+<li><p>Before starting the server, ensure to comment out the autogpt section in the open_instruction.yml file.</p></li>
+<li><p>Then, start the server and multiple communication agents by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose<span class="w"> </span>-f<span class="w"> </span>dockerfiles/open_instruction.yml<span class="w"> </span>up
+</pre></div>
 </div>
-<ul class="simple">
-<li><p><strong>Creating Docker for Open Interpreter</strong>: Next, we need to create a Dockerfile located in  <code class="code docutils literal notranslate"><span class="pre">dockerfiles/tool_agents</span></code> . This allows tool agents like Open Interpreter to be started with Docker, avoiding potential environment conflicts with AgentVerse.</p></li>
+</li>
 </ul>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<ul class="simple">
-<li><p><strong>Building Adapter for Open Interpreter</strong>: <code class="code docutils literal notranslate"><span class="pre">im_client/agents/open_interpreter</span></code> created in im_client/agents/open_interpreter is an adapter for Open Interpreter. It builds the conversion between AgentVerse and Open Interpreter data formats and forwards the request to the Open Interpreter’s Docker container. The adapter also provides a run method, which performs data format conversion and calls the corresponding endpoint of the Open Interpreter Docker container via a POST request.</p></li>
+</li>
 </ul>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<section id="docker-startup">
-<h3>Docker Startup<a class="headerlink" href="#docker-startup" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>In the <code class="code docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> , set up the environment variable CUSTOM_CONFIG for a tool agent’s configuration within an agent’s configuration, and define tool agent-related parameters in the file specified by CUSTOM_CONFIG. <code class="code docutils literal notranslate"><span class="pre">CUSTOM_CONFIG</span></code>.</p></li>
-</ul>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<ul class="simple">
-<li><p>Build the Dockerfile you wrote earlier in the terminal, for example, <code class="code docutils literal notranslate"><span class="pre">docker</span> <span class="pre">build</span> <span class="pre">-f</span> <span class="pre">dockerfiles/tool_agents/open_interpreter.Dockerfile</span> <span class="pre">-t</span> <span class="pre">open_interpreter:latest</span> <span class="pre">.</span></code>. Then run <code class="code docutils literal notranslate"><span class="pre">docker-compose</span> <span class="pre">up</span> <span class="pre">--build</span></code> to start the server and multiple communication agents.</p></li>
-</ul>
-</section>
 </section>
 </section>
 
@@ -345,23 +373,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../getting_started/installation.html">
+          <a class="next-page" href="client_configuration.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">IoA Installation</div>
+                <div class="title">Client Configuration</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="mechanism.html">
+          <a class="prev-page" href="../case/open_instruction.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Key Mechanisms</div>
+                <div class="title">Open Instruction Dataset</div>
                 
               </div>
             </a>
@@ -396,10 +424,8 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Integrate Third-party Agent</a><ul>
-<li><a class="reference internal" href="#openinterpreter-example">Openinterpreter Example</a><ul>
-<li><a class="reference internal" href="#docker-startup">Docker Startup</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#open-interpreter-integration">Open Interpreter Integration</a></li>
+<li><a class="reference internal" href="#open-interpreter-docker-startup">Open Interpreter Docker Startup</a></li>
 </ul>
 </li>
 </ul>

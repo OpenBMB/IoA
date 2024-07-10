@@ -219,7 +219,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="high_level_concepts/framework.html">Framework Philosophy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="high_level_concepts/mechanism.html">Key Mechanisms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="high_level_concepts/customize_tool_agent.html">Integrate Third-party Agent</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
@@ -231,12 +230,13 @@
 <li class="toctree-l1"><a class="reference internal" href="case/gaia.html">GAIA Benchmark</a></li>
 <li class="toctree-l1"><a class="reference internal" href="case/open_instruction.html">Open Instruction Dataset</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Customize AGENT</span></p>
+<p class="caption" role="heading"><span class="caption-text">Customize Agent</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="customize/agent.html">Agent</a></li>
-<li class="toctree-l1"><a class="reference internal" href="customize/tool.html">Tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="customize/goal.html">Goal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="customize/docker-compose.html">docker-compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize/integrate_thirdparty_agent.html">Integrate Third-party Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize/client_configuration.html">Client Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize/tool_creation.html">Tool Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize/docker-compose_setup.html">Docker Compose Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize/goal_submission.html">Goal Submission</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Distributed Service</span></p>
 <ul>
@@ -261,12 +261,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/OpenBMB/IoA/blob/main/docs/source/index.rst?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/OpenBMB/IoA/blob/main/docs/index.rst?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/OpenBMB/IoA/edit/main/docs/source/index.rst" title="Edit this page">
+  <a class="muted-link" href="https://github.com/OpenBMB/IoA/edit/main/docs/index.rst" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -318,10 +318,6 @@
 <li class="toctree-l2"><a class="reference internal" href="high_level_concepts/mechanism.html#task-assignment-and-execution">📋 Task Assignment and Execution</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="high_level_concepts/customize_tool_agent.html">Integrate Third-party Agent</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="high_level_concepts/customize_tool_agent.html#openinterpreter-example">Openinterpreter Example</a></li>
-</ul>
-</li>
 </ul>
 </div>
 <div class="line-block">
@@ -363,26 +359,30 @@
 <div class="line"><br /></div>
 </div>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Customize AGENT</span></p>
+<p class="caption" role="heading"><span class="caption-text">Customize Agent</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="customize/agent.html">Agent</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="customize/agent.html#server">Server</a></li>
-<li class="toctree-l2"><a class="reference internal" href="customize/agent.html#tool-agent">Tool Agent</a></li>
-<li class="toctree-l2"><a class="reference internal" href="customize/agent.html#comm">Comm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="customize/agent.html#llm">LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize/integrate_thirdparty_agent.html">Integrate Third-party Agent</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="customize/integrate_thirdparty_agent.html#open-interpreter-integration">Open Interpreter Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize/integrate_thirdparty_agent.html#open-interpreter-docker-startup">Open Interpreter Docker Startup</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="customize/tool.html">Tool</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="customize/tool.html#tool-with-required-parameters">Tool with required parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="customize/tool.html#tool-without-required-parameters">Tool without required parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize/client_configuration.html">Client Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="customize/client_configuration.html#server">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize/client_configuration.html#tool-agent">Tool Agent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize/client_configuration.html#comm">Comm</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="customize/goal.html">Goal</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="customize/goal.html#id1">Goal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize/tool_creation.html">Tool Creation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="customize/tool_creation.html#tool-with-required-parameters">Tool with required parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="customize/tool_creation.html#tool-without-required-parameters">Tool without required parameters</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="customize/docker-compose.html">docker-compose</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="customize/docker-compose.html#id1">Docker Compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customize/docker-compose_setup.html">Docker Compose Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="customize/docker-compose_setup.html#docker-compose-configuration">Docker Compose Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="customize/goal_submission.html">Goal Submission</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="customize/goal_submission.html#goal">Goal</a></li>
 </ul>
 </li>
 </ul>

@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Tool" href="tool.html" /><link rel="prev" title="Open Instruction Dataset" href="../case/open_instruction.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Goal Submission" href="goal_submission.html" /><link rel="prev" title="Tool Creation" href="tool_creation.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>Agent - IoA 0.0.1 documentation</title>
+        <title>Docker Compose Setup - IoA 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -219,7 +219,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../high_level_concepts/framework.html">Framework Philosophy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../high_level_concepts/mechanism.html">Key Mechanisms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../high_level_concepts/customize_tool_agent.html">Integrate Third-party Agent</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
@@ -231,12 +230,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../case/gaia.html">GAIA Benchmark</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../case/open_instruction.html">Open Instruction Dataset</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Customize AGENT</span></p>
+<p class="caption" role="heading"><span class="caption-text">Customize Agent</span></p>
 <ul class="current">
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Agent</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tool.html">Tool</a></li>
-<li class="toctree-l1"><a class="reference internal" href="goal.html">Goal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docker-compose.html">docker-compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrate_thirdparty_agent.html">Integrate Third-party Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client_configuration.html">Client Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tool_creation.html">Tool Creation</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Docker Compose Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="goal_submission.html">Goal Submission</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Distributed Service</span></p>
 <ul>
@@ -261,12 +261,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/OpenBMB/IoA/blob/main/docs/source/customize/agent.rst?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/OpenBMB/IoA/blob/main/docs/customize/docker-compose_setup.rst?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/OpenBMB/IoA/edit/main/docs/source/customize/agent.rst" title="Edit this page">
+  <a class="muted-link" href="https://github.com/OpenBMB/IoA/edit/main/docs/customize/docker-compose_setup.rst" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -285,62 +285,37 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="agent">
-<h1>Agent<a class="headerlink" href="#agent" title="Link to this heading">¶</a></h1>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>Create a folder named your_case_name under the <code class="code docutils literal notranslate"><span class="pre">im_client/config/cases</span></code> directory for your cases. For example: <code class="code docutils literal notranslate"><span class="pre">im_client/config/cases/IOT</span></code></p>
-<p>Create a file named <code class="code docutils literal notranslate"><span class="pre">your_agent_name.yaml</span></code> to serve as the configuration file for the agent, depending on the number of agents required, create the corresponding number of YAML files. For example: <code class="code docutils literal notranslate"><span class="pre">im_client/config/cases/IOT/Caterer.yaml</span></code></p>
-<p><code class="code docutils literal notranslate"><span class="pre">your_agent_name.yaml</span></code> is divided into four sections: <strong>server</strong> , <strong>tool_agent</strong>, <strong>comm</strong>, <strong>llm</strong>。</p>
-<section id="server">
-<h2>Server<a class="headerlink" href="#server" title="Link to this heading">¶</a></h2>
-<p>server: All configuration consists of the following IP Address and Port.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">server</span><span class="p">:</span>
-<span class="w">   </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://your_server_IP_address (ex. http://IoA-server)</span>
-<span class="w">   </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7788 (setting 7788 port in your server)</span>
-<span class="w">   </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your_server_IP_address (ex. IoA-server)</span>
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</section>
-<section id="tool-agent">
-<h2>Tool Agent<a class="headerlink" href="#tool-agent" title="Link to this heading">¶</a></h2>
-<p>tool agent: Represents different agents integrated into AgentVerse, such as ReAct, OpenInterpreter, etc. The tool_agent is optional and determined by the actual agents required for the case.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tool_agent</span><span class="p">:</span>
-<span class="w">   </span><span class="nt">agent_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReAct / OpenInterpreter</span>
-<span class="w">   </span><span class="nt">desc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your tool agent description</span>
-<span class="w">   </span><span class="nt">tool_config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your tools file path</span>
-<span class="w">   </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker container name</span>
-<span class="w">   </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GPT version (ex. gpt-4-1106)</span>
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</section>
-<section id="comm">
-<h2>Comm<a class="headerlink" href="#comm" title="Link to this heading">¶</a></h2>
-<p>comm: The communication agent used for communicating with other agents and also for assigning tasks to the tool_agent.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">comm</span><span class="p">:</span>
-<span class="w">   </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your communication agent name</span>
-<span class="w">   </span><span class="nt">desc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your communication agent description</span>
-<span class="w">   </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Thing Assistant / Human Assistant</span>
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</section>
-<section id="llm">
-<h2>LLM<a class="headerlink" href="#llm" title="Link to this heading">¶</a></h2>
-<p>llm: Configuration properties for the LLM.。</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">llm</span><span class="p">:</span>
-<span class="w">   </span><span class="nt">llm_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openai-chat</span>
-<span class="w">   </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GPT version (ex. gpt-4-1106)</span>
-<span class="w">   </span><span class="nt">temperature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">our default value is 0.1, it is optional</span>
+          <section id="docker-compose-setup">
+<h1>Docker Compose Setup<a class="headerlink" href="#docker-compose-setup" title="Link to this heading">¶</a></h1>
+<p>Customizing the Docker Compose YAML file is essential for setting up the environment to include various agents’ Docker containers, along with the configuration of all necessary variables for each container. This setup allows for seamless integration and orchestration of multiple agents and tools within the IoA platform, ensuring they can work together effectively and efficiently. The Docker Compose configuration simplifies the deployment process, providing a centralized way to manage dependencies, environment settings, and network configurations.</p>
+<section id="docker-compose-configuration">
+<h2>Docker Compose Configuration<a class="headerlink" href="#docker-compose-configuration" title="Link to this heading">¶</a></h2>
+<p>Create your case-specific <code class="code docutils literal notranslate"><span class="pre">your_case.yml</span></code> file in the <code class="code docutils literal notranslate"><span class="pre">dockerfiles/compose</span></code> directory. For example: <code class="code docutils literal notranslate"><span class="pre">dockerfiles/compose/IOT_Party.yml</span></code></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3&quot;</span>
+
+<span class="nt">service</span><span class="p">:</span>
+<span class="nt">Name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(e.g. WeizeChen)</span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Specifies the Docker image to use for this service (e.g. ioa-client:latest)</span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../../</span>
+<span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Specifies the Dockerfile to use for building the image(e.g. dockerfiles/client.Dockerfile)</span>
+<span class="w w-Error">   </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the name of the Docker container</span>
+<span class="w">   </span><span class="nt">env_file</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span>
+<span class="w">   </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/run/docker.sock:/var/run/docker.sock</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/sqlite:/app/database</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/openai_response_log:${OPENAI_RESPONSE_LOG_PATH}</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../../configs/client_configs:/app/configs</span>
+<span class="w">   </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OPENAI_API_KEY</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CUSTOM_CONFIG=agent configuration file path(e.g. configs/cases/paper_writing/weizechen.yaml)</span>
+<span class="w">   </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Maps host_port to container_port, allowing access to the service.(e.g. 5051:5050)</span>
+<span class="w">   </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Server</span>
+<span class="w">   </span><span class="nt">stdin_open</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">   </span><span class="nt">tty</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </pre></div>
 </div>
 </section>
@@ -351,23 +326,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="tool.html">
+          <a class="next-page" href="goal_submission.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Tool</div>
+                <div class="title">Goal Submission</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../case/open_instruction.html">
+          <a class="prev-page" href="tool_creation.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Open Instruction Dataset</div>
+                <div class="title">Tool Creation</div>
                 
               </div>
             </a>
@@ -401,11 +376,8 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Agent</a><ul>
-<li><a class="reference internal" href="#server">Server</a></li>
-<li><a class="reference internal" href="#tool-agent">Tool Agent</a></li>
-<li><a class="reference internal" href="#comm">Comm</a></li>
-<li><a class="reference internal" href="#llm">LLM</a></li>
+<li><a class="reference internal" href="#">Docker Compose Setup</a><ul>
+<li><a class="reference internal" href="#docker-compose-configuration">Docker Compose Configuration</a></li>
 </ul>
 </li>
 </ul>

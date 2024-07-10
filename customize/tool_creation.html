@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="docker-compose" href="docker-compose.html" /><link rel="prev" title="Tool" href="tool.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Docker Compose Setup" href="docker-compose_setup.html" /><link rel="prev" title="Client Configuration" href="client_configuration.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>Goal - IoA 0.0.1 documentation</title>
+        <title>Tool Creation - IoA 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -219,7 +219,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../high_level_concepts/framework.html">Framework Philosophy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../high_level_concepts/mechanism.html">Key Mechanisms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../high_level_concepts/customize_tool_agent.html">Integrate Third-party Agent</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
@@ -231,12 +230,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../case/gaia.html">GAIA Benchmark</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../case/open_instruction.html">Open Instruction Dataset</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Customize AGENT</span></p>
+<p class="caption" role="heading"><span class="caption-text">Customize Agent</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="agent.html">Agent</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tool.html">Tool</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Goal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docker-compose.html">docker-compose</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrate_thirdparty_agent.html">Integrate Third-party Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client_configuration.html">Client Configuration</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Tool Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker-compose_setup.html">Docker Compose Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="goal_submission.html">Goal Submission</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Distributed Service</span></p>
 <ul>
@@ -261,12 +261,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/OpenBMB/IoA/blob/main/docs/source/customize/goal.rst?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/OpenBMB/IoA/blob/main/docs/customize/tool_creation.rst?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/OpenBMB/IoA/edit/main/docs/source/customize/goal.rst" title="Edit this page">
+  <a class="muted-link" href="https://github.com/OpenBMB/IoA/edit/main/docs/customize/tool_creation.rst" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -285,25 +285,49 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="goal">
-<h1>Goal<a class="headerlink" href="#goal" title="Link to this heading">¶</a></h1>
+          <section id="tool-creation">
+<h1>Tool Creation<a class="headerlink" href="#tool-creation" title="Link to this heading">¶</a></h1>
+<p>Tool creation is necessary when you do not have your own agent but want to provide a custom tool that a ReAct agent or another existing agent can utilize to solve problems. This need arises when you have specialized tools or functionalities that can enhance the capabilities of an agent without the need to develop a full-fledged new agent. By integrating these tools, the ReAct agent can leverage them to perform specific tasks, thereby extending its problem-solving abilities and making it more versatile and effective in handling a broader range of scenarios. Before introduce the configuration of tools, it is necessary to create a yaml file and corresponding tool’s Python file for the tool configuration.</p>
+<ul class="simple">
+<li><p>Create and complete the corresponding tool’s Python implementation in  <code class="code docutils literal notranslate"><span class="pre">im_client/agents/tools</span></code>. For example, <code class="code docutils literal notranslate"><span class="pre">im_client/agents/tools/code_executor.py</span></code></p></li>
+<li><p>Create a file named <code class="code docutils literal notranslate"><span class="pre">tools_name.yaml</span></code> to serve as the configuration file for calling the tool by the tool agent. The format of all tools within the YAML file should adhere to the OpenAI function call format. For example, <code class="code docutils literal notranslate"><span class="pre">im_client/agents/react/tools_code_executor.yaml</span></code>.</p></li>
+</ul>
+<p>Here is an example for yaml configuration:</p>
+<section id="tool-with-required-parameters">
+<h2>Tool with required parameters<a class="headerlink" href="#tool-with-required-parameters" title="Link to this heading">¶</a></h2>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">function</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your function description</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">function name</span>
+<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">parameters_1</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">description</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">your parameters_1 description</span>
+<span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string / number / boolean</span>
+<span class="w">          </span><span class="nt">enum</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;It&#39;s</span><span class="nv"> </span><span class="s">necessary</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">your</span><span class="nv"> </span><span class="s">parameter</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">set</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">Literal</span><span class="nv"> </span><span class="s">type</span><span class="nv"> </span><span class="s">OR</span><span class="nv"> </span><span class="s">specified</span><span class="nv"> </span><span class="s">parameter&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">parameters_2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(It&#39;s necessary if there are more than 1 parameter in your function)</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">your parameters_1 description</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string / number / boolean</span>
+<span class="w">      </span><span class="nt">required</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">parameters_1</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">parameters_2</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">function</span>
+</pre></div>
+</div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>Create <code class="code docutils literal notranslate"><span class="pre">tests</span></code> in the <code class="code docutils literal notranslate"><span class="pre">test_your_case.py</span></code> directory. For example, <code class="code docutils literal notranslate"><span class="pre">tests/test_IOT_real.py</span></code></p>
-<section id="id1">
-<h2>Goal<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
-<p>Complete your task objective description in the goal variable, and send a POST request to the <code class="code docutils literal notranslate"><span class="pre">url:</span> <span class="pre">&quot;http://127.0.0.1:5050/launch_goal&quot;</span></code> ，set <code class="code docutils literal notranslate"><span class="pre">team_member_names</span></code> to None, and <code class="code docutils literal notranslate"><span class="pre">team_up_depth</span></code>  to the depth of nested teaming you desire.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">goal</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot; your task goal &quot;&quot;&quot;</span> <span class="p">(</span><span class="n">ex</span><span class="o">.</span> <span class="s2">&quot;&quot;&quot; Complete preparations for  a Halloween themed party. The following is the list of guests, RanLi (vegetarian), WeiZe (fitness enthusiast), YiTong (gluten-free), QianChen (kosher), Chengyang (halal). &quot;&quot;&quot;</span><span class="p">)</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-   <span class="s2">&quot;http://127.0.0.1:5050/launch_goal&quot;</span><span class="p">,</span>
-   <span class="n">json</span><span class="o">=</span><span class="p">{</span>
-      <span class="s2">&quot;goal&quot;</span><span class="p">:</span> <span class="n">goal</span>
-      <span class="s2">&quot;team_member_names&quot;</span><span class="p">:</span> <span class="kc">None</span>
-      <span class="s2">&quot;team_up_depth&quot;</span><span class="p">:</span> <span class="mi">1</span>
-   <span class="p">},</span>
-<span class="p">)</span>
+</section>
+<section id="tool-without-required-parameters">
+<h2>Tool without required parameters<a class="headerlink" href="#tool-without-required-parameters" title="Link to this heading">¶</a></h2>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">function</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your function description</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">function name</span>
+<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">properties</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">      </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">function</span>
 </pre></div>
 </div>
 </section>
@@ -314,23 +338,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="docker-compose.html">
+          <a class="next-page" href="docker-compose_setup.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">docker-compose</div>
+                <div class="title">Docker Compose Setup</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="tool.html">
+          <a class="prev-page" href="client_configuration.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Tool</div>
+                <div class="title">Client Configuration</div>
                 
               </div>
             </a>
@@ -364,8 +388,9 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Goal</a><ul>
-<li><a class="reference internal" href="#id1">Goal</a></li>
+<li><a class="reference internal" href="#">Tool Creation</a><ul>
+<li><a class="reference internal" href="#tool-with-required-parameters">Tool with required parameters</a></li>
+<li><a class="reference internal" href="#tool-without-required-parameters">Tool without required parameters</a></li>
 </ul>
 </li>
 </ul>
