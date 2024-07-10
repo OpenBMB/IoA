@@ -29,7 +29,7 @@ html_static_path = ["_static"]
 html_theme_options = {
     "source_repository": "https://github.com/OpenBMB/IoA",
     "source_branch": "main",
-    "source_directory": "docs/",
+    "source_directory": "docs/source",
     # "source_view_link": "https://github.com/OpenBMB/IoA/docs/{filename}",
     # Additional theme options can be added here
 }

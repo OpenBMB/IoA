@@ -1,7 +1,7 @@
 Client Configuration
 #######################
 
-When integrating a new client into the IoA platform, it is essential to configure the client's settings to ensure seamless communication and functionality within the existing system. This configuration process, known as client configuration, is necessary because each client may have unique requirements, data formats, and interaction protocols that must be aligned with the IoA platform's standards. Proper client configuration allows for the customization of parameters such as server, tool agent, and comm, ensuring that the new client can effectively interact with other components of the platform. Before introduce the configuration of parameters,
+When integrating a new client into the IoA platform, it is essential to configure the client's settings to ensure seamless communication and functionality within the existing system. This configuration process, known as client configuration, is necessary because each client may have unique requirements, data formats, and interaction protocols that must be aligned with the IoA platform's standards. Proper client configuration allows for the customization of parameters related to server, agent, and communication approach, ensuring that the new client can effectively interact with other components of the platform. Before introduce the configuration of parameters,
 it is necessary to create a folder and file for the client configuration.
 
 * Create a folder named your_case_name under the :code:`configs/client_configs/cases` directory for your cases. For example: :code:`configs/client_configs/cases/example`
@@ -17,8 +17,8 @@ The server section is responsible for setting up the basic server configurations
 .. code-block:: yaml
 
    server:  
-      port: SERVER_PORT (e.g. setting 7788 port in your server)
-      hostname: SERVER_IP (e.g. ioa-server)
+      port: SERVER_PORT (e.g. default 7788)
+      hostname: SERVER_IP (e.g. default ioa-server)
 
 |
 
@@ -28,7 +28,7 @@ The tool_agent section defines the configuration for the tool agent itself and r
 
 .. code-block:: yaml
 
-   tool_agent:  s
+   tool_agent: 
       agent_type: ReAct
       agent_name: tool agent name
       desc: |- 
@@ -45,12 +45,12 @@ The tool_agent section defines the configuration for the tool agent itself and r
 
 Comm
 ==========================
-The communication agent used for communicating and interacting with other agents and also for assigning tasks to the tool_agent.
+The communication service client used for communicating and interacting with other clients and also for assigning tasks to the tool_agent.
 
 .. code-block:: yaml
 
    comm:  
-      name: The name of the communication agent.
+      name: The name of the client.
       desc: A description of the communication agent's capabilities.
       type: The type of the communication agent. (Thing Assistant or Human Assistant)
       support_nested teams: Indicates whether the agent supports nested teams. (true or false)
