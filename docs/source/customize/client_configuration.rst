@@ -16,8 +16,8 @@ The server section is responsible for setting up the basic server configurations
 .. code-block:: yaml
 
    server:  
-      port: SERVER_PORT (e.g. default 7788)
-      hostname: SERVER_IP (e.g. default ioa-server)
+      port: SERVER_PORT    # e.g. default 7788
+      hostname: SERVER_IP  # e.g. default ioa-server
 
 |
 
@@ -32,11 +32,11 @@ The tool agent section defines the configuration for the tool agent itself and r
       agent_name: tool agent name
       desc: |- 
          A description of the tool agent's capabilities.
-      tool_config: configuration file of tools (e.g tools_code_executor.yaml)
+      tool_config: configuration file of tools  # e.g tools_code_executor.yaml
       image_name: react-agent
       container_name: docker container name
       port: The port number on which the agent's Docker container will be exposed.
-      model: The model used by the agent (e.g. gpt-4-1106-preview)
+      model: The model used by the agent  # e.g. gpt-4-1106-preview
       max_num_steps: The maximum number of steps the agent can take in its process.
 
 
@@ -51,12 +51,12 @@ The communication service client section used for communicating and interacting 
    comm:  
       name: The name of the client.
       desc: A description of the communication agent's capabilities.
-      type: The type of the communication agent. (Thing Assistant or Human Assistant)
-      support_nested teams: Indicates whether the agent supports nested teams. (true or false)
+      type: The type of the communication agent.  # Thing Assistant or Human Assistant
+      support_nested teams: Indicates whether the agent supports nested teams.  # true or false
       max_team_up_attempts: The maximum number of attempts to team up with other agents.
       llm:  
-         llm_type: Defines the type of large language model (e.g. openai-chat)
-         model: Specifies the model for the large language model, indicating the version and type of AI model used (e.g., gpt-4-1106-preview)
-         temperature: Controls the randomness of the language model's responses (default value is 0.1)
+         llm_type: Defines the type of large language model  # e.g. openai-chat
+         model: Specifies the model for the large language model, indicating the version and type of AI model used  # e.g., gpt-4-1106-preview 
+         temperature: Controls the randomness of the language model's responses  # default value is 0.1
 
    
