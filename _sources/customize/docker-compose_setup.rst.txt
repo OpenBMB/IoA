@@ -12,8 +12,8 @@ Create your case-specific :code:`your_case.yml` file in the :code:`dockerfiles/c
       version: "3"
 
       service:
-      Name: (e.g. WeizeChen)
-         image: Specifies the Docker image to use for this service (e.g. ioa-client:latest)
+      Name:  # e.g. WeizeChen 
+         image: Specifies the Docker image to use for this service  # e.g. ioa-client:latest
          build: 
             context: ../../
             dockerfile: dockerfiles/client.Dockerfile
@@ -27,9 +27,9 @@ Create your case-specific :code:`your_case.yml` file in the :code:`dockerfiles/c
             - ../../configs/client_configs:/app/configs
          environment:
             - OPENAI_API_KEY
-            - CUSTOM_CONFIG=agent configuration file path(e.g. configs/cases/paper_writing/weizechen.yaml)
+            - CUSTOM_CONFIG=agent configuration file path  # e.g. configs/cases/paper_writing/weizechen.yaml
          ports:
-            - Maps host_port to container_port, allowing access to the service.(e.g. 5051:5050)
+            - Maps host_port to container_port, allowing access to the service.  # e.g. 5050:5050
          depends_on:
             - Server
          stdin_open: true

@@ -316,7 +316,7 @@
 <li><p>The Open Interpreter, located in the <code class="code docutils literal notranslate"><span class="pre">im_client/agents/open_interpreter/open_interpreter_agent.py</span></code> script, will be dockerized. This script includes FastAPI POST endpoints, which will be exposed as an HTTP service when started with Uvicorn. When deployed with Docker, these endpoints can be accessed externally.</p></li>
 </ul>
 </li>
-<li><p><strong>Creating Docker for Open Interpreter</strong>:</p>
+<li><p><strong>Creating Dockerfile for Open Interpreter</strong>:</p>
 <ul>
 <li><p>Next, create a Dockerfile in the <code class="code docutils literal notranslate"><span class="pre">dockerfiles/tool_agents</span></code> directory. This Dockerfile ensures that tool agents like Open Interpreter can be started with Docker, preventing potential environment conflicts with IoA.</p></li>
 </ul>

@@ -31,8 +31,8 @@ Tool with required parameters
               description:  your parameters_1 description 
               type: string / number / boolean 
               enum: ["It's necessary if your parameter is set by Literal type OR specified parameter"] 
-            parameters_2: (It's necessary if there are more than 1 parameter in your function)
-              description:  your parameters_1 description 
+            parameters_2:  # It's necessary if there are more than 1 parameter in your function
+              description:  your parameters_2 description 
               type: string / number / boolean 
           required:
           - parameters_1

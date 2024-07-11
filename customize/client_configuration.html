@@ -297,8 +297,8 @@
 <h2>Server<a class="headerlink" href="#server" title="Link to this heading">¶</a></h2>
 <p>The server section is responsible for setting up the basic server configurations</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">server</span><span class="p">:</span>
-<span class="w">   </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SERVER_PORT (e.g. default 7788)</span>
-<span class="w">   </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SERVER_IP (e.g. default ioa-server)</span>
+<span class="w">   </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SERVER_PORT</span><span class="w">    </span><span class="c1"># e.g. default 7788</span>
+<span class="w">   </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SERVER_IP</span><span class="w">  </span><span class="c1"># e.g. default ioa-server</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -313,11 +313,11 @@
 <span class="w">   </span><span class="nt">agent_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tool agent name</span>
 <span class="w">   </span><span class="nt">desc</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|-</span>
 <span class="w">      </span><span class="no">A description of the tool agent&#39;s capabilities.</span>
-<span class="w">   </span><span class="nt">tool_config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configuration file of tools (e.g tools_code_executor.yaml)</span>
+<span class="w">   </span><span class="nt">tool_config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">configuration file of tools</span><span class="w">  </span><span class="c1"># e.g tools_code_executor.yaml</span>
 <span class="w">   </span><span class="nt">image_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">react-agent</span>
 <span class="w">   </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker container name</span>
 <span class="w">   </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The port number on which the agent&#39;s Docker container will be exposed.</span>
-<span class="w">   </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The model used by the agent (e.g. gpt-4-1106-preview)</span>
+<span class="w">   </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The model used by the agent</span><span class="w">  </span><span class="c1"># e.g. gpt-4-1106-preview</span>
 <span class="w">   </span><span class="nt">max_num_steps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The maximum number of steps the agent can take in its process.</span>
 </pre></div>
 </div>
@@ -331,13 +331,13 @@
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">comm</span><span class="p">:</span>
 <span class="w">   </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The name of the client.</span>
 <span class="w">   </span><span class="nt">desc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A description of the communication agent&#39;s capabilities.</span>
-<span class="w">   </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The type of the communication agent. (Thing Assistant or Human Assistant)</span>
-<span class="w">   </span><span class="nt">support_nested teams</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Indicates whether the agent supports nested teams. (true or false)</span>
+<span class="w">   </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The type of the communication agent.</span><span class="w">  </span><span class="c1"># Thing Assistant or Human Assistant</span>
+<span class="w">   </span><span class="nt">support_nested teams</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Indicates whether the agent supports nested teams.</span><span class="w">  </span><span class="c1"># true or false</span>
 <span class="w">   </span><span class="nt">max_team_up_attempts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The maximum number of attempts to team up with other agents.</span>
 <span class="w">   </span><span class="nt">llm</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">llm_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Defines the type of large language model (e.g. openai-chat)</span>
-<span class="w">      </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Specifies the model for the large language model, indicating the version and type of AI model used (e.g., gpt-4-1106-preview)</span>
-<span class="w">      </span><span class="nt">temperature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Controls the randomness of the language model&#39;s responses (default value is 0.1)</span>
+<span class="w">      </span><span class="nt">llm_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Defines the type of large language model</span><span class="w">  </span><span class="c1"># e.g. openai-chat</span>
+<span class="w">      </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Specifies the model for the large language model, indicating the version and type of AI model used</span><span class="w">  </span><span class="c1"># e.g., gpt-4-1106-preview</span>
+<span class="w">      </span><span class="nt">temperature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Controls the randomness of the language model&#39;s responses</span><span class="w">  </span><span class="c1"># default value is 0.1</span>
 </pre></div>
 </div>
 </section>

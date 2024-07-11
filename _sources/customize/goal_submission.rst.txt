@@ -19,6 +19,6 @@ The full URL :code:`url: "http://127.0.0.1:5050/launch_goal"` is used to send a 
       json={
          "goal": goal,
          "max_turns": 20,
-         "team_member_names": [agent_1, agent_2] "(if you have no spcific team members, set it to None)""
+         "team_member_names": [agent_1, agent_2]  # if you have no spcific team members, set it to None 
       },
    )
