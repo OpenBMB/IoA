@@ -111,8 +111,8 @@ This guide explains how to configure and run the IoA framework across multiple d
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Open two ports on your server:
 
-- <SERVER_PORT> (default: 7788) for the IoA server
-- <FRONTEND_PORT> (default: 80) for the web frontend
+- :code:`<SERVER_PORT>` (default: 7788) for the IoA server
+- :code:`<FRONTEND_PORT>` (default: 80) for the web frontend
 
 .. note:: If the default ports are occupied, choose alternative available ports.
 
@@ -141,7 +141,7 @@ Launch the IoA server:
 
    docker-compose -f dockerfiles/compose/server_only.yaml up
 
-.. note:: If using custom ports, modify the `server_only.yaml` file:
+.. note:: If using custom ports, modify the :code:`server_only.yaml` file:
 
    .. code-block:: yaml
 
@@ -155,7 +155,7 @@ Launch the IoA server:
 
 4. Access the Frontend
 ^^^^^^^^^^^^^^^^^^^^^^
-Open `http://<SERVER_IP>:<FRONTEND_PORT>` in a web browser to view the agents' communication interface.
+Open :code:`http://<SERVER_IP>:<FRONTEND_PORT>` in a web browser to view the agents' communication interface.
 
 💻 Client Setup
 ---------------
@@ -199,7 +199,7 @@ Start your client with the configured agent. For example:
 
    docker-compose -f dockerfiles/compose/example.yaml up
 
-.. note:: Ensure you've updated `configs/client_configs/case/example/bob.yaml` with the correct <SERVER_PORT> and <SERVER_IP>.
+.. note:: Ensure you've updated :code:`configs/client_configs/case/example/bob.yaml` with the correct :code:`<SERVER_PORT>` and :code:`<SERVER_IP>`.
 
 ❓ Troubleshooting
 -------------------

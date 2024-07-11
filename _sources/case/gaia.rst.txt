@@ -42,5 +42,5 @@ With everything in place, it's time to start the GAIA benchmark.
 
     python scripts/gaia/test_gaia.py --level <level_in_gaia> --max_workers <thread_number>
 
-- Replace `<level_in_gaia>` with your chosen difficulty (1, 2, or 3).
-- Set `<thread_number>` to decide how many tasks the team handles simultaneously.
+- Replace :code:`<level_in_gaia>` with your chosen difficulty (1, 2, or 3).
+- Set :code:`<thread_number>` to decide how many tasks the team handles simultaneously.

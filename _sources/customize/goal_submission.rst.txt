@@ -13,7 +13,7 @@ The full URL :code:`url: "http://127.0.0.1:5050/launch_goal"` is used to send a 
 
    import requests 
    goal = "task descrpition" 
-   "(e.g. goal = I want to know the annual revenue of Microsoft from 2014 to 2020. Please generate a figure in text format showing the trend of the annual revenue, and give me a analysis report.)"
+   # e.g. goal = I want to know the annual revenue of Microsoft from 2014 to 2020. Please generate a figure in text format showing the trend of the annual revenue, and give me a analysis report. 
    response = requests.post(
       "http://127.0.0.1:5050/launch_goal",
       json={

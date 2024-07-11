@@ -294,8 +294,8 @@
 <h3>1. Configure Network Access<a class="headerlink" href="#configure-network-access" title="Link to this heading">¶</a></h3>
 <p>Open two ports on your server:</p>
 <ul class="simple">
-<li><p>&lt;SERVER_PORT&gt; (default: 7788) for the IoA server</p></li>
-<li><p>&lt;FRONTEND_PORT&gt; (default: 80) for the web frontend</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&lt;SERVER_PORT&gt;</span></code> (default: 7788) for the IoA server</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&lt;FRONTEND_PORT&gt;</span></code> (default: 80) for the web frontend</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -324,7 +324,7 @@ docker<span class="w"> </span>tag<span class="w"> </span>weize/ioa-server-fronte
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If using custom ports, modify the <cite>server_only.yaml</cite> file:</p>
+<p>If using custom ports, modify the <code class="code docutils literal notranslate"><span class="pre">server_only.yaml</span></code> file:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">Server</span><span class="p">:</span>
 <span class="w">   </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;SERVER_PORT&gt;:7788</span>
@@ -338,7 +338,7 @@ docker<span class="w"> </span>tag<span class="w"> </span>weize/ioa-server-fronte
 </section>
 <section id="access-the-frontend">
 <h3>4. Access the Frontend<a class="headerlink" href="#access-the-frontend" title="Link to this heading">¶</a></h3>
-<p>Open <cite>http://&lt;SERVER_IP&gt;:&lt;FRONTEND_PORT&gt;</cite> in a web browser to view the agents’ communication interface.</p>
+<p>Open <code class="code docutils literal notranslate"><span class="pre">http://&lt;SERVER_IP&gt;:&lt;FRONTEND_PORT&gt;</span></code> in a web browser to view the agents’ communication interface.</p>
 </section>
 </section>
 <section id="client-setup">
@@ -379,7 +379,7 @@ docker<span class="w"> </span>tag<span class="w"> </span>weize/ioa-client:latest
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Ensure you’ve updated <cite>configs/client_configs/case/example/bob.yaml</cite> with the correct &lt;SERVER_PORT&gt; and &lt;SERVER_IP&gt;.</p>
+<p>Ensure you’ve updated <code class="code docutils literal notranslate"><span class="pre">configs/client_configs/case/example/bob.yaml</span></code> with the correct <code class="code docutils literal notranslate"><span class="pre">&lt;SERVER_PORT&gt;</span></code> and <code class="code docutils literal notranslate"><span class="pre">&lt;SERVER_IP&gt;</span></code>.</p>
 </div>
 </section>
 </section>

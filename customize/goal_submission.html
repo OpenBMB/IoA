@@ -297,7 +297,7 @@
 The full URL <code class="code docutils literal notranslate"><span class="pre">url:</span> <span class="pre">&quot;http://127.0.0.1:5050/launch_goal&quot;</span></code> is used to send a POST request to the local server to initiate a goal. This request includes a JSON payload specifying the details of the goal, such as the goal description, maximum turns, and team member names and so on. The server at this endpoint processes the request and sets the specified goal for the IoA to accomplish.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">goal</span> <span class="o">=</span> <span class="s2">&quot;task descrpition&quot;</span>
-<span class="s2">&quot;(e.g. goal = I want to know the annual revenue of Microsoft from 2014 to 2020. Please generate a figure in text format showing the trend of the annual revenue, and give me a analysis report.)&quot;</span>
+<span class="c1"># e.g. goal = I want to know the annual revenue of Microsoft from 2014 to 2020. Please generate a figure in text format showing the trend of the annual revenue, and give me a analysis report.</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
    <span class="s2">&quot;http://127.0.0.1:5050/launch_goal&quot;</span><span class="p">,</span>
    <span class="n">json</span><span class="o">=</span><span class="p">{</span>
