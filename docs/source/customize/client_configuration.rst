@@ -7,7 +7,7 @@ To successfully integrate your agent (or agents we provide) into your IoA server
 
 * Create a file named :code:`agent_name.yaml` to serve as the configuration file for the agent, depending on the number of agents required, create the corresponding number of YAML files. For example: :code:`configs/client_configs/cases/example/bob.yaml`
 
-The following are configuration examples for parameters. The configuration file is divided into three sections: **server** , **tool_agent**, **comm**.
+The following are configuration examples for parameters. The configuration file is divided into three sections: **server** , **tool agent**, **communication service client**.
 
 Server
 ===========================
