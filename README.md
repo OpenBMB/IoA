@@ -12,7 +12,8 @@
     <!-- <a href="https://openbmb.github.io/IoA/"><img src="https://img.shields.io/badge/Doc-En-white.svg" alt="EN doc"/></a>
     <a href="https://openbmb.github.io/IoA//doc_zh/index_zh.html"><img src="https://img.shields.io/badge/Doc-中文-white.svg" alt="ZH doc"/></a> -->
     <br>
-    <br>【<a href="https://openbmb.github.io/IoA/">Documentation</a> | Paper (comming soon)</a>】<br>
+    <br>【<a href="https://openbmb.github.io/IoA/">Documentation</a> | <a href = "https://arxiv.org/abs/2407.07061
+    ">Paper</a>】<br>
 </p>
 
 ---
@@ -30,7 +31,7 @@ Imagine if AI agents could collaborate like humans do on the internet. That's th
 - 🗣️ **Adaptive Conversation Flow**: The conversation flow is autonomously managed to keep agent conversations structured but flexible.
 - 🔄 **Scalable and Extensible**: Easy to add new types of agents or tackle different kinds of tasks.
 
-For more details, please refer to our paper.
+For more details, please refer to [our paper](https://arxiv.org/abs/2407.07061).
 
 <p align="center" style="color:RGB(160, 160, 160)">
     <img src="https://github.com/OpenBMB/IoA/assets/32613237/126082a8-432b-4039-8acd-49f4798a492c">

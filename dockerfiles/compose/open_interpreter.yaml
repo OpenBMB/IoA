@@ -1,0 +1,64 @@
+# Set the current version of compose yml file
+version: "3"
+
+services:
+  Server:
+    image: ioa-server:latest
+    build:
+      context: ../../
+      dockerfile: dockerfiles/server.Dockerfile
+    container_name: ioa-server
+    env_file:
+      - .env
+    environment:
+      - OPENAI_API_KEY
+      #- OPENAI_BASE_URL
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/sqlite:/app/database
+      - ../../configs/server_configs:/app/configs
+    ports:
+      - 7788:7788
+    stdin_open: true
+    tty: true
+
+  OpenInterpreter:
+    image: ioa-client:latest
+    build:
+      context: ../../
+      dockerfile: dockerfiles/client.Dockerfile
+    container_name: open-interpreter-client
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./volumes/openInterpreter/log:/app/tool_agent_log
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/sqlite:/app/database
+      - ./volumes/openai_response_log:${OPENAI_RESPONSE_LOG_PATH}
+      - ../../configs/client_configs:/app/configs
+    env_file:
+      - .env
+    environment:
+      - CUSTOM_CONFIG=configs/cases/open_instruction/open_interpreter.yaml
+    ports:
+      - 5051:5050
+    depends_on:
+      - Server
+    stdin_open: true
+    tty: true
+
+  ServerFrontend:
+    image: ioa-server-frontend:latest
+    build:
+      context: ../../
+      dockerfile: dockerfiles/server_frontend.Dockerfile
+    container_name: server_frontend
+    ports:
+      - 80:80
+    depends_on:
+      - Server
+    stdin_open: true
+    tty: true
+
+networks:
+  default:
+    name: agent_network
+    external: true
+    # driver: bridge

@@ -1,0 +1,23 @@
+server:
+  port: 7788
+  hostname: ioa-server
+
+tool_agent:
+  image_name: open-interpreter:latest
+  container_name: open-interpreter-agent
+  agent_type: OpenInterpreter
+  agent_name: Open Interpreter
+  desc: This is Open Interpreter. It has the ability to execute code, control the terminal, and interact with online tools.
+  port: 7070
+comm:
+  name: Open Interpreter
+  desc: |-
+    This is Open Interpreter, which is an AI that can execute code, control the terminal, and interact with online tools. Tasks related to code snippet writing and execution can be assigned to this assistant.
+  type: Thing Assistant
+  support_nested_teams: false
+
+  llm:
+    llm_type: openai-chat
+    model: gpt-4-1106-preview
+    # model: gpt-4-1106
+    temperature: 0.1
