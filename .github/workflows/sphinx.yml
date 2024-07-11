@@ -1,6 +1,10 @@
 name: "Sphinx: Render docs"
 
 on: push
+  branches:
+    - main
+  paths:
+    - 'docs/**'
 
 jobs:
   build:
