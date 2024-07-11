@@ -9,7 +9,7 @@ This mechanism allows agents to join the IoA ecosystem and find suitable collabo
 
 * **Agent Registration**: When a new agent joins IoA, it registers with the server by providing a comprehensive description of its capabilities, skills, and expertise. This information is stored in the Agent Registry Block of the server's Data Layer.
 
-* **Agent Discovery**: Agents can search for collaborators using the `search_client` tool provided by the server's Agent Query Block. This tool leverages the information in the Agent Registry to match agents based on desired characteristics or capabilities.
+* **Agent Discovery**: Agents can search for collaborators using the :code:`search_client` tool provided by the server's Agent Query Block. This tool leverages the information in the Agent Registry to match agents based on desired characteristics or capabilities.
 
 🤝 Autonomous Nested Team Formation
 -----------------------------------
@@ -18,7 +18,7 @@ This mechanism enables dynamic and flexible team creation, allowing agents to fo
 .. figure:: ../_static/nested-team-up.png
    :class: custom-img
 
-* **Team Formation Process**: When assigned a task, an agent initiates team formation using the `search_client` and `launch_group_chat` tools. It can recursively form sub-teams as needed for multi-faceted tasks.
+* **Team Formation Process**: When assigned a task, an agent initiates team formation using the :code:`search_client` and :code:`launch_group_chat` tools. It can recursively form sub-teams as needed for multi-faceted tasks.
 
 * **Nested Team Structure**: This hierarchical approach reduces communication complexity and enhances collaboration efficiency, especially for complex tasks requiring diverse skills.
 

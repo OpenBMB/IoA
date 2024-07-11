@@ -23,16 +23,16 @@ Tool with required parameters
 .. code-block:: yaml
 
     - function:
-        description: your function description 
+        description: function description 
         name: function name
         parameters:
           properties:
             parameters_1:
-              description:  your parameters_1 description 
+              description:  parameters_1 description 
               type: string / number / boolean 
-              enum: ["It's necessary if your parameter is set by Literal type OR specified parameter"] 
-            parameters_2:  # It's necessary if there are more than 1 parameter in your function
-              description:  your parameters_2 description 
+              enum: ["It's necessary if parameter is set by Literal type OR specified parameter"] 
+            parameters_2:  # It's necessary if there are more than 1 parameter in function
+              description:  parameters_2 description 
               type: string / number / boolean 
           required:
           - parameters_1
@@ -48,7 +48,7 @@ Tool without required parameters
 .. code-block:: yaml
 
     - function:
-        description: your function description 
+        description: function description 
         name: function name
         parameters:
           properties: {} 

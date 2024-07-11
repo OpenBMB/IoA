@@ -59,7 +59,7 @@ Open Interpreter Docker Startup
 
       docker build -f dockerfiles/tool_agents/open_interpreter.Dockerfile -t open_interpreter:latest .
   
-  * Then, start the server and multiple communication agents by running:
+  * Then, start the server and communication agents by running:
   
     .. code-block:: bash
 
