@@ -287,11 +287,10 @@
         <article role="main" id="furo-main-content">
           <section id="client-configuration">
 <h1>Client Configuration<a class="headerlink" href="#client-configuration" title="Link to this heading">¶</a></h1>
-<p>When integrating a new client into the IoA platform, it is essential to configure the client’s settings to ensure seamless communication and functionality within the existing system. This configuration process, known as client configuration, is necessary because each client may have unique requirements, data formats, and interaction protocols that must be aligned with the IoA platform’s standards. Proper client configuration allows for the customization of parameters related to server, agent, and communication approach, ensuring that the new client can effectively interact with other components of the platform. Before introduce the configuration of parameters,
-it is necessary to create a folder and file for the client configuration.</p>
+<p>To successfully integrate your agent (or agents we provide) into your IoA server, you must configure the client settings to ensure proper registration within the IoA ecosystem. This involves setting up server details, defining agent specifications, and adjusting communication settings, as detailed below:</p>
 <ul class="simple">
 <li><p>Create a folder named your_case_name under the <code class="code docutils literal notranslate"><span class="pre">configs/client_configs/cases</span></code> directory for your cases. For example: <code class="code docutils literal notranslate"><span class="pre">configs/client_configs/cases/example</span></code></p></li>
-<li><p>Create a file named <code class="code docutils literal notranslate"><span class="pre">your_agent_name.yaml</span></code> to serve as the configuration file for the agent, depending on the number of agents required, create the corresponding number of YAML files. For example: <code class="code docutils literal notranslate"><span class="pre">configs/client_configs/cases/example/bob.yaml</span></code></p></li>
+<li><p>Create a file named <code class="code docutils literal notranslate"><span class="pre">agent_name.yaml</span></code> to serve as the configuration file for the agent, depending on the number of agents required, create the corresponding number of YAML files. For example: <code class="code docutils literal notranslate"><span class="pre">configs/client_configs/cases/example/bob.yaml</span></code></p></li>
 </ul>
 <p>The following are configuration examples for parameters. The configuration file is divided into three sections: <strong>server</strong> , <strong>tool_agent</strong>, <strong>comm</strong>.</p>
 <section id="server">
@@ -308,7 +307,7 @@ it is necessary to create a folder and file for the client configuration.</p>
 </section>
 <section id="tool-agent">
 <h2>Tool Agent<a class="headerlink" href="#tool-agent" title="Link to this heading">¶</a></h2>
-<p>The tool_agent section defines the configuration for the tool agent itself and represents various agents integrated into the IoA platform, such as ReAct, OpenInterpreter, and others. The inclusion of a tool_agent is optional and depends on the specific agents required for the given use case.</p>
+<p>The tool agent section defines the configuration for the tool agent itself and represents various agents integrated into the IoA platform, such as ReAct, OpenInterpreter, and others. The inclusion of a tool_agent is optional and depends on the specific agents required for the given use case.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tool_agent</span><span class="p">:</span>
 <span class="w">   </span><span class="nt">agent_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReAct</span>
 <span class="w">   </span><span class="nt">agent_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tool agent name</span>
@@ -326,9 +325,9 @@ it is necessary to create a folder and file for the client configuration.</p>
 <div class="line"><br /></div>
 </div>
 </section>
-<section id="comm">
-<h2>Comm<a class="headerlink" href="#comm" title="Link to this heading">¶</a></h2>
-<p>The communication service client used for communicating and interacting with other clients and also for assigning tasks to the tool_agent.</p>
+<section id="communication-service-client">
+<h2>Communication Service Client<a class="headerlink" href="#communication-service-client" title="Link to this heading">¶</a></h2>
+<p>The communication service client section used for communicating and interacting with other clients and also for assigning tasks to the tool_agent.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">comm</span><span class="p">:</span>
 <span class="w">   </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The name of the client.</span>
 <span class="w">   </span><span class="nt">desc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A description of the communication agent&#39;s capabilities.</span>
@@ -402,7 +401,7 @@ it is necessary to create a folder and file for the client configuration.</p>
 <li><a class="reference internal" href="#">Client Configuration</a><ul>
 <li><a class="reference internal" href="#server">Server</a></li>
 <li><a class="reference internal" href="#tool-agent">Tool Agent</a></li>
-<li><a class="reference internal" href="#comm">Comm</a></li>
+<li><a class="reference internal" href="#communication-service-client">Communication Service Client</a></li>
 </ul>
 </li>
 </ul>

@@ -1,8 +1,6 @@
 Integrate Third-party Agent
 ################################
 
-|
-
 Here is a brief guide for integrating third-party agents. If you want to integrate an agent from a third-party repository, there are mainly two things to consider:
 
 

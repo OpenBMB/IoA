@@ -1,12 +1,11 @@
 Client Configuration
 #######################
 
-When integrating a new client into the IoA platform, it is essential to configure the client's settings to ensure seamless communication and functionality within the existing system. This configuration process, known as client configuration, is necessary because each client may have unique requirements, data formats, and interaction protocols that must be aligned with the IoA platform's standards. Proper client configuration allows for the customization of parameters related to server, agent, and communication approach, ensuring that the new client can effectively interact with other components of the platform. Before introduce the configuration of parameters,
-it is necessary to create a folder and file for the client configuration.
+To successfully integrate your agent (or agents we provide) into your IoA server, you must configure the client settings to ensure proper registration within the IoA ecosystem. This involves setting up server details, defining agent specifications, and adjusting communication settings, as detailed below:
 
 * Create a folder named your_case_name under the :code:`configs/client_configs/cases` directory for your cases. For example: :code:`configs/client_configs/cases/example`
 
-* Create a file named :code:`your_agent_name.yaml` to serve as the configuration file for the agent, depending on the number of agents required, create the corresponding number of YAML files. For example: :code:`configs/client_configs/cases/example/bob.yaml`
+* Create a file named :code:`agent_name.yaml` to serve as the configuration file for the agent, depending on the number of agents required, create the corresponding number of YAML files. For example: :code:`configs/client_configs/cases/example/bob.yaml`
 
 The following are configuration examples for parameters. The configuration file is divided into three sections: **server** , **tool_agent**, **comm**.
 
@@ -24,7 +23,7 @@ The server section is responsible for setting up the basic server configurations
 
 Tool Agent
 ===========================
-The tool_agent section defines the configuration for the tool agent itself and represents various agents integrated into the IoA platform, such as ReAct, OpenInterpreter, and others. The inclusion of a tool_agent is optional and depends on the specific agents required for the given use case.
+The tool agent section defines the configuration for the tool agent itself and represents various agents integrated into the IoA platform, such as ReAct, OpenInterpreter, and others. The inclusion of a tool_agent is optional and depends on the specific agents required for the given use case.
 
 .. code-block:: yaml
 
@@ -43,9 +42,9 @@ The tool_agent section defines the configuration for the tool agent itself and r
 
 |
 
-Comm
-==========================
-The communication service client used for communicating and interacting with other clients and also for assigning tasks to the tool_agent.
+Communication Service Client
+===================================
+The communication service client section used for communicating and interacting with other clients and also for assigning tasks to the tool_agent.
 
 .. code-block:: yaml
 
