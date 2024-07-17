@@ -158,7 +158,7 @@ Or simply send a post request like:
 ```python
 import requests
 
-goal = "I want to know the annual revenue of Microsoft from 2014 to 2020. Please generate a figure in text format showing the trend of the annual revenue, and give me a analysis report."
+goal = "I want to know the annual revenue of Microsoft from 2014 to 2020. Please generate a figure in text format showing the trend of the annual revenue, and give me an analysis report."
 
 response = requests.post(
     "http://127.0.0.1:5050/launch_goal",
