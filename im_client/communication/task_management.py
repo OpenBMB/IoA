@@ -299,7 +299,7 @@ class TaskManager(Serializable):
 
             if task:
                 if task.status.priority < TaskStatus.COMPLETED.priority:
-                    logger.info(f"Set {task.task_id}'s trigger")
+                    logger.info(f"Task status: {task.status.priority}. Set {task.task_id}'s trigger")
                     self.triggers[task.task_id] = False
                 else:
                     logger.info(f"{task.task_id} is in terminated status. Skip setting trigger.")
@@ -360,7 +360,7 @@ class TaskManager(Serializable):
             if task:
                 if task.status.priority < TaskStatus.COMPLETED.priority:
                     # not in terminated status
-                    logger.info(f"Set {task_id}'s trigger")
+                    logger.info(f"Task status: {task.status.priority}. Set {task_id}'s trigger")
                     self.triggers[task.task_id] = False
                 else:
                     logger.info(f"{task_id} is in terminated status. Skip setting trigger.")
@@ -448,12 +448,12 @@ class TaskManager(Serializable):
             for task_id, (task_index, task_entry_dict) in data["tasks"].items()
         }
         manager.taskIndex2tasks = {
-            index: TaskEntry.from_dict(task_entry_dict) for index, task_entry_dict in data["taskIndex2tasks"].items()
+            index: entry for _, (index, entry) in manager.tasks.items()
         }
         manager.triggers = data["triggers"]
         manager.trigger_setter = data["trigger_setter"]
         manager.msg2task = {
-            LLMResult.model_validate_json(result_json): TaskEntry.from_dict(task_dict)
+            LLMResult.model_validate_json(result_json): manager.tasks[TaskEntry.from_dict(task_dict).task_id][1]
             for result_json, task_dict in data["msg2task"].items()
         }
         manager.dynamic_collaborative_planner = data["dynamic_collaborative_planner"]
