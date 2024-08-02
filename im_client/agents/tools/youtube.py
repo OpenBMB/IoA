@@ -5,12 +5,12 @@ import requests
 from common.log import logger
 
 TEMP_DIR = "./temp"
-WHISPER_URL = "http://166.111.121.22:8848/whisper"
+WHISPER_URL = "http://166.111.121.22:8850/whisper"
 MAX_CHAR = 10000
 
 
 def get_youtube_transcript(youtube_id: str | None = None, url: str | None = None):
-    from pytube import YouTube
+    from pytubefix import YouTube
 
     def _audio_to_text(yt: YouTube):
         logger.info("No captions found. Trying to extract text from audio.")
@@ -44,7 +44,7 @@ def get_youtube_transcript(youtube_id: str | None = None, url: str | None = None
         url = f"https://www.youtube.com/watch?v={youtube_id}"
     try:
         yt = YouTube(url)
-        yt.bypass_age_gate()
+        # yt.bypass_age_gate()
     except Exception as e:
         return f"Error: {e}"
     captions = yt.captions

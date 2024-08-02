@@ -36,3 +36,4 @@ pdfminer.six
 pathvalidate
 pymupdf4llm
 playwright
+pytubefix
