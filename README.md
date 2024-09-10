@@ -175,7 +175,7 @@ print(response)
 <details>
 <summary>🤔 Want to run IoA across different devices?</summary>
 
-Check out our [distributed setup guide](https://asl-r.github.io/distributed_service/config.html). 
+Check out our [distributed setup guide](https://openbmb.github.io/IoA/distributed_service/config.html). 
 We're continuously improving our documentation, so your feedback is valuable!
 </details>
 
