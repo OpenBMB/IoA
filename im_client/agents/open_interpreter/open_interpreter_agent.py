@@ -76,9 +76,9 @@ async def run(task_desc: TaskDesc):
     interpreter_instance.llm.api_key = os.environ.get("OPENAI_API_KEY")
     interpreter_instance.llm.api_base = os.environ.get("OPENAI_BASE_URL")
 
+    interpreter_instance.model = "gpt-4-1106-preview"
     if task_desc.model != "":
         interpreter_instance.model = task_desc.model
-    interpreter_instance.model = "gpt-4-1106-preview"
     print(f"interpreter model: {interpreter_instance.model}...")
     task_desc.task_desc = "Here is a task that you should finish:\n" + task_desc.task_desc
     try:
