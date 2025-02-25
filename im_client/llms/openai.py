@@ -390,11 +390,11 @@ def get_embedding(text: str) -> np.array:
     try:
         text = text.replace("\n", " ")
         if openai.api_type == "azure":
-            embedding = sync_openai_client.embeddings.create(input=[text], deployment_id="text-embedding-ada-002")[
+            embedding = sync_openai_client.embeddings.create(input=[text], deployment_id="text-embedding-3-small")[
                 "data"
             ][0]["embedding"]
         else:
-            embedding = sync_openai_client.embeddings.create(input=[text], model="text-embedding-ada-002")["data"][0][
+            embedding = sync_openai_client.embeddings.create(input=[text], model="text-embedding-3-small")["data"][0][
                 "embedding"
             ]
         return tuple(embedding)
