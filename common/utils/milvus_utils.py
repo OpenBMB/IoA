@@ -16,7 +16,7 @@ from typing import List
 import asyncio, json
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-openai_engine = "text-embedding-ada-002"
+openai_engine = "text-embedding-3-small"
 VECTOR_DIMENSION = 1536
 client = OpenAI()
 
