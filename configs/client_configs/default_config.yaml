@@ -7,14 +7,14 @@ tool_agent:
   agent_name: ReAct Agent
   desc: The ReAct agent is designed as an affordable and straightforward agent, It is well-suited for handling routine tasks. However, it is important to note that it may not be able to tackle highly complex problems. It has an access to a story about Paul Graham.
   tools_config: tools_rag.yaml
-  model: gpt-3.5-turbo-1106 #gpt-4-1106-preview
+  model: Qwen3.8-Flash #Qwen3.8-Flash
   image_name: react-agent
   container_name: react_rag
   port: 7070
   rag:
     persist_dir: ""
     chunk_size: 512
-    llm_model: gpt-4-1106-preview
+    llm_model: Qwen3.8-Flash
     llm_temperature: 0.1
     similarity_top_k: 2
     data: ""
@@ -26,7 +26,7 @@ comm:
   max_team_up_attempts: 10
   llm:
     llm_type: openai-chat
-    model: gpt-4-1106-preview
+    model: Qwen3.8-Flash
     temperature: 0.1
   observation_func: dummy
   discussion_only: false

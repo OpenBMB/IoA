@@ -16,8 +16,8 @@ from typing import List
 import asyncio, json
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-openai_engine = "text-embedding-ada-002"
-VECTOR_DIMENSION = 1536
+openai_engine = "GLM-Embedding-3"
+VECTOR_DIMENSION = 2048
 client = OpenAI()
 
 # MilvusConfPath = os.path.join(os.path.dirname(__file__), "..", "config", "vecdb")

@@ -169,3 +169,8 @@ logs/
 **/volumes/
 results/
 **/.env
+
+# Local credentials and runtime data
+/dockerfiles/compose/.env
+/dockerfiles/compose/volumes/
+*.bak

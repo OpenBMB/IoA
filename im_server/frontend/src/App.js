@@ -50,7 +50,7 @@ function App() {
     let connectionEstablished = false; // Flag to track connection status
 
     function connectWebSocket() {
-      socket = new WebSocket("ws://127.0.0.1:7788/chatlist_ws");
+      socket = new WebSocket(`ws://${window.location.hostname}:7788/chatlist_ws`);
 
       // Event Handlers
       socket.onopen = () => {
@@ -122,7 +122,7 @@ function App() {
 
   // Fetch all the chat records from the server when initialized
   useEffect(() => {
-    fetch("http://127.0.0.1:7788/fetch_chat_record", {
+    fetch(`http://${window.location.hostname}:7788/fetch_chat_record`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

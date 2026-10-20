@@ -1,0 +1,34 @@
+server:
+  port: 7788
+  hostname: ioa-server
+
+tool_agent:
+  agent_type: ReAct
+  agent_name: ReAct Tool Agent
+  desc: ReAct tool agent for simple reasoning and tool tasks.
+  tools_config: tools_code_executor.yaml
+  image_name: react-agent:latest
+  container_name: react-tool-agent
+  port: 7070
+  model: Qwen3.8-Flash
+  max_num_steps: 4
+  rag:
+    persist_dir: ""
+    chunk_size: 512
+    llm_model: Qwen3.8-Flash
+    llm_temperature: 0.1
+    similarity_top_k: 2
+    data: ""
+
+comm:
+  name: ReAct Agent
+  desc: ReAct Agent, a third participant for collaborative tasks.
+  type: Thing Assistant
+  support_nested_teams: false
+  max_team_up_attempts: 3
+  llm:
+    llm_type: openai-chat
+    model: Qwen3.8-Flash
+    temperature: 0.1
+  observation_func: dummy
+  discussion_only: false

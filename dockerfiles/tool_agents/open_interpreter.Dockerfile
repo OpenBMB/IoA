@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 # start with a python:3.10 image
 FROM python:3.10.13-slim
 
@@ -18,8 +19,9 @@ RUN apt-get update && apt-get install -y gcc \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Intall the project dependencies dynamically
-RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
-    && pip install --no-cache-dir -r requirements.txt
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
+    && pip install -r requirements.txt
 
 # Copy the current directory contents into container at /app
 COPY im_client/agents/open_interpreter .

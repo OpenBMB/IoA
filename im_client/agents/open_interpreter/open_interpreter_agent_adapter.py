@@ -43,13 +43,15 @@ class OpenInterpreterAgent(AgentAdapter):
         if not os.path.exists(self.log_path):
             os.makedirs(self.log_path)
 
-    async def run(self, task_desc: str, model: str = "gpt-4-1106-preview"):
+    async def run(self, task_desc: str, model: str = "openai/Qwen3.8-Flash"):
         data = TaskDesc(task_desc=task_desc, model=model)
         headers = {"Content-Type": "application/json"}
         print(f"the model specified in Open Interpreter: {data.model}...")
         while True:
             try:
-                async with aiohttp.ClientSession() as session:
+                async with aiohttp.ClientSession(
+                    timeout=aiohttp.ClientTimeout(total=900)
+                ) as session:
                     async with session.post(self.url + "/run", json=data.model_dump(), headers=headers) as response:
                         item = await response.json()
                         conclusion = item["conclusion"]

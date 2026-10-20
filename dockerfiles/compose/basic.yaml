@@ -12,8 +12,6 @@ services:
       - ../../configs/server_configs:/app/configs
     env_file:
       - .env
-    environment:
-      - OPENAI_API_KEY
     ports:
       - 7788:7788
     stdin_open: true
@@ -30,8 +28,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ../../configs/client_configs:/app/configs
-    environment:
-      - OPENAI_API_KEY
     ports:
       - 5050:5050
     depends_on:

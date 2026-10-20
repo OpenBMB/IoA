@@ -8,11 +8,9 @@ ${task_description}
 ```
 """
 
-REACT_APPEND_THOUGHT_PROMPT = r"""Now you must generate your thought and you must not call the tools in this stage. You should respond in the following json format:
-```json
-{
-    "thought": "your thought"
-}
-```"""
+REACT_APPEND_THOUGHT_PROMPT = r"""Now generate your thought without calling tools.
+Return exactly one valid JSON object, with no Markdown fences and no text before or after it:
+{"thought":"your thought"}
+"""
 
 REACT_APPEND_TOOL_PROMPT = r"""Now you must call the tools in this stage"""

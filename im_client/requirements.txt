@@ -9,9 +9,10 @@ pymilvus==2.3.0
 colorama==0.4.6
 tiktoken==0.5.1
 tenacity
-websockets
+websockets==13.1
 docker
 sqlitedict==2.1.0
 aiofiles
 requests==2.31.0
 aiohttp
+marshmallow<4

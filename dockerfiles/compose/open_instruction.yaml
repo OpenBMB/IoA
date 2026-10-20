@@ -10,8 +10,6 @@ services:
     container_name: ioa-server
     env_file:
       - .env
-    environment:
-      - OPENAI_API_KEY
       #- OPENAI_BASE_URL
     volumes:
       - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/sqlite:/app/database
@@ -38,13 +36,34 @@ services:
     environment:
       - HEADLESS_BROWSER=True
       - USE_WEB_BROWSER=firefox
-      - SMART_LLM=gpt-4-1106-preview
-      - FAST_LLM=gpt-4-1106-preview
+      - SMART_LLM=Qwen3.8-Flash
+      - FAST_LLM=Qwen3.8-Flash
       - EXECUTE_LOCAL_COMMANDS=True
       - DISABLED_COMMANDS=web_search
       - CUSTOM_CONFIG=configs/cases/open_instruction/autogpt.yaml
     ports:
       - 5050:5050
+    depends_on:
+      - Server
+    stdin_open: true
+    tty: true
+
+  ReAct:
+    image: ioa-client:latest
+    build:
+      context: ../../
+      dockerfile: dockerfiles/client.Dockerfile
+    container_name: react-client
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/sqlite:/app/database
+      - ../../configs/client_configs:/app/configs
+    env_file:
+      - .env
+    environment:
+      - CUSTOM_CONFIG=configs/cases/open_instruction/react_agent.yaml
+    ports:
+      - 5052:5050
     depends_on:
       - Server
     stdin_open: true

@@ -76,17 +76,15 @@ async def run(task_desc: TaskDesc):
     interpreter_instance.llm.api_key = os.environ.get("OPENAI_API_KEY")
     interpreter_instance.llm.api_base = os.environ.get("OPENAI_BASE_URL")
 
-    interpreter_instance.model = "gpt-4-1106-preview"
-    if task_desc.model != "":
-        interpreter_instance.model = task_desc.model
+    model_id = "Qwen3.8-Flash"
+    interpreter_instance.model = model_id
+    interpreter_instance.llm.model = model_id
+
     print(f"interpreter model: {interpreter_instance.model}...")
     task_desc.task_desc = "Here is a task that you should finish:\n" + task_desc.task_desc
     try:
         intermediate_msgs = await safe_chat(interpreter_instance, task_desc.task_desc)
-        conclusion_msgs = await safe_chat(
-            interpreter_instance,
-            "Please summarize and provide a complied and complete conclusion as the final answer to the previous task I assigned to you. If there are any files or codes in the final answer, please print them out.",
-        )
+        conclusion_msgs = intermediate_msgs
     except Exception as e:
         return {
             "task_id": uuid.uuid4().hex,
